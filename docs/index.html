@@ -1,1 +1,222 @@
-<h1>Hello World!</h1>
+---
+layout: default
+title: Senient Cloud Platform API
+---
+
+<nav class="left">
+	<h4>Overview</h4>
+	<div>
+		<a href="#QuickStart" title="A guide to help you get started.">Quick Start</a>
+	</div>
+	<!--div>
+		<a href="#Authenication" title="An introduction to authentication in the IMS.">Authenication</a>
+	</div>
+	<div>
+		<a href="#QuerySyntax" title="A syntax reference for querying data in the IMS.">Query Syntax</a>
+	</div>
+	<div>
+		<a href="#EventTypes" title="A list of event types used in the environment.">Event Types</a>
+	</div>
+	<div>
+		<a href="#MetricKeys" title="A list of metric keys used in the environment.">Metric Keys</a>
+	</div-->
+	<h4>Resources</h4>
+{% for resource in site.data.api %}
+	<div>
+		<a href="#{{ resource.name }}">{{ resource.name }}</a>
+	</div>
+{% endfor %}
+</nav>
+
+<section class="main">
+	<article id="QuickStart" class="content">
+		<div class="content_block">
+			<header>
+				<h2><span class="content_name">Quick Start</span><a class="top_link" href="#top">top</a></h2>
+			</header>
+			<aside class="code-gutter"></aside>
+		</div>
+		<div class="content_block">
+			<div class="content_body">
+				<p>
+				The Senient Cloud Platform provides an easy way to set up a hybrid-cloud environment, where
+				the operator can orchestrate, manage and monitor dedicated and * as a Service resources.
+				</p>
+				<p>
+				Built "API-first", the Senient Cloud Platform provides a rich API which allows consumers
+				to access all of the information about their cloud environment, from the memory-presure, down
+				to the efficiency of the power-supplies, and provides the ability to respond programatically
+				to changes within the environment.
+				</p>
+			</div>
+			<aside class="code-gutter"></aside>
+		</div>
+		<div class="content_block">
+			<div class="content_body">
+				<pre class="cli">
+					<code>
+<span class="cli-prompt">[senient@wintermute]</span> $ senient modules --limit 5
+
+Serial Number         Resource Pool  Power      Cores  Arch      RAM (MB)
+------------------  ---------------  -------  -------  ------  ----------
+FF-0000-0000000004                   Off            8  X86_64        8192
+FF-0000-000000000F                   Off            8  X86_64        8192
+FF-0000-0000000017                   Off            8  X86_64        8192
+FF-0000-000000001F                   Off            8  X86_64        8192
+FF-0000-0000000021                   Off            8  X86_64        8192
+					</code>
+				</pre>
+			</div>
+			<aside class="code-gutter">
+			</aside>
+		</div>
+	</article>
+	<!--article id="Authenication" class="content">
+		<h2><span class="content_name">Metric Keys</span><a class="top_link" href="#top">top</a></h2>
+	</article>
+	<article id="QuerySyntax" class="content">
+		<h2><span class="content_name">Query Syntax</span><a class="top_link" href="#top">top</a></h2>
+	</article>
+	<article id="EventTypes" class="content">
+		<h2><span class="content_name">Event Types</span><a class="top_link" href="#top">top</a></h2>
+	</article>
+	<article id="MetricKeys" class="content">
+		<h2><span class="content_name">Metric Keys</span><a class="top_link" href="#top">top</a></h2>
+	</article-->
+{% for collection in site.data.api %}
+	<article id="{{ collection.name }}" class="collection">
+		<div class="content_block">
+			<header>
+				<h2><span class="collection_name">{{ collection.name }}</span><a class="top_link" href="#top">top</a></h2>
+				<div>
+				{% capture resource_description %}{% include_relative _resources/{{collection.name | replace: ' ', '_'}}.md %}{% endcapture %}
+				{{ resource_description | markdownify }}
+				</div>
+			</header>
+			<aside class="code-gutter">
+				<pre data-src class="language-javascript">
+					<code class="language-javascript">
+// {{ collection.resource.name }}
+{{ collection.resource.example }}
+					</code>
+				</pre>
+			</aside>
+		</div>
+		<div class="content_block">
+			<div class="resource">
+				<header class="resource_header">
+					<h4>Schema</h4>
+					<span class="resource_name">{{ collection.resource.name }}</span>
+					<span class="resource_type">{{ collection.resource.type }}</span>
+				</header>
+				<div class="body resource_body">
+	{% include propertylist.html properties=collection.resource.properties %}
+				</div>
+			</div>
+		</div>
+		<div class="paths">
+			<header>
+			<h4>Operations</h4>
+	{% for path in collection.paths %}
+			<div class="path">
+				<div class="path_body">
+					<ul>
+		{% for method in path.methods %}
+						<li class="method">
+							<div class="content_block">
+								<div class="content_body">
+									<header class="method_header">
+										<span class="method_description">{{ method.description }}</span>
+										<span class="method_name">{{ method.name }}</span>
+										<span class="path_name">{{ path.name }}</span>
+			{% if method.parameters.query %}
+										<span class="query_params params">
+				{% for param in method.parameters.query %}
+											<span class="query_param{% if param.required %} param_required{% endif %} param"><span class="query_param_name param_name">{{ param.name }}</span><span class="query_param_type param_type">{% if param.format %}{{param.format}}{% else %}{{ param.type }}{% endif %}</span></span>
+				{% endfor %}
+										</span>
+			{% endif %}
+									</header>
+									<div class="method_body content_body">
+			{% assign param_order = 'path|query|formData' | split: '|'] %}
+			{% for param_in in param_order %}
+				{% unless method.parameters[param_in] %}
+					{% continue %}
+				{% endunless %}
+										<div class="method_summary">
+											<h5>{{ param_in | replace: 'Data', '' | capitalize }} Parameters</h5>
+											<ul class="{{ param_in }}_params params">
+				{% for param in method.parameters[param_in] %}
+												<li class="{{ param_in }}_param{% if param.default %} param_defaulted{% elsif param.required %} param_required{% endif %} param">
+													<header class="param_header">
+														<span class="param_name">{{ param.name }}</span>
+														<span class="param_type">
+														{% if param.format %}{{param.format}}{% else %}{{ param.type }}{% endif %}
+														</span>
+														{% if param.default %}<span class="param_default">{{param.default}}</span>{% endif %}
+					{% if param.enum %}
+														<span class="param_enum">
+						{% for enum_value in param.enum %}
+															<span class="param_enum_value">{{ enum_value }}</span>
+						{% endfor %}
+														</span>
+					{% endif %}
+													</header>
+													<div class="{{ param_in }}_param_body param_body">
+														<span class="param_description">{{param.description}}</span>
+													</div>
+												</li>
+			{% endfor %}
+											</ul>
+										</div>
+			{% endfor %}
+										<div class="responses">
+											<h5>Responses</h5>
+											<ul>
+			{% for response in method.responses %}
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">{{ response.code }}</span>
+														<span class="response_description">{{ response.description }}</span>
+													</header>
+												</li>
+			{% endfor %}
+											</ul>
+										</div>
+									</div>
+								</div>
+								<aside class="code-gutter">
+			{% if method.example %}
+									<pre data-src class="language-javascript">
+										<code class="language-javascript">
+// 200
+{{ method.example }}
+										</code>
+									</pre>
+			{% endif %}
+								</aside>
+							</div>
+						</li>
+		{% endfor %}
+					</ul>
+				</div>
+			</div>
+	{% endfor %}
+		</div>
+	</article>
+{% endfor %}
+</section>
+<script type="text/javascript">
+(function() {
+	var style = document.createElement('style'),
+		height = Math.max(
+	        document.documentElement.clientHeight,
+	        document.body.scrollHeight,
+	        document.documentElement.scrollHeight,
+	        document.body.offsetHeight,
+	        document.documentElement.offsetHeight
+	    );
+	style.textContent = 'body::before { height: ' + height + 'px; }';
+	document.head.appendChild(style);
+})();
+</script>

@@ -1,0 +1,2056 @@
+---
+swagger: "2.0"
+info:
+  description: "An API to automate management and monitoring tasks."
+  version: "1.0"
+  title: "Senient Systems - Cloud Management API"
+  contact:
+    name: "Senient Systems Inc. - Support Team"
+    url: "http://www.senient.com"
+    email: "support@senient.com"
+host: "localhost:8042"
+basePath: "/"
+tags:
+- name: "Snapshots"
+  description: "A collection of all snapshots."
+- name: "Commands"
+  description: "<p>Within the Senient Cloud Platform, there is a barrier between the\
+    \ management system and the hosting environment. The Command pipeline is responsible\
+    \ for initiating any operations that mutate the hosting environment.</p>"
+- name: "Images"
+  description: "A collection of all OS images."
+- name: "Components"
+  description: "A collection of components within the cloud platform."
+- name: "Stores"
+  description: "A collection of Stores."
+- name: "Versions"
+  description: "A collection of all supported API versions."
+- name: "Metrics"
+  description: "A collection of metrics related to the cloud platform."
+- name: "Events"
+  description: "A collection of events related to the cloud platform."
+- name: "Definitions"
+  description: "A collection of all service definitions."
+- name: "Resource Modules"
+  description: "A collection of all resource modules."
+- name: "Deployments"
+  description: "A collection of all service deployments."
+- name: "Instances"
+  description: "A collection of all instances"
+- name: "Resource Pools"
+  description: "A collection of all resource pools."
+paths:
+  /api/commands:
+    get:
+      tags:
+      - "Commands"
+      summary: "Retrieve all Commands that match {query}."
+      operationId: "getUsingGET_1"
+      consumes:
+      - "application/vnd.senientsystems+json;version=1.0"
+      produces:
+      - "application/vnd.senientsystems+json;version=1.0"
+      parameters:
+      - name: "query"
+        in: "query"
+        description: "A query string to filter the Commands with."
+        required: false
+        type: "string"
+        default: "*:*"
+      - name: "page"
+        in: "query"
+        description: "The page offset to return."
+        required: false
+        type: "integer"
+        default: 0
+        format: "int32"
+      - name: "size"
+        in: "query"
+        description: "The number of Commands to return per query."
+        required: false
+        type: "integer"
+        default: 100
+        format: "int32"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/Command"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
+        404:
+          description: "Not Found"
+    post:
+      tags:
+      - "Commands"
+      summary: "Initiate a new command."
+      operationId: "postUsingPOST"
+      consumes:
+      - "application/vnd.senientsystems+json;version=1.0"
+      produces:
+      - "application/vnd.senientsystems+json;version=1.0"
+      parameters:
+      - in: "body"
+        name: "command"
+        description: "command"
+        required: true
+        schema:
+          $ref: "#/definitions/Command"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/Command"
+        201:
+          description: "Created"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
+        404:
+          description: "Not Found"
+  /api/commands/{id}:
+    get:
+      tags:
+      - "Commands"
+      summary: "Retrieve a specific Command by its Id."
+      operationId: "getUsingGET"
+      consumes:
+      - "application/vnd.senientsystems+json;version=1.0"
+      produces:
+      - "application/vnd.senientsystems+json;version=1.0"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The id of the command to retrieve."
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/Command"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
+        404:
+          description: "Not Found"
+  /api/components:
+    get:
+      tags:
+      - "Components"
+      summary: "Get all components"
+      operationId: "getUsingGET_19"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/vnd.senientsystems+json;version=1.0"
+      parameters:
+      - name: "enclosureId"
+        in: "query"
+        description: "enclosureId"
+        required: false
+        type: "integer"
+        format: "int32"
+      - name: "type"
+        in: "query"
+        description: "type"
+        required: false
+        type: "string"
+      - name: "typeId"
+        in: "query"
+        description: "typeId"
+        required: false
+        type: "integer"
+        format: "int32"
+      - name: "name"
+        in: "query"
+        description: "name"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/SystemComponent"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
+        404:
+          description: "Not Found"
+  /api/components/{componentId}:
+    get:
+      tags:
+      - "Components"
+      summary: "Get component by id"
+      operationId: "getUsingGET_18"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/vnd.senientsystems+json;version=1.0"
+      parameters:
+      - name: "componentId"
+        in: "path"
+        description: "componentId"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/SystemComponent"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
+        404:
+          description: "Not Found"
+  /api/definitions:
+    get:
+      tags:
+      - "Definitions"
+      summary: "getNamespaces"
+      operationId: "getNamespacesUsingGET"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/vnd.senientsystems+json;version=1.0"
+      parameters: []
+      responses:
+        200:
+          description: "OK"
+          schema:
+            type: "array"
+            items:
+              type: "string"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
+        404:
+          description: "Not Found"
+    post:
+      tags:
+      - "Definitions"
+      summary: "post"
+      operationId: "postUsingPOST_1"
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "*/*"
+      parameters:
+      - name: "definition"
+        in: "formData"
+        description: "definition"
+        required: true
+        type: "file"
+      - name: "assets"
+        in: "query"
+        description: "assets"
+        required: false
+        type: "array"
+        items:
+          type: "file"
+        collectionFormat: "multi"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/Definition"
+        201:
+          description: "Created"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
+        404:
+          description: "Not Found"
+    put:
+      tags:
+      - "Definitions"
+      summary: "put"
+      operationId: "putUsingPUT"
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "*/*"
+      parameters:
+      - name: "definition"
+        in: "formData"
+        description: "definition"
+        required: true
+        type: "file"
+      - name: "assets"
+        in: "query"
+        description: "assets"
+        required: false
+        type: "array"
+        items:
+          type: "file"
+        collectionFormat: "multi"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/ResponseEntity"
+        201:
+          description: "Created"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
+        404:
+          description: "Not Found"
+  /api/definitions/{namespace}:
+    get:
+      tags:
+      - "Definitions"
+      summary: "getNames"
+      operationId: "getNamesUsingGET"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/vnd.senientsystems+json;version=1.0"
+      parameters:
+      - name: "namespace"
+        in: "path"
+        description: "namespace"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            type: "array"
+            items:
+              type: "string"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
+        404:
+          description: "Not Found"
+  /api/definitions/{namespace}/{name}:
+    get:
+      tags:
+      - "Definitions"
+      summary: "getVersions"
+      operationId: "getVersionsUsingGET"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/vnd.senientsystems+json;version=1.0"
+      parameters:
+      - name: "namespace"
+        in: "path"
+        description: "namespace"
+        required: true
+        type: "string"
+      - name: "name"
+        in: "path"
+        description: "name"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            type: "array"
+            items:
+              type: "string"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
+        404:
+          description: "Not Found"
+  /api/definitions/{namespace}/{name}/{version}/senient.json:
+    get:
+      tags:
+      - "Definitions"
+      summary: "getJson"
+      operationId: "getJsonUsingGET"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/vnd.senientsystems+json;version=1.0"
+      parameters:
+      - name: "namespace"
+        in: "path"
+        description: "namespace"
+        required: true
+        type: "string"
+      - name: "name"
+        in: "path"
+        description: "name"
+        required: true
+        type: "string"
+      - name: "version"
+        in: "path"
+        description: "version"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/Definition"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
+        404:
+          description: "Not Found"
+  /api/definitions/{namespace}/{name}/{version}/senient.yaml:
+    get:
+      tags:
+      - "Definitions"
+      summary: "Get definition file in YAML format."
+      operationId: "getUsingGET_2"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/vnd.senientsystems+yaml;version=1.0"
+      parameters:
+      - name: "namespace"
+        in: "path"
+        description: "namespace"
+        required: true
+        type: "string"
+      - name: "name"
+        in: "path"
+        description: "name"
+        required: true
+        type: "string"
+      - name: "version"
+        in: "path"
+        description: "version"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/Definition"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
+        404:
+          description: "Not Found"
+  /api/deployments:
+    get:
+      tags:
+      - "Deployments"
+      summary: "get"
+      operationId: "getUsingGET_4"
+      consumes:
+      - "application/vnd.senientsystems+json;version=1.0"
+      produces:
+      - "application/vnd.senientsystems+json;version=1.0"
+      parameters: []
+      responses:
+        200:
+          description: "OK"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Deployment"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
+        404:
+          description: "Not Found"
+  /api/deployments/{id}:
+    get:
+      tags:
+      - "Deployments"
+      summary: "get"
+      operationId: "getUsingGET_3"
+      consumes:
+      - "application/vnd.senientsystems+json;version=1.0"
+      produces:
+      - "application/vnd.senientsystems+json;version=1.0"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "id"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/Deployment"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
+        404:
+          description: "Not Found"
+  /api/events:
+    get:
+      tags:
+      - "Events"
+      summary: "get"
+      operationId: "getUsingGET_5"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/vnd.senientsystems+json;version=1.0"
+      parameters:
+      - name: "query"
+        in: "query"
+        description: "query"
+        required: false
+        type: "string"
+        default: "*:*"
+      - name: "page"
+        in: "query"
+        description: "page"
+        required: false
+        type: "integer"
+        default: 0
+        format: "int32"
+      - name: "size"
+        in: "query"
+        description: "size"
+        required: false
+        type: "integer"
+        default: 100
+        format: "int32"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/PageOfEvent"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
+        404:
+          description: "Not Found"
+  /api/images:
+    get:
+      tags:
+      - "Images"
+      summary: "get"
+      operationId: "getUsingGET_7"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/vnd.senientsystems+json;version=1.0"
+      parameters: []
+      responses:
+        200:
+          description: "OK"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Image"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
+        404:
+          description: "Not Found"
+  /api/images/{name}:
+    get:
+      tags:
+      - "Images"
+      summary: "get"
+      operationId: "getUsingGET_6"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/vnd.senientsystems+json;version=1.0"
+      parameters:
+      - name: "name"
+        in: "path"
+        description: "name"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/Image"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
+        404:
+          description: "Not Found"
+  /api/instances:
+    get:
+      tags:
+      - "Instances"
+      summary: "get"
+      operationId: "getUsingGET_9"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/vnd.senientsystems+json;version=1.0"
+      parameters: []
+      responses:
+        200:
+          description: "OK"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Instance"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
+        404:
+          description: "Not Found"
+  /api/instances/{id}:
+    get:
+      tags:
+      - "Instances"
+      summary: "get"
+      operationId: "getUsingGET_8"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/vnd.senientsystems+json;version=1.0"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "id"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/Instance"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
+        404:
+          description: "Not Found"
+  /api/metrics:
+    get:
+      tags:
+      - "Metrics"
+      summary: "get"
+      operationId: "getUsingGET_10"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/vnd.senientsystems+json;version=1.0"
+      parameters:
+      - name: "from"
+        in: "query"
+        description: "from"
+        required: false
+        type: "integer"
+        format: "int64"
+      - name: "to"
+        in: "query"
+        description: "to"
+        required: false
+        type: "integer"
+        format: "int64"
+      - name: "page"
+        in: "query"
+        description: "page"
+        required: false
+        type: "integer"
+        default: 0
+        format: "int32"
+      - name: "pageSize"
+        in: "query"
+        description: "pageSize"
+        required: false
+        type: "integer"
+        default: 100
+        format: "int32"
+      - name: "types"
+        in: "query"
+        description: "types"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "multi"
+        default: "*"
+      - name: "cursorId"
+        in: "query"
+        description: "cursorId"
+        required: false
+        type: "string"
+      - name: "cursorTtl"
+        in: "query"
+        description: "cursorTtl"
+        required: false
+        type: "integer"
+        default: 60000
+        format: "int64"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Metric"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
+        404:
+          description: "Not Found"
+  /api/metrics/cursor:
+    get:
+      tags:
+      - "Metrics"
+      summary: "prepareCursor"
+      operationId: "prepareCursorUsingGET"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/vnd.senientsystems+json;version=1.0"
+      parameters:
+      - name: "from"
+        in: "query"
+        description: "from"
+        required: false
+        type: "integer"
+        format: "int64"
+      - name: "to"
+        in: "query"
+        description: "to"
+        required: false
+        type: "integer"
+        format: "int64"
+      - name: "ttl"
+        in: "query"
+        description: "ttl"
+        required: false
+        type: "integer"
+        default: 60000
+        format: "int64"
+      - name: "pageSize"
+        in: "query"
+        description: "pageSize"
+        required: false
+        type: "integer"
+        default: 1000
+        format: "int32"
+      - name: "types"
+        in: "query"
+        description: "types"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "multi"
+        default: "*"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/Cursor"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
+        404:
+          description: "Not Found"
+  /api/resource_modules:
+    get:
+      tags:
+      - "Resource Modules"
+      summary: "get"
+      operationId: "getUsingGET_12"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/vnd.senientsystems+json;version=1.0"
+      parameters:
+      - name: "query"
+        in: "query"
+        description: "query"
+        required: false
+        type: "string"
+        default: "*:*"
+      - name: "page"
+        in: "query"
+        description: "page"
+        required: false
+        type: "integer"
+        default: 0
+        format: "int32"
+      - name: "size"
+        in: "query"
+        description: "size"
+        required: false
+        type: "integer"
+        default: 100
+        format: "int32"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/PageOfResourceModule"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
+        404:
+          description: "Not Found"
+  /api/resource_modules/{serialNumber}:
+    get:
+      tags:
+      - "Resource Modules"
+      summary: "get"
+      operationId: "getUsingGET_11"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/vnd.senientsystems+json;version=1.0"
+      parameters:
+      - name: "serialNumber"
+        in: "path"
+        description: "serialNumber"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/ResourceModule"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
+        404:
+          description: "Not Found"
+    put:
+      tags:
+      - "Resource Modules"
+      summary: "put"
+      operationId: "putUsingPUT_1"
+      consumes:
+      - "application/vnd.senientsystems+json;version=1.0"
+      produces:
+      - "application/vnd.senientsystems+json;version=1.0"
+      parameters:
+      - in: "body"
+        name: "rm"
+        description: "rm"
+        required: true
+        schema:
+          $ref: "#/definitions/ResourceModule"
+      - name: "serialNumber"
+        in: "path"
+        description: "serialNumber"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/ResponseEntity"
+        201:
+          description: "Created"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
+        404:
+          description: "Not Found"
+  /api/resource_pools:
+    get:
+      tags:
+      - "Resource Pools"
+      summary: "get"
+      operationId: "getUsingGET_13"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/vnd.senientsystems+json;version=1.0"
+      parameters:
+      - name: "names"
+        in: "query"
+        description: "names"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "multi"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/ResourcePool"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
+        404:
+          description: "Not Found"
+    post:
+      tags:
+      - "Resource Pools"
+      summary: "post"
+      operationId: "postUsingPOST_2"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/vnd.senientsystems+json;version=1.0"
+      parameters:
+      - in: "body"
+        name: "resourcePool"
+        description: "resourcePool"
+        required: true
+        schema:
+          $ref: "#/definitions/ResourcePool"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/ResourcePool"
+        201:
+          description: "Created"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
+        404:
+          description: "Not Found"
+  /api/resource_pools/{id}:
+    get:
+      tags:
+      - "Resource Pools"
+      summary: "getById"
+      operationId: "getByIdUsingGET"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/vnd.senientsystems+json;version=1.0"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "id"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/ResourcePool"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
+        404:
+          description: "Not Found"
+    delete:
+      tags:
+      - "Resource Pools"
+      summary: "delete"
+      operationId: "deleteUsingDELETE"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/vnd.senientsystems+json;version=1.0"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "id"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "OK"
+        204:
+          description: "No Content"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
+  /api/snapshots:
+    get:
+      tags:
+      - "Snapshots"
+      summary: "get"
+      operationId: "getUsingGET_15"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/vnd.senientsystems+json;version=1.0"
+      parameters: []
+      responses:
+        200:
+          description: "OK"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Snapshot"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
+        404:
+          description: "Not Found"
+  /api/snapshots/{name}:
+    get:
+      tags:
+      - "Snapshots"
+      summary: "get"
+      operationId: "getUsingGET_14"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/vnd.senientsystems+json;version=1.0"
+      parameters:
+      - name: "name"
+        in: "path"
+        description: "name"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/Snapshot"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
+        404:
+          description: "Not Found"
+  /api/stores:
+    get:
+      tags:
+      - "Stores"
+      summary: "get"
+      operationId: "getUsingGET_17"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/vnd.senientsystems+json;version=1.0"
+      parameters: []
+      responses:
+        200:
+          description: "OK"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Store"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
+        404:
+          description: "Not Found"
+  /api/stores/{name}:
+    get:
+      tags:
+      - "Stores"
+      summary: "get"
+      operationId: "getUsingGET_16"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/vnd.senientsystems+json;version=1.0"
+      parameters:
+      - name: "name"
+        in: "path"
+        description: "name"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/Store"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
+        404:
+          description: "Not Found"
+  /api/versions:
+    get:
+      tags:
+      - "Versions"
+      summary: "get"
+      description: "Returns a list of supported API versions and their associated\
+        \ MIME types."
+      operationId: "getUsingGET_20"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/vnd.senientsystems+json;version=1.0"
+      parameters: []
+      responses:
+        200:
+          description: "OK"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Version"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
+        404:
+          description: "Not Found"
+definitions:
+  StoreAccess:
+    type: "object"
+    properties:
+      anyone:
+        type: "string"
+        enum:
+        - "READ"
+        - "WRITE"
+        - "NONE"
+      resource_pool:
+        type: "string"
+        enum:
+        - "READ"
+        - "WRITE"
+        - "NONE"
+      service:
+        type: "string"
+        enum:
+        - "READ"
+        - "WRITE"
+        - "NONE"
+  Instance:
+    type: "object"
+    required:
+    - "component_deployment_id"
+    - "deployment_id"
+    - "ipv4_addrs"
+    - "ipv6_addrs"
+    - "org_id"
+    - "storage_pool"
+    properties:
+      admin_status:
+        type: "string"
+        description: "The recognized target Instance status."
+        enum:
+        - "UNDEPLOYED"
+        - "CHECK_DEPLOY_REQUIRED"
+        - "DEPLOYING"
+        - "UNDEPLOYING"
+        - "DEPLOYED_FS"
+        - "DEPLOYED"
+        - "UP"
+        - "DOWN"
+        - "BOOTING"
+        - "GOING_DOWN"
+        - "ORPHANED"
+      base_image:
+        type: "string"
+        description: "The base image used for this Instance."
+      component_deployment_id:
+        type: "string"
+        description: "The locally-unique identifier for the initiating component deployment."
+      deleted:
+        type: "boolean"
+      deployment_id:
+        type: "string"
+        description: "The globally-unique identifier for the initiating deployment."
+      hostname:
+        type: "string"
+        description: "The hostname of this Instance."
+      id:
+        type: "string"
+        description: "The ID of the Instance."
+      ipv4_addrs:
+        type: "array"
+        description: "The IPv4 address assigned to this Instance."
+        items:
+          type: "string"
+      ipv6_addrs:
+        type: "array"
+        description: "The IPv6 address assigned to this Instance."
+        items:
+          type: "string"
+      oper_status:
+        type: "string"
+        description: "The current recognize Instance status."
+        enum:
+        - "UNDEPLOYED"
+        - "CHECK_DEPLOY_REQUIRED"
+        - "DEPLOYING"
+        - "UNDEPLOYING"
+        - "DEPLOYED_FS"
+        - "DEPLOYED"
+        - "UP"
+        - "DOWN"
+        - "BOOTING"
+        - "GOING_DOWN"
+        - "ORPHANED"
+      org_id:
+        type: "string"
+        description: "The globally-unique identifier for the owning organization."
+      primary_mac_address:
+        type: "string"
+        description: "The primary MAC address of this Instance."
+      rm_serial_number:
+        type: "string"
+        description: "The serial number of the Resource Module hosting this Instance."
+      storage_pool:
+        type: "string"
+        description: "The storage pool of this Instance."
+  Deployment:
+    type: "object"
+    properties:
+      command_id:
+        type: "string"
+      completed:
+        type: "string"
+      components:
+        type: "array"
+        items:
+          $ref: "#/definitions/Component"
+      definition:
+        $ref: "#/definitions/DefinitionIdentifier"
+      id:
+        type: "string"
+      initiated:
+        type: "string"
+      message:
+        type: "string"
+      org_id:
+        type: "string"
+      resource_pool_id:
+        type: "string"
+      status:
+        type: "string"
+        enum:
+        - "QUEUED"
+        - "PREPARING"
+        - "DEPLOYING"
+        - "DEPLOYED"
+        - "BRING_UP"
+        - "UP"
+        - "BRING_DOWN"
+        - "DOWN"
+        - "DESTROYING"
+        - "DESTROYED"
+        - "CANCELED"
+        - "FAILED"
+        - "DELETING"
+        - "DELETED"
+  Store:
+    type: "object"
+    properties:
+      created:
+        type: "string"
+      definition:
+        $ref: "#/definitions/StoreDefinition"
+      deployment_id:
+        type: "string"
+      name:
+        type: "string"
+      reserved:
+        type: "integer"
+        format: "int64"
+      used:
+        type: "integer"
+        format: "int64"
+  ResourcePool:
+    type: "object"
+    required:
+    - "name"
+    properties:
+      created:
+        type: "string"
+      default:
+        type: "boolean"
+        example: false
+        description: "A boolean value indicating whether this Resource Pool is the\
+          \ default for the account."
+      description:
+        type: "string"
+        description: "The description of the Resource Pool."
+      id:
+        type: "string"
+        description: "The globally unique identifier for the Resource Pool."
+      name:
+        type: "string"
+        description: "The account-local, friendly name of the Resource Pool."
+  Image:
+    type: "object"
+    properties:
+      arch:
+        type: "string"
+      description:
+        type: "string"
+      distribution:
+        type: "string"
+      init_system:
+        type: "string"
+        enum:
+        - "SYSTEM_D"
+        - "INIT"
+      name:
+        type: "string"
+        description: "The name of the image."
+      org_id:
+        type: "string"
+      parent_image:
+        type: "string"
+        description: "The image from which this one is derived."
+      parent_snap:
+        type: "string"
+        description: "The version of the parent image from which this image is derived."
+      properties:
+        type: "object"
+        additionalProperties:
+          type: "string"
+      size:
+        type: "integer"
+        format: "int64"
+        description: "Size in bytes of the image."
+      type:
+        type: "string"
+      vendor:
+        type: "string"
+      version:
+        type: "string"
+      versions:
+        type: "array"
+        items:
+          $ref: "#/definitions/ImageVersion"
+  Cursor:
+    type: "object"
+    required:
+    - "cursor_id"
+    - "items_per_get"
+    properties:
+      cursor_id:
+        type: "string"
+        description: "The id to use when retrieving data"
+      items_per_get:
+        type: "integer"
+        format: "int32"
+        description: "The number of items returned per GET"
+  CommandValidationMessage:
+    type: "object"
+    properties:
+      command_id:
+        type: "string"
+      fatal:
+        type: "boolean"
+      message:
+        type: "string"
+      property:
+        type: "string"
+  ModuleType:
+    type: "object"
+    properties:
+      architecture:
+        type: "string"
+      direct_attached_storage:
+        type: "string"
+      embedded_storage:
+        type: "string"
+      memory:
+        type: "string"
+  Version:
+    type: "object"
+    properties:
+      consumes:
+        type: "array"
+        description: "The mime types supported by POST and PUT in this version of\
+          \ the API."
+        items:
+          type: "string"
+      produces:
+        type: "array"
+        description: "The mime types returnable by this version of the API."
+        items:
+          type: "string"
+      version:
+        type: "string"
+        description: "The version number of the API."
+  StoreDefinition:
+    type: "object"
+    properties:
+      access:
+        $ref: "#/definitions/StoreAccess"
+      compressed:
+        type: "boolean"
+      encrypted:
+        type: "boolean"
+      name:
+        type: "string"
+      replicas:
+        $ref: "#/definitions/IntRange"
+      replication:
+        type: "string"
+        enum:
+        - "REPLICATED"
+        - "ERASURE"
+      reserved:
+        type: "boolean"
+      size:
+        type: "string"
+  Sort:
+    type: "object"
+  Asset:
+    type: "object"
+    properties:
+      local_path:
+        type: "string"
+      remote_path:
+        type: "string"
+  Component:
+    type: "object"
+    properties:
+      completed:
+        type: "string"
+      id:
+        type: "string"
+      initiated:
+        type: "string"
+      message:
+        type: "string"
+      name:
+        type: "string"
+      status:
+        type: "string"
+        enum:
+        - "QUEUED"
+        - "PREPARING"
+        - "DEPLOYING"
+        - "DEPLOYED"
+        - "BRING_UP"
+        - "UP"
+        - "BRING_DOWN"
+        - "DOWN"
+        - "DESTROYING"
+        - "DESTROYED"
+        - "CANCELED"
+        - "FAILED"
+        - "DELETING"
+        - "DELETED"
+  StoreMount:
+    type: "object"
+  PageOfEvent:
+    type: "object"
+    properties:
+      content:
+        type: "array"
+        items:
+          $ref: "#/definitions/Event"
+      first:
+        type: "boolean"
+      last:
+        type: "boolean"
+      number:
+        type: "integer"
+        format: "int32"
+      number_of_elements:
+        type: "integer"
+        format: "int32"
+      size:
+        type: "integer"
+        format: "int32"
+      sort:
+        $ref: "#/definitions/Sort"
+      total_elements:
+        type: "integer"
+        format: "int64"
+      total_pages:
+        type: "integer"
+        format: "int32"
+  Definition:
+    type: "object"
+    properties:
+      components:
+        type: "array"
+        items:
+          $ref: "#/definitions/ComponentDefinition"
+      meta:
+        type: "object"
+        additionalProperties:
+          type: "string"
+      module_types:
+        type: "object"
+        additionalProperties:
+          $ref: "#/definitions/ModuleType"
+      name:
+        type: "string"
+      namespace:
+        type: "string"
+      parent:
+        $ref: "#/definitions/DefinitionIdentifier"
+      properties:
+        type: "object"
+        additionalProperties:
+          type: "string"
+      public:
+        type: "boolean"
+      stores:
+        type: "array"
+        items:
+          $ref: "#/definitions/StoreDefinition"
+      version:
+        type: "string"
+  IntRange:
+    type: "object"
+    properties:
+      max:
+        type: "integer"
+        format: "int32"
+      min:
+        type: "integer"
+        format: "int32"
+  DefinitionIdentifier:
+    type: "object"
+    properties:
+      name:
+        type: "string"
+      namespace:
+        type: "string"
+      version:
+        type: "string"
+  ResourceModule:
+    type: "object"
+    required:
+    - "connected"
+    - "embedded_storage_type"
+    - "first_connected"
+    - "last_connected"
+    - "master_cpu_arch"
+    - "master_cpu_arch_version"
+    - "master_cpu_core_count"
+    - "master_cpu_datapath_width"
+    - "master_cpu_integer_width"
+    - "master_cpu_memory_addr_width"
+    - "maximum_input_voltage"
+    - "maximum_power"
+    - "minimum_input_voltage"
+    - "pcie_lane_per_link"
+    - "pcie_link_count"
+    - "pcie_version"
+    - "power_state"
+    - "ram_amount"
+    - "ram_speed"
+    - "serial_number"
+    - "slave_cpu_arch"
+    - "slave_cpu_arch_version"
+    - "slave_cpu_core_count"
+    - "slave_cpu_datapath_width"
+    - "slave_cpu_integer_width"
+    - "slave_cpu_memory_addr_width"
+    - "updated"
+    properties:
+      connected:
+        type: "boolean"
+        example: false
+        description: "A value indicating whether the Resource Module is connected."
+      deployment_id:
+        type: "string"
+        description: "The globally-unique identifier of the Deployment using the Resource\
+          \ Module."
+      embedded_storage_read_speed:
+        type: "integer"
+        format: "int32"
+        description: "The read speed of the embedded storage."
+      embedded_storage_type:
+        type: "string"
+        format: "byte"
+        description: "The type of embedded storage available to the Resource Module.(0\
+          \ = NAND, 1 = SATA)"
+      embedded_storage_write_cycles:
+        type: "integer"
+        format: "int32"
+        description: "The estimated number of write cycles the of embedded storagewas\
+          \ designed for."
+      embedded_storage_write_speed:
+        type: "integer"
+        format: "int32"
+        description: "The write speed of the embedded storage."
+      enclosure_id:
+        type: "integer"
+        format: "int32"
+        description: "The globally-unique identifier of the Enclosure housing theResource\
+          \ Module."
+      ethernet_port_map:
+        type: "object"
+        description: "A map of interfaces to their connected switch ports."
+        additionalProperties:
+          type: "string"
+      first_connected:
+        type: "string"
+        description: "An ISO 8601 timestamp identifying the first time a Resource\
+          \ Module was connected."
+      last_connected:
+        type: "string"
+        description: "An ISO 8601 timestamp identifying the last time a Resource Module\
+          \ was connected."
+      master_cpu_arch:
+        type: "string"
+        format: "byte"
+        description: "The architecture of the Resource Module's master CPU"
+      master_cpu_arch_version:
+        type: "string"
+        format: "byte"
+        description: "The architecture version of the Resource Module's master CPU"
+      master_cpu_core_count:
+        type: "integer"
+        format: "int32"
+        description: "The number of cores in the Resource Module's master CPU"
+      master_cpu_datapath_width:
+        type: "string"
+        format: "byte"
+        description: "The data path width of the Resource Module's master CPU"
+      master_cpu_integer_width:
+        type: "string"
+        format: "byte"
+        description: "The integer width of the Resource Module's master CPU"
+      master_cpu_memory_addr_width:
+        type: "string"
+        format: "byte"
+        description: "The memory address width of the Resource Module's master CPU"
+      maximum_input_voltage:
+        type: "number"
+        format: "double"
+        description: "The maximum input voltage supported by the Resource Module."
+      maximum_power:
+        type: "integer"
+        format: "int32"
+        description: "The maximum power draw in watts."
+      minimum_input_voltage:
+        type: "number"
+        format: "double"
+        description: "The minimum input voltage supported by the Resource Module."
+      module_function:
+        type: "string"
+      module_index:
+        type: "integer"
+        format: "int32"
+        description: "The index of the slot a module is current attached to."
+      pcie_lane_per_link:
+        type: "string"
+        format: "byte"
+        description: "The number of PCIe lanes per link."
+      pcie_link_count:
+        type: "string"
+        format: "byte"
+        description: "The total number of PCIe links available."
+      pcie_version:
+        type: "string"
+        format: "byte"
+        description: "The version of PCIe the Resoure Module supports."
+      power_state:
+        type: "string"
+        description: "The current power state of the Resource Module."
+        enum:
+        - "ON"
+        - "OFF"
+        - "UNKNOWN"
+        - "COMING_UP"
+        - "GOING_DOWN"
+      ram_amount:
+        type: "integer"
+        format: "int32"
+        description: "The amount of RAM currently allocated to the Resource Module."
+      ram_speed:
+        type: "integer"
+        format: "int32"
+        description: "The speed of the RAM the Resource Module has access to."
+      resource_pool_id:
+        type: "string"
+        description: "The globally-unique identifier of the Resource Pool to which\
+          \ the Resource Module belongs."
+      serial_number:
+        type: "string"
+        description: "The serial number of the Resource Module."
+      slave_cpu_arch:
+        type: "string"
+        format: "byte"
+        description: "The architecture of the Resource Module's slave CPU"
+      slave_cpu_arch_version:
+        type: "string"
+        format: "byte"
+        description: "The architecture version of the Resource Module's slave CPU"
+      slave_cpu_core_count:
+        type: "integer"
+        format: "int32"
+        description: "The number of cores in the Resource Module's slave CPU"
+      slave_cpu_datapath_width:
+        type: "string"
+        format: "byte"
+        description: "The data path width of the Resource Module's slave CPU"
+      slave_cpu_integer_width:
+        type: "string"
+        format: "byte"
+        description: "The integer width of the Resource Module's slave CPU"
+      slave_cpu_memory_addr_width:
+        type: "string"
+        format: "byte"
+        description: "The memory address width of the Resource Module's slave CPU"
+      updated:
+        type: "string"
+        description: "An ISO 8601 timestamp identifying the last time a Resource Module's\
+          \ state was changed."
+  Snapshot:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+        description: "The snapshot id."
+      name:
+        type: "string"
+        description: "The snapshot name."
+      note:
+        type: "string"
+      size:
+        type: "integer"
+        format: "int64"
+        description: "Size in bytes of the snapshot."
+  ResponseEntity:
+    type: "object"
+    properties:
+      body:
+        type: "object"
+        properties: {}
+      status_code:
+        type: "string"
+        enum:
+        - "100"
+        - "101"
+        - "102"
+        - "103"
+        - "200"
+        - "201"
+        - "202"
+        - "203"
+        - "204"
+        - "205"
+        - "206"
+        - "207"
+        - "208"
+        - "226"
+        - "300"
+        - "301"
+        - "302"
+        - "303"
+        - "304"
+        - "305"
+        - "307"
+        - "308"
+        - "400"
+        - "401"
+        - "402"
+        - "403"
+        - "404"
+        - "405"
+        - "406"
+        - "407"
+        - "408"
+        - "409"
+        - "410"
+        - "411"
+        - "412"
+        - "413"
+        - "414"
+        - "415"
+        - "416"
+        - "417"
+        - "418"
+        - "419"
+        - "420"
+        - "421"
+        - "422"
+        - "423"
+        - "424"
+        - "426"
+        - "428"
+        - "429"
+        - "431"
+        - "451"
+        - "500"
+        - "501"
+        - "502"
+        - "503"
+        - "504"
+        - "505"
+        - "506"
+        - "507"
+        - "508"
+        - "509"
+        - "510"
+        - "511"
+      status_code_value:
+        type: "integer"
+        format: "int32"
+  ImageVersion:
+    type: "object"
+  Command:
+    type: "object"
+    properties:
+      completed:
+        type: "string"
+        description: "The date and time that the Command completed (if it has)."
+      id:
+        type: "string"
+        description: "An auto-generated unique identifier of the Command."
+      ims_instance_id:
+        type: "string"
+        description: "The instance id of the IMS node that originated the Command."
+      initiated:
+        type: "string"
+        description: "The date and time when the Command was initiated."
+      initiated_by:
+        type: "string"
+        description: "The Name of the uer who initiated the Command."
+      last_updated:
+        type: "string"
+        description: "The date and time that the Command was last updated."
+      message:
+        type: "string"
+        description: "The current human-readable message about the state of the Command."
+      metadata:
+        type: "object"
+        description: "A dictionary of metadata associated with the Command."
+        properties: {}
+      org_id:
+        type: "string"
+        description: "The identifier for the organization to which the Command is\
+          \ applicable."
+      properties:
+        type: "object"
+        description: "A dictionary of properties applicable to the Command."
+        properties: {}
+      status:
+        type: "string"
+        description: "The current status of the Command."
+        enum:
+        - "QUEUED"
+        - "PREPARING"
+        - "EXECUTING"
+        - "FAILED"
+        - "SUCCESSFUL"
+        - "CANCELLED"
+      type:
+        type: "string"
+        description: "The type of Command to be performed."
+      valid:
+        type: "boolean"
+        example: false
+        description: "A value indicating whether or not a Command has passed validation."
+      validation_messages:
+        type: "array"
+        description: "A list of messages resulting from the validation of the Command."
+        items:
+          $ref: "#/definitions/CommandValidationMessage"
+    description: "Commands represent changes to be made to Services and Resources\
+      \ within the Senient Environment."
+  PageOfCommand:
+    type: "object"
+    properties:
+      content:
+        type: "array"
+        items:
+          $ref: "#/definitions/Command"
+      first:
+        type: "boolean"
+      last:
+        type: "boolean"
+      number:
+        type: "integer"
+        format: "int32"
+      number_of_elements:
+        type: "integer"
+        format: "int32"
+      size:
+        type: "integer"
+        format: "int32"
+      sort:
+        $ref: "#/definitions/Sort"
+      total_elements:
+        type: "integer"
+        format: "int64"
+      total_pages:
+        type: "integer"
+        format: "int32"
+  Event:
+    type: "object"
+    required:
+    - "timestamp"
+    - "type"
+    properties:
+      enclosure_id:
+        type: "integer"
+        format: "int32"
+      id:
+        type: "string"
+        description: "The id of the Event."
+      properties:
+        type: "object"
+        description: "All properties relating to the Event."
+        properties: {}
+      timestamp:
+        type: "string"
+        description: "The ISO8601 formatted timestamp of the event."
+      type:
+        type: "string"
+        description: "The type or category of the Event."
+  Metric:
+    type: "object"
+    required:
+    - "component_id"
+    - "enclosure_id"
+    - "timestamp"
+    - "type"
+    - "value"
+    properties:
+      component_id:
+        description: "The globally-unique identifier of the component that originated\
+          \ the metric."
+        $ref: "#/definitions/ComponentId"
+      enclosure_id:
+        type: "integer"
+        format: "int32"
+        description: "The globally-unique identifier of the enclosure that originated\
+          \ the metric."
+      timestamp:
+        type: "string"
+        description: "The ISO8601 formatted timestamp of the metric."
+      type:
+        type: "string"
+        description: "The type or category of the metric."
+      value:
+        type: "number"
+        format: "double"
+        description: "The value of the metric."
+  ComponentId:
+    type: "object"
+    required:
+    - "enclosure_id"
+    - "subtype"
+    - "subtype_id"
+    - "subtype_name"
+    - "type"
+    - "type_id"
+    - "type_name"
+    - "value"
+    properties:
+      enclosure_id:
+        type: "integer"
+        format: "int32"
+        description: "The 32-bit globally unique enclosure ID."
+      subtype:
+        type: "integer"
+        format: "int32"
+        description: "The subtype of the component as an integer."
+      subtype_id:
+        type: "integer"
+        format: "int32"
+        description: "The subtype id of the component."
+      subtype_name:
+        type: "string"
+        description: "The subtype of the component as a string."
+      type:
+        type: "integer"
+        format: "int32"
+        description: "The type of the component as an integer."
+      type_id:
+        type: "integer"
+        format: "int32"
+        description: "The type id of the component."
+      type_name:
+        type: "string"
+        description: "The type of the component as a string."
+      value:
+        type: "integer"
+        format: "int64"
+        description: "The 64-bit globally unique component ID."
+  SystemComponent:
+    type: "object"
+    properties:
+      enclosure_id:
+        type: "integer"
+        format: "int32"
+      id:
+        type: "integer"
+        format: "int64"
+      name:
+        type: "string"
+      parent_id:
+        type: "integer"
+        format: "int64"
+      timestamp:
+        type: "string"
+      type:
+        type: "integer"
+        format: "int32"
+      type_id:
+        type: "integer"
+        format: "int32"
+      type_name:
+        type: "string"
+  ComponentDefinition:
+    type: "object"
+    properties:
+      assets:
+        type: "array"
+        items:
+          $ref: "#/definitions/Asset"
+      base_image:
+        type: "string"
+      min_instances:
+        type: "integer"
+        format: "int32"
+      mounts:
+        type: "array"
+        items:
+          $ref: "#/definitions/StoreMount"
+      name:
+        type: "string"
+      script:
+        type: "string"
+  PageOfResourceModule:
+    type: "object"
+    properties:
+      content:
+        type: "array"
+        items:
+          $ref: "#/definitions/ResourceModule"
+      first:
+        type: "boolean"
+      last:
+        type: "boolean"
+      number:
+        type: "integer"
+        format: "int32"
+      number_of_elements:
+        type: "integer"
+        format: "int32"
+      size:
+        type: "integer"
+        format: "int32"
+      sort:
+        $ref: "#/definitions/Sort"
+      total_elements:
+        type: "integer"
+        format: "int64"
+      total_pages:
+        type: "integer"
+        format: "int32"

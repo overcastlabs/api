@@ -1,0 +1,7248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Senient Cloud Platform API</title>
+  <meta name="description" content="This is the new home of documentation and code for getting started with the Senient Cloud Platform API.">
+
+  <link rel="stylesheet" href="/assets/css/prism-xonokai.css">
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="canonical" href="http://localhost:4000/">
+  <link rel="alternate" type="application/rss+xml" title="Senient Systems" href="/feed.xml">
+  <link rel="shortcut icon" href="/favicon.ico" />
+<script type="text/javascript" src="/assets/js/prefixfree.min.js"></script>
+  
+  
+</head>
+
+
+  <body>
+
+    <a name="top"></a>
+
+<header class="site-header" role="banner">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="http://www.senient.com/" title="Senient Systems"><img src="http://localhost:4000/assets/img/senient_icon_50X50.png"></a>
+
+    <nav class="site-nav">
+      <span class="menu-icon">
+        <svg viewBox="0 0 18 15" width="18px" height="15px">
+          <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+          <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+          <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+        </svg>
+      </span>
+
+      <div class="trigger">
+        <a class="page-link" href="http://api.senient.com">API</a>
+        <a class="page-link" href="http://www.senient.com/platform/">PLATFORM</a>
+        <a class="page-link" href="http://www.senient.com/contact/">CONTACT</a>
+        <a class="page-link" href="http://www.senient.com/about/">ABOUT</a>
+      </div>
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <nav class="left">
+	<h4>Overview</h4>
+	<div>
+		<a href="#QuickStart" title="A guide to help you get started.">Quick Start</a>
+	</div>
+	<!--div>
+		<a href="#Authenication" title="An introduction to authentication in the IMS.">Authenication</a>
+	</div>
+	<div>
+		<a href="#QuerySyntax" title="A syntax reference for querying data in the IMS.">Query Syntax</a>
+	</div>
+	<div>
+		<a href="#EventTypes" title="A list of event types used in the environment.">Event Types</a>
+	</div>
+	<div>
+		<a href="#MetricKeys" title="A list of metric keys used in the environment.">Metric Keys</a>
+	</div-->
+	<h4>Resources</h4>
+
+	<div>
+		<a href="#Commands">Commands</a>
+	</div>
+
+	<div>
+		<a href="#Definitions">Definitions</a>
+	</div>
+
+	<div>
+		<a href="#Deployments">Deployments</a>
+	</div>
+
+	<div>
+		<a href="#Instances">Instances</a>
+	</div>
+
+	<div>
+		<a href="#Images">Images</a>
+	</div>
+
+	<div>
+		<a href="#Resource Modules">Resource Modules</a>
+	</div>
+
+	<div>
+		<a href="#Resource Pools">Resource Pools</a>
+	</div>
+
+	<div>
+		<a href="#Snapshots">Snapshots</a>
+	</div>
+
+	<div>
+		<a href="#Stores">Stores</a>
+	</div>
+
+	<div>
+		<a href="#Components">Components</a>
+	</div>
+
+	<div>
+		<a href="#Events">Events</a>
+	</div>
+
+	<div>
+		<a href="#Metrics">Metrics</a>
+	</div>
+
+	<div>
+		<a href="#Versions">Versions</a>
+	</div>
+
+</nav>
+
+<section class="main">
+	<article id="QuickStart" class="content">
+		<div class="content_block">
+			<header>
+				<h2><span class="content_name">Quick Start</span><a class="top_link" href="#top">top</a></h2>
+			</header>
+			<aside class="code-gutter"></aside>
+		</div>
+		<div class="content_block">
+			<div class="content_body">
+				<p>
+				The Senient Cloud Platform provides an easy way to set up a hybrid-cloud environment, where
+				the operator can orchestrate, manage and monitor dedicated and * as a Service resources.
+				</p>
+				<p>
+				Built "API-first", the Senient Cloud Platform provides a rich API which allows consumers
+				to access all of the information about their cloud environment, from the memory-presure, down
+				to the efficiency of the power-supplies, and provides the ability to respond programatically
+				to changes within the environment.
+				</p>
+			</div>
+			<aside class="code-gutter"></aside>
+		</div>
+		<div class="content_block">
+			<div class="content_body">
+				<pre class="cli">
+					<code>
+<span class="cli-prompt">[senient@wintermute]</span> $ senient modules --limit 5
+
+Serial Number         Resource Pool  Power      Cores  Arch      RAM (MB)
+------------------  ---------------  -------  -------  ------  ----------
+FF-0000-0000000004                   Off            8  X86_64        8192
+FF-0000-000000000F                   Off            8  X86_64        8192
+FF-0000-0000000017                   Off            8  X86_64        8192
+FF-0000-000000001F                   Off            8  X86_64        8192
+FF-0000-0000000021                   Off            8  X86_64        8192
+					</code>
+				</pre>
+			</div>
+			<aside class="code-gutter">
+			</aside>
+		</div>
+	</article>
+	<!--article id="Authenication" class="content">
+		<h2><span class="content_name">Metric Keys</span><a class="top_link" href="#top">top</a></h2>
+	</article>
+	<article id="QuerySyntax" class="content">
+		<h2><span class="content_name">Query Syntax</span><a class="top_link" href="#top">top</a></h2>
+	</article>
+	<article id="EventTypes" class="content">
+		<h2><span class="content_name">Event Types</span><a class="top_link" href="#top">top</a></h2>
+	</article>
+	<article id="MetricKeys" class="content">
+		<h2><span class="content_name">Metric Keys</span><a class="top_link" href="#top">top</a></h2>
+	</article-->
+
+	<article id="Commands" class="collection">
+		<div class="content_block">
+			<header>
+				<h2><span class="collection_name">Commands</span><a class="top_link" href="#top">top</a></h2>
+				<div>
+				
+				<p>Within the Senient Cloud Platform, there is a barrier between the management system and the hosting environment. The Command pipeline is responsible for initiating any operations that mutate the hosting environment.</p>
+
+				</div>
+			</header>
+			<aside class="code-gutter">
+				<pre data-src class="language-javascript">
+					<code class="language-javascript">
+// Command
+{
+  // The date and time that the
+  // Command completed (if it has).
+  "completed": string
+  // An auto-generated unique
+  // identifier of the Command.
+  "id": string
+  // The instance id of the IMS node
+  // that originated the Command.
+  "ims_instance_id": string
+  // The date and time when the
+  // Command was initiated.
+  "initiated": string
+  // The Name of the uer who initiated
+  // the Command.
+  "initiated_by": string
+  // The date and time that the
+  // Command was last updated.
+  "last_updated": string
+  // The current human-readable
+  // message about the state of the
+  // Command.
+  "message": string
+  // A dictionary of metadata
+  // associated with the Command.
+  "metadata": object
+  // The identifier for the
+  // organization to which the Command
+  // is applicable.
+  "org_id": string
+  // A dictionary of properties
+  // applicable to the Command.
+  "properties": object
+  // The current status of the
+  // Command.
+  "status": enum
+  // The type of Command to be
+  // performed.
+  "type": string
+  // A value indicating whether or not
+  // a Command has passed validation.
+  "valid": boolean
+  // A list of messages resulting from
+  // the validation of the Command.
+  "validation_messages": array
+}
+					</code>
+				</pre>
+			</aside>
+		</div>
+		<div class="content_block">
+			<div class="resource">
+				<header class="resource_header">
+					<h4>Schema</h4>
+					<span class="resource_name">Command</span>
+					<span class="resource_type">object</span>
+				</header>
+				<div class="body resource_body">
+						<ul class="properties">
+		
+						<li class="property">
+							<header>
+								<span class="property_name">completed</span>
+								<span class="property_type">
+			
+								string
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description">The date and time that the Command completed (if it has).</span>
+			
+							</div>
+						</li>
+		
+						<li class="property">
+							<header>
+								<span class="property_name">id</span>
+								<span class="property_type">
+			
+								string
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description">An auto-generated unique identifier of the Command.</span>
+			
+							</div>
+						</li>
+		
+						<li class="property">
+							<header>
+								<span class="property_name">ims_instance_id</span>
+								<span class="property_type">
+			
+								string
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description">The instance id of the IMS node that originated the Command.</span>
+			
+							</div>
+						</li>
+		
+						<li class="property">
+							<header>
+								<span class="property_name">initiated</span>
+								<span class="property_type">
+			
+								string
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description">The date and time when the Command was initiated.</span>
+			
+							</div>
+						</li>
+		
+						<li class="property">
+							<header>
+								<span class="property_name">initiated_by</span>
+								<span class="property_type">
+			
+								string
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description">The Name of the uer who initiated the Command.</span>
+			
+							</div>
+						</li>
+		
+						<li class="property">
+							<header>
+								<span class="property_name">last_updated</span>
+								<span class="property_type">
+			
+								string
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description">The date and time that the Command was last updated.</span>
+			
+							</div>
+						</li>
+		
+						<li class="property">
+							<header>
+								<span class="property_name">message</span>
+								<span class="property_type">
+			
+								string
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description">The current human-readable message about the state of the Command.</span>
+			
+							</div>
+						</li>
+		
+						<li class="property">
+							<header>
+								<span class="property_name">metadata</span>
+								<span class="property_type">
+			
+								object
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description">A dictionary of metadata associated with the Command.</span>
+			
+							</div>
+						</li>
+		
+						<li class="property">
+							<header>
+								<span class="property_name">org_id</span>
+								<span class="property_type">
+			
+								string
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description">The identifier for the organization to which the Command is applicable.</span>
+			
+							</div>
+						</li>
+		
+						<li class="property">
+							<header>
+								<span class="property_name">properties</span>
+								<span class="property_type">
+			
+								object
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description">A dictionary of properties applicable to the Command.</span>
+			
+							</div>
+						</li>
+		
+						<li class="property">
+							<header>
+								<span class="property_name">status</span>
+								<span class="property_type">
+			
+								enum
+			
+								</span>
+			
+								<span class="property_enum">
+				
+									<span class="property_enum_value">QUEUED</span>
+				
+									<span class="property_enum_value">PREPARING</span>
+				
+									<span class="property_enum_value">EXECUTING</span>
+				
+									<span class="property_enum_value">FAILED</span>
+				
+									<span class="property_enum_value">SUCCESSFUL</span>
+				
+									<span class="property_enum_value">CANCELLED</span>
+				
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description">The current status of the Command.</span>
+			
+							</div>
+						</li>
+		
+						<li class="property">
+							<header>
+								<span class="property_name">type</span>
+								<span class="property_type">
+			
+								string
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description">The type of Command to be performed.</span>
+			
+							</div>
+						</li>
+		
+						<li class="property">
+							<header>
+								<span class="property_name">valid</span>
+								<span class="property_type">
+			
+								boolean
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description">A value indicating whether or not a Command has passed validation.</span>
+			
+							</div>
+						</li>
+		
+						<li class="property">
+							<header>
+								<span class="property_name">validation_messages</span>
+								<span class="property_type">
+			
+								array
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description">A list of messages resulting from the validation of the Command.</span>
+			
+							</div>
+						</li>
+		
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="paths">
+			<header>
+			<h4>Operations</h4>
+	
+			<div class="path">
+				<div class="path_body">
+					<ul>
+		
+						<li class="method">
+							<div class="content_block">
+								<div class="content_body">
+									<header class="method_header">
+										<span class="method_description">Retrieve all Commands that match {query}.</span>
+										<span class="method_name">GET</span>
+										<span class="path_name">/api/commands</span>
+			
+										<span class="query_params params">
+				
+											<span class="query_param param"><span class="query_param_name param_name">size</span><span class="query_param_type param_type">int32</span></span>
+				
+											<span class="query_param param"><span class="query_param_name param_name">page</span><span class="query_param_type param_type">int32</span></span>
+				
+											<span class="query_param param"><span class="query_param_name param_name">query</span><span class="query_param_type param_type">string</span></span>
+				
+										</span>
+			
+									</header>
+									<div class="method_body content_body">
+			
+			
+				
+					
+				
+										<div class="method_summary">
+											<h5>Query Parameters</h5>
+											<ul class="query_params params">
+				
+												<li class="query_param param_defaulted param">
+													<header class="param_header">
+														<span class="param_name">size</span>
+														<span class="param_type">
+														int32
+														</span>
+														<span class="param_default">100</span>
+					
+													</header>
+													<div class="query_param_body param_body">
+														<span class="param_description">The number of Commands to return per query.</span>
+													</div>
+												</li>
+			
+												<li class="query_param param_defaulted param">
+													<header class="param_header">
+														<span class="param_name">page</span>
+														<span class="param_type">
+														int32
+														</span>
+														<span class="param_default">0</span>
+					
+													</header>
+													<div class="query_param_body param_body">
+														<span class="param_description">The page offset to return.</span>
+													</div>
+												</li>
+			
+												<li class="query_param param_defaulted param">
+													<header class="param_header">
+														<span class="param_name">query</span>
+														<span class="param_type">
+														string
+														</span>
+														<span class="param_default">*:*</span>
+					
+													</header>
+													<div class="query_param_body param_body">
+														<span class="param_description">A query string to filter the Commands with.</span>
+													</div>
+												</li>
+			
+											</ul>
+										</div>
+			
+				
+					
+										<div class="responses">
+											<h5>Responses</h5>
+											<ul>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">200</span>
+														<span class="response_description">OK</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">401</span>
+														<span class="response_description">Unauthorized</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">403</span>
+														<span class="response_description">Forbidden</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">404</span>
+														<span class="response_description">Not Found</span>
+													</header>
+												</li>
+			
+											</ul>
+										</div>
+									</div>
+								</div>
+								<aside class="code-gutter">
+			
+									<pre data-src class="language-javascript">
+										<code class="language-javascript">
+// 200
+Command
+										</code>
+									</pre>
+			
+								</aside>
+							</div>
+						</li>
+		
+						<li class="method">
+							<div class="content_block">
+								<div class="content_body">
+									<header class="method_header">
+										<span class="method_description">Initiate a new command.</span>
+										<span class="method_name">POST</span>
+										<span class="path_name">/api/commands</span>
+			
+									</header>
+									<div class="method_body content_body">
+			
+			
+				
+					
+				
+					
+				
+					
+										<div class="responses">
+											<h5>Responses</h5>
+											<ul>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">200</span>
+														<span class="response_description">OK</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">201</span>
+														<span class="response_description">Created</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">401</span>
+														<span class="response_description">Unauthorized</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">403</span>
+														<span class="response_description">Forbidden</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">404</span>
+														<span class="response_description">Not Found</span>
+													</header>
+												</li>
+			
+											</ul>
+										</div>
+									</div>
+								</div>
+								<aside class="code-gutter">
+			
+								</aside>
+							</div>
+						</li>
+		
+					</ul>
+				</div>
+			</div>
+	
+			<div class="path">
+				<div class="path_body">
+					<ul>
+		
+						<li class="method">
+							<div class="content_block">
+								<div class="content_body">
+									<header class="method_header">
+										<span class="method_description">Retrieve a specific Command by its Id.</span>
+										<span class="method_name">GET</span>
+										<span class="path_name">/api/commands/{id}</span>
+			
+									</header>
+									<div class="method_body content_body">
+			
+			
+				
+										<div class="method_summary">
+											<h5>Path Parameters</h5>
+											<ul class="path_params params">
+				
+												<li class="path_param param">
+													<header class="param_header">
+														<span class="param_name">id</span>
+														<span class="param_type">
+														string
+														</span>
+														
+					
+													</header>
+													<div class="path_param_body param_body">
+														<span class="param_description">The id of the command to retrieve.</span>
+													</div>
+												</li>
+			
+											</ul>
+										</div>
+			
+				
+					
+				
+					
+										<div class="responses">
+											<h5>Responses</h5>
+											<ul>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">200</span>
+														<span class="response_description">OK</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">401</span>
+														<span class="response_description">Unauthorized</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">403</span>
+														<span class="response_description">Forbidden</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">404</span>
+														<span class="response_description">Not Found</span>
+													</header>
+												</li>
+			
+											</ul>
+										</div>
+									</div>
+								</div>
+								<aside class="code-gutter">
+			
+									<pre data-src class="language-javascript">
+										<code class="language-javascript">
+// 200
+Command
+										</code>
+									</pre>
+			
+								</aside>
+							</div>
+						</li>
+		
+					</ul>
+				</div>
+			</div>
+	
+		</div>
+	</article>
+
+	<article id="Definitions" class="collection">
+		<div class="content_block">
+			<header>
+				<h2><span class="collection_name">Definitions</span><a class="top_link" href="#top">top</a></h2>
+				<div>
+				
+				<p><em>This is a place holder</em></p>
+
+				</div>
+			</header>
+			<aside class="code-gutter">
+				<pre data-src class="language-javascript">
+					<code class="language-javascript">
+// Definition
+{
+  "components": array
+  "meta": object
+  "module_types": object
+  "name": string
+  "namespace": string
+  "parent": object
+  "properties": object
+  "public": boolean
+  "stores": array
+  "version": string
+}
+					</code>
+				</pre>
+			</aside>
+		</div>
+		<div class="content_block">
+			<div class="resource">
+				<header class="resource_header">
+					<h4>Schema</h4>
+					<span class="resource_name">Definition</span>
+					<span class="resource_type">object</span>
+				</header>
+				<div class="body resource_body">
+						<ul class="properties">
+		
+						<li class="property">
+							<header>
+								<span class="property_name">components</span>
+								<span class="property_type">
+			
+								array
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description"></span>
+			
+							</div>
+						</li>
+		
+						<li class="property">
+							<header>
+								<span class="property_name">meta</span>
+								<span class="property_type">
+			
+								object
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description"></span>
+			
+							</div>
+						</li>
+		
+						<li class="property">
+							<header>
+								<span class="property_name">module_types</span>
+								<span class="property_type">
+			
+								object
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description"></span>
+			
+							</div>
+						</li>
+		
+						<li class="property">
+							<header>
+								<span class="property_name">name</span>
+								<span class="property_type">
+			
+								string
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description"></span>
+			
+							</div>
+						</li>
+		
+						<li class="property">
+							<header>
+								<span class="property_name">namespace</span>
+								<span class="property_type">
+			
+								string
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description"></span>
+			
+							</div>
+						</li>
+		
+						<li class="property">
+							<header>
+								<span class="property_name">parent</span>
+								<span class="property_type">
+			
+								object
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description"></span>
+			
+									<ul class="properties">
+		
+						<li class="property">
+							<header>
+								<span class="property_name">name</span>
+								<span class="property_type">
+			
+								string
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description"></span>
+			
+							</div>
+						</li>
+		
+						<li class="property">
+							<header>
+								<span class="property_name">namespace</span>
+								<span class="property_type">
+			
+								string
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description"></span>
+			
+							</div>
+						</li>
+		
+						<li class="property">
+							<header>
+								<span class="property_name">version</span>
+								<span class="property_type">
+			
+								string
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description"></span>
+			
+							</div>
+						</li>
+		
+					</ul>
+			
+							</div>
+						</li>
+		
+						<li class="property">
+							<header>
+								<span class="property_name">properties</span>
+								<span class="property_type">
+			
+								object
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description"></span>
+			
+							</div>
+						</li>
+		
+						<li class="property">
+							<header>
+								<span class="property_name">public</span>
+								<span class="property_type">
+			
+								boolean
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description"></span>
+			
+							</div>
+						</li>
+		
+						<li class="property">
+							<header>
+								<span class="property_name">stores</span>
+								<span class="property_type">
+			
+								array
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description"></span>
+			
+							</div>
+						</li>
+		
+						<li class="property">
+							<header>
+								<span class="property_name">version</span>
+								<span class="property_type">
+			
+								string
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description"></span>
+			
+							</div>
+						</li>
+		
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="paths">
+			<header>
+			<h4>Operations</h4>
+	
+			<div class="path">
+				<div class="path_body">
+					<ul>
+		
+						<li class="method">
+							<div class="content_block">
+								<div class="content_body">
+									<header class="method_header">
+										<span class="method_description">getNamespaces</span>
+										<span class="method_name">GET</span>
+										<span class="path_name">/api/definitions</span>
+			
+									</header>
+									<div class="method_body content_body">
+			
+			
+				
+					
+				
+					
+				
+					
+										<div class="responses">
+											<h5>Responses</h5>
+											<ul>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">200</span>
+														<span class="response_description">OK</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">401</span>
+														<span class="response_description">Unauthorized</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">403</span>
+														<span class="response_description">Forbidden</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">404</span>
+														<span class="response_description">Not Found</span>
+													</header>
+												</li>
+			
+											</ul>
+										</div>
+									</div>
+								</div>
+								<aside class="code-gutter">
+			
+									<pre data-src class="language-javascript">
+										<code class="language-javascript">
+// 200
+string[]
+										</code>
+									</pre>
+			
+								</aside>
+							</div>
+						</li>
+		
+						<li class="method">
+							<div class="content_block">
+								<div class="content_body">
+									<header class="method_header">
+										<span class="method_description">post</span>
+										<span class="method_name">POST</span>
+										<span class="path_name">/api/definitions</span>
+			
+									</header>
+									<div class="method_body content_body">
+			
+			
+				
+					
+				
+					
+				
+										<div class="method_summary">
+											<h5>Form Parameters</h5>
+											<ul class="formData_params params">
+				
+												<li class="formData_param param_required param">
+													<header class="param_header">
+														<span class="param_name">definition</span>
+														<span class="param_type">
+														file
+														</span>
+														
+					
+													</header>
+													<div class="formData_param_body param_body">
+														<span class="param_description">definition</span>
+													</div>
+												</li>
+			
+												<li class="formData_param param">
+													<header class="param_header">
+														<span class="param_name">assets</span>
+														<span class="param_type">
+														array
+														</span>
+														
+					
+													</header>
+													<div class="formData_param_body param_body">
+														<span class="param_description">assets</span>
+													</div>
+												</li>
+			
+											</ul>
+										</div>
+			
+										<div class="responses">
+											<h5>Responses</h5>
+											<ul>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">200</span>
+														<span class="response_description">OK</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">201</span>
+														<span class="response_description">Created</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">401</span>
+														<span class="response_description">Unauthorized</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">403</span>
+														<span class="response_description">Forbidden</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">404</span>
+														<span class="response_description">Not Found</span>
+													</header>
+												</li>
+			
+											</ul>
+										</div>
+									</div>
+								</div>
+								<aside class="code-gutter">
+			
+								</aside>
+							</div>
+						</li>
+		
+						<li class="method">
+							<div class="content_block">
+								<div class="content_body">
+									<header class="method_header">
+										<span class="method_description">put</span>
+										<span class="method_name">PUT</span>
+										<span class="path_name">/api/definitions</span>
+			
+									</header>
+									<div class="method_body content_body">
+			
+			
+				
+					
+				
+					
+				
+										<div class="method_summary">
+											<h5>Form Parameters</h5>
+											<ul class="formData_params params">
+				
+												<li class="formData_param param_required param">
+													<header class="param_header">
+														<span class="param_name">definition</span>
+														<span class="param_type">
+														file
+														</span>
+														
+					
+													</header>
+													<div class="formData_param_body param_body">
+														<span class="param_description">definition</span>
+													</div>
+												</li>
+			
+												<li class="formData_param param">
+													<header class="param_header">
+														<span class="param_name">assets</span>
+														<span class="param_type">
+														array
+														</span>
+														
+					
+													</header>
+													<div class="formData_param_body param_body">
+														<span class="param_description">assets</span>
+													</div>
+												</li>
+			
+											</ul>
+										</div>
+			
+										<div class="responses">
+											<h5>Responses</h5>
+											<ul>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">200</span>
+														<span class="response_description">OK</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">201</span>
+														<span class="response_description">Created</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">401</span>
+														<span class="response_description">Unauthorized</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">403</span>
+														<span class="response_description">Forbidden</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">404</span>
+														<span class="response_description">Not Found</span>
+													</header>
+												</li>
+			
+											</ul>
+										</div>
+									</div>
+								</div>
+								<aside class="code-gutter">
+			
+								</aside>
+							</div>
+						</li>
+		
+					</ul>
+				</div>
+			</div>
+	
+			<div class="path">
+				<div class="path_body">
+					<ul>
+		
+						<li class="method">
+							<div class="content_block">
+								<div class="content_body">
+									<header class="method_header">
+										<span class="method_description">getNames</span>
+										<span class="method_name">GET</span>
+										<span class="path_name">/api/definitions/{namespace}</span>
+			
+									</header>
+									<div class="method_body content_body">
+			
+			
+				
+										<div class="method_summary">
+											<h5>Path Parameters</h5>
+											<ul class="path_params params">
+				
+												<li class="path_param param_required param">
+													<header class="param_header">
+														<span class="param_name">namespace</span>
+														<span class="param_type">
+														string
+														</span>
+														
+					
+													</header>
+													<div class="path_param_body param_body">
+														<span class="param_description">namespace</span>
+													</div>
+												</li>
+			
+											</ul>
+										</div>
+			
+				
+					
+				
+					
+										<div class="responses">
+											<h5>Responses</h5>
+											<ul>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">200</span>
+														<span class="response_description">OK</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">401</span>
+														<span class="response_description">Unauthorized</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">403</span>
+														<span class="response_description">Forbidden</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">404</span>
+														<span class="response_description">Not Found</span>
+													</header>
+												</li>
+			
+											</ul>
+										</div>
+									</div>
+								</div>
+								<aside class="code-gutter">
+			
+									<pre data-src class="language-javascript">
+										<code class="language-javascript">
+// 200
+string[]
+										</code>
+									</pre>
+			
+								</aside>
+							</div>
+						</li>
+		
+					</ul>
+				</div>
+			</div>
+	
+			<div class="path">
+				<div class="path_body">
+					<ul>
+		
+						<li class="method">
+							<div class="content_block">
+								<div class="content_body">
+									<header class="method_header">
+										<span class="method_description">getVersions</span>
+										<span class="method_name">GET</span>
+										<span class="path_name">/api/definitions/{namespace}/{name}</span>
+			
+									</header>
+									<div class="method_body content_body">
+			
+			
+				
+										<div class="method_summary">
+											<h5>Path Parameters</h5>
+											<ul class="path_params params">
+				
+												<li class="path_param param_required param">
+													<header class="param_header">
+														<span class="param_name">name</span>
+														<span class="param_type">
+														string
+														</span>
+														
+					
+													</header>
+													<div class="path_param_body param_body">
+														<span class="param_description">name</span>
+													</div>
+												</li>
+			
+												<li class="path_param param_required param">
+													<header class="param_header">
+														<span class="param_name">namespace</span>
+														<span class="param_type">
+														string
+														</span>
+														
+					
+													</header>
+													<div class="path_param_body param_body">
+														<span class="param_description">namespace</span>
+													</div>
+												</li>
+			
+											</ul>
+										</div>
+			
+				
+					
+				
+					
+										<div class="responses">
+											<h5>Responses</h5>
+											<ul>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">200</span>
+														<span class="response_description">OK</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">401</span>
+														<span class="response_description">Unauthorized</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">403</span>
+														<span class="response_description">Forbidden</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">404</span>
+														<span class="response_description">Not Found</span>
+													</header>
+												</li>
+			
+											</ul>
+										</div>
+									</div>
+								</div>
+								<aside class="code-gutter">
+			
+									<pre data-src class="language-javascript">
+										<code class="language-javascript">
+// 200
+string[]
+										</code>
+									</pre>
+			
+								</aside>
+							</div>
+						</li>
+		
+					</ul>
+				</div>
+			</div>
+	
+			<div class="path">
+				<div class="path_body">
+					<ul>
+		
+						<li class="method">
+							<div class="content_block">
+								<div class="content_body">
+									<header class="method_header">
+										<span class="method_description">getJson</span>
+										<span class="method_name">GET</span>
+										<span class="path_name">/api/definitions/{namespace}/{name}/{version}/senient.json</span>
+			
+									</header>
+									<div class="method_body content_body">
+			
+			
+				
+										<div class="method_summary">
+											<h5>Path Parameters</h5>
+											<ul class="path_params params">
+				
+												<li class="path_param param_required param">
+													<header class="param_header">
+														<span class="param_name">version</span>
+														<span class="param_type">
+														string
+														</span>
+														
+					
+													</header>
+													<div class="path_param_body param_body">
+														<span class="param_description">version</span>
+													</div>
+												</li>
+			
+												<li class="path_param param_required param">
+													<header class="param_header">
+														<span class="param_name">name</span>
+														<span class="param_type">
+														string
+														</span>
+														
+					
+													</header>
+													<div class="path_param_body param_body">
+														<span class="param_description">name</span>
+													</div>
+												</li>
+			
+												<li class="path_param param_required param">
+													<header class="param_header">
+														<span class="param_name">namespace</span>
+														<span class="param_type">
+														string
+														</span>
+														
+					
+													</header>
+													<div class="path_param_body param_body">
+														<span class="param_description">namespace</span>
+													</div>
+												</li>
+			
+											</ul>
+										</div>
+			
+				
+					
+				
+					
+										<div class="responses">
+											<h5>Responses</h5>
+											<ul>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">200</span>
+														<span class="response_description">OK</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">401</span>
+														<span class="response_description">Unauthorized</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">403</span>
+														<span class="response_description">Forbidden</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">404</span>
+														<span class="response_description">Not Found</span>
+													</header>
+												</li>
+			
+											</ul>
+										</div>
+									</div>
+								</div>
+								<aside class="code-gutter">
+			
+									<pre data-src class="language-javascript">
+										<code class="language-javascript">
+// 200
+Definition
+										</code>
+									</pre>
+			
+								</aside>
+							</div>
+						</li>
+		
+					</ul>
+				</div>
+			</div>
+	
+			<div class="path">
+				<div class="path_body">
+					<ul>
+		
+						<li class="method">
+							<div class="content_block">
+								<div class="content_body">
+									<header class="method_header">
+										<span class="method_description">Get definition file in YAML format.</span>
+										<span class="method_name">GET</span>
+										<span class="path_name">/api/definitions/{namespace}/{name}/{version}/senient.yaml</span>
+			
+									</header>
+									<div class="method_body content_body">
+			
+			
+				
+										<div class="method_summary">
+											<h5>Path Parameters</h5>
+											<ul class="path_params params">
+				
+												<li class="path_param param_required param">
+													<header class="param_header">
+														<span class="param_name">version</span>
+														<span class="param_type">
+														string
+														</span>
+														
+					
+													</header>
+													<div class="path_param_body param_body">
+														<span class="param_description">version</span>
+													</div>
+												</li>
+			
+												<li class="path_param param_required param">
+													<header class="param_header">
+														<span class="param_name">name</span>
+														<span class="param_type">
+														string
+														</span>
+														
+					
+													</header>
+													<div class="path_param_body param_body">
+														<span class="param_description">name</span>
+													</div>
+												</li>
+			
+												<li class="path_param param_required param">
+													<header class="param_header">
+														<span class="param_name">namespace</span>
+														<span class="param_type">
+														string
+														</span>
+														
+					
+													</header>
+													<div class="path_param_body param_body">
+														<span class="param_description">namespace</span>
+													</div>
+												</li>
+			
+											</ul>
+										</div>
+			
+				
+					
+				
+					
+										<div class="responses">
+											<h5>Responses</h5>
+											<ul>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">200</span>
+														<span class="response_description">OK</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">401</span>
+														<span class="response_description">Unauthorized</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">403</span>
+														<span class="response_description">Forbidden</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">404</span>
+														<span class="response_description">Not Found</span>
+													</header>
+												</li>
+			
+											</ul>
+										</div>
+									</div>
+								</div>
+								<aside class="code-gutter">
+			
+									<pre data-src class="language-javascript">
+										<code class="language-javascript">
+// 200
+Definition
+										</code>
+									</pre>
+			
+								</aside>
+							</div>
+						</li>
+		
+					</ul>
+				</div>
+			</div>
+	
+		</div>
+	</article>
+
+	<article id="Deployments" class="collection">
+		<div class="content_block">
+			<header>
+				<h2><span class="collection_name">Deployments</span><a class="top_link" href="#top">top</a></h2>
+				<div>
+				
+				<p><em>This is a place holder</em></p>
+
+				</div>
+			</header>
+			<aside class="code-gutter">
+				<pre data-src class="language-javascript">
+					<code class="language-javascript">
+// Deployment
+{
+  "command_id": string
+  "completed": string
+  "components": Component[]
+  "definition": object
+  "id": string
+  "initiated": string
+  "message": string
+  "org_id": string
+  "resource_pool_id": string
+  "status": enum
+}
+					</code>
+				</pre>
+			</aside>
+		</div>
+		<div class="content_block">
+			<div class="resource">
+				<header class="resource_header">
+					<h4>Schema</h4>
+					<span class="resource_name">Deployment</span>
+					<span class="resource_type">object</span>
+				</header>
+				<div class="body resource_body">
+						<ul class="properties">
+		
+						<li class="property">
+							<header>
+								<span class="property_name">command_id</span>
+								<span class="property_type">
+			
+								string
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description"></span>
+			
+							</div>
+						</li>
+		
+						<li class="property">
+							<header>
+								<span class="property_name">completed</span>
+								<span class="property_type">
+			
+								string
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description"></span>
+			
+							</div>
+						</li>
+		
+						<li class="property">
+							<header>
+								<span class="property_name">components</span>
+								<span class="property_type">
+			
+								array
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description"></span>
+			
+							</div>
+						</li>
+		
+						<li class="property">
+							<header>
+								<span class="property_name">definition</span>
+								<span class="property_type">
+			
+								object
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description"></span>
+			
+									<ul class="properties">
+		
+						<li class="property">
+							<header>
+								<span class="property_name">name</span>
+								<span class="property_type">
+			
+								string
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description"></span>
+			
+							</div>
+						</li>
+		
+						<li class="property">
+							<header>
+								<span class="property_name">namespace</span>
+								<span class="property_type">
+			
+								string
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description"></span>
+			
+							</div>
+						</li>
+		
+						<li class="property">
+							<header>
+								<span class="property_name">version</span>
+								<span class="property_type">
+			
+								string
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description"></span>
+			
+							</div>
+						</li>
+		
+					</ul>
+			
+							</div>
+						</li>
+		
+						<li class="property">
+							<header>
+								<span class="property_name">id</span>
+								<span class="property_type">
+			
+								string
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description"></span>
+			
+							</div>
+						</li>
+		
+						<li class="property">
+							<header>
+								<span class="property_name">initiated</span>
+								<span class="property_type">
+			
+								string
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description"></span>
+			
+							</div>
+						</li>
+		
+						<li class="property">
+							<header>
+								<span class="property_name">message</span>
+								<span class="property_type">
+			
+								string
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description"></span>
+			
+							</div>
+						</li>
+		
+						<li class="property">
+							<header>
+								<span class="property_name">org_id</span>
+								<span class="property_type">
+			
+								string
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description"></span>
+			
+							</div>
+						</li>
+		
+						<li class="property">
+							<header>
+								<span class="property_name">resource_pool_id</span>
+								<span class="property_type">
+			
+								string
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description"></span>
+			
+							</div>
+						</li>
+		
+						<li class="property">
+							<header>
+								<span class="property_name">status</span>
+								<span class="property_type">
+			
+								enum
+			
+								</span>
+			
+								<span class="property_enum">
+				
+									<span class="property_enum_value">QUEUED</span>
+				
+									<span class="property_enum_value">PREPARING</span>
+				
+									<span class="property_enum_value">DEPLOYING</span>
+				
+									<span class="property_enum_value">DEPLOYED</span>
+				
+									<span class="property_enum_value">BRING_UP</span>
+				
+									<span class="property_enum_value">UP</span>
+				
+									<span class="property_enum_value">BRING_DOWN</span>
+				
+									<span class="property_enum_value">DOWN</span>
+				
+									<span class="property_enum_value">DESTROYING</span>
+				
+									<span class="property_enum_value">DESTROYED</span>
+				
+									<span class="property_enum_value">CANCELED</span>
+				
+									<span class="property_enum_value">FAILED</span>
+				
+									<span class="property_enum_value">DELETING</span>
+				
+									<span class="property_enum_value">DELETED</span>
+				
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description"></span>
+			
+							</div>
+						</li>
+		
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="paths">
+			<header>
+			<h4>Operations</h4>
+	
+			<div class="path">
+				<div class="path_body">
+					<ul>
+		
+						<li class="method">
+							<div class="content_block">
+								<div class="content_body">
+									<header class="method_header">
+										<span class="method_description">get</span>
+										<span class="method_name">GET</span>
+										<span class="path_name">/api/deployments</span>
+			
+									</header>
+									<div class="method_body content_body">
+			
+			
+				
+					
+				
+					
+				
+					
+										<div class="responses">
+											<h5>Responses</h5>
+											<ul>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">200</span>
+														<span class="response_description">OK</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">401</span>
+														<span class="response_description">Unauthorized</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">403</span>
+														<span class="response_description">Forbidden</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">404</span>
+														<span class="response_description">Not Found</span>
+													</header>
+												</li>
+			
+											</ul>
+										</div>
+									</div>
+								</div>
+								<aside class="code-gutter">
+			
+									<pre data-src class="language-javascript">
+										<code class="language-javascript">
+// 200
+Deployment[]
+										</code>
+									</pre>
+			
+								</aside>
+							</div>
+						</li>
+		
+					</ul>
+				</div>
+			</div>
+	
+			<div class="path">
+				<div class="path_body">
+					<ul>
+		
+						<li class="method">
+							<div class="content_block">
+								<div class="content_body">
+									<header class="method_header">
+										<span class="method_description">get</span>
+										<span class="method_name">GET</span>
+										<span class="path_name">/api/deployments/{id}</span>
+			
+									</header>
+									<div class="method_body content_body">
+			
+			
+				
+										<div class="method_summary">
+											<h5>Path Parameters</h5>
+											<ul class="path_params params">
+				
+												<li class="path_param param_required param">
+													<header class="param_header">
+														<span class="param_name">id</span>
+														<span class="param_type">
+														string
+														</span>
+														
+					
+													</header>
+													<div class="path_param_body param_body">
+														<span class="param_description">id</span>
+													</div>
+												</li>
+			
+											</ul>
+										</div>
+			
+				
+					
+				
+					
+										<div class="responses">
+											<h5>Responses</h5>
+											<ul>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">200</span>
+														<span class="response_description">OK</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">401</span>
+														<span class="response_description">Unauthorized</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">403</span>
+														<span class="response_description">Forbidden</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">404</span>
+														<span class="response_description">Not Found</span>
+													</header>
+												</li>
+			
+											</ul>
+										</div>
+									</div>
+								</div>
+								<aside class="code-gutter">
+			
+									<pre data-src class="language-javascript">
+										<code class="language-javascript">
+// 200
+Deployment
+										</code>
+									</pre>
+			
+								</aside>
+							</div>
+						</li>
+		
+					</ul>
+				</div>
+			</div>
+	
+		</div>
+	</article>
+
+	<article id="Instances" class="collection">
+		<div class="content_block">
+			<header>
+				<h2><span class="collection_name">Instances</span><a class="top_link" href="#top">top</a></h2>
+				<div>
+				
+				<p><em>This is a place holder</em></p>
+
+				</div>
+			</header>
+			<aside class="code-gutter">
+				<pre data-src class="language-javascript">
+					<code class="language-javascript">
+// Instance
+{
+  // The recognized target Instance
+  // status.
+  "admin_status": enum
+  // The base image used for this
+  // Instance.
+  "base_image": string
+  // The locally-unique identifier for
+  // the initiating component
+  // deployment.
+  "component_deployment_id": string
+  "deleted": boolean
+  // The globally-unique identifier
+  // for the initiating deployment.
+  "deployment_id": string
+  // The hostname of this Instance.
+  "hostname": string
+  // The ID of the Instance.
+  "id": string
+  // The IPv4 address assigned to this
+  // Instance.
+  "ipv4_addrs": string[]
+  // The IPv6 address assigned to this
+  // Instance.
+  "ipv6_addrs": string[]
+  // The current recognize Instance
+  // status.
+  "oper_status": enum
+  // The globally-unique identifier
+  // for the owning organization.
+  "org_id": string
+  // The primary MAC address of this
+  // Instance.
+  "primary_mac_address": string
+  // The serial number of the Resource
+  // Module hosting this Instance.
+  "rm_serial_number": string
+  // The storage pool of this
+  // Instance.
+  "storage_pool": string
+}
+					</code>
+				</pre>
+			</aside>
+		</div>
+		<div class="content_block">
+			<div class="resource">
+				<header class="resource_header">
+					<h4>Schema</h4>
+					<span class="resource_name">Instance</span>
+					<span class="resource_type">object</span>
+				</header>
+				<div class="body resource_body">
+						<ul class="properties">
+		
+						<li class="property">
+							<header>
+								<span class="property_name">admin_status</span>
+								<span class="property_type">
+			
+								enum
+			
+								</span>
+			
+								<span class="property_enum">
+				
+									<span class="property_enum_value">UNDEPLOYED</span>
+				
+									<span class="property_enum_value">CHECK_DEPLOY_REQUIRED</span>
+				
+									<span class="property_enum_value">DEPLOYING</span>
+				
+									<span class="property_enum_value">UNDEPLOYING</span>
+				
+									<span class="property_enum_value">DEPLOYED_FS</span>
+				
+									<span class="property_enum_value">DEPLOYED</span>
+				
+									<span class="property_enum_value">UP</span>
+				
+									<span class="property_enum_value">DOWN</span>
+				
+									<span class="property_enum_value">BOOTING</span>
+				
+									<span class="property_enum_value">GOING_DOWN</span>
+				
+									<span class="property_enum_value">ORPHANED</span>
+				
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description">The recognized target Instance status.</span>
+			
+							</div>
+						</li>
+		
+						<li class="property">
+							<header>
+								<span class="property_name">base_image</span>
+								<span class="property_type">
+			
+								string
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description">The base image used for this Instance.</span>
+			
+							</div>
+						</li>
+		
+						<li class="property property_required">
+							<header>
+								<span class="property_name">component_deployment_id</span>
+								<span class="property_type">
+			
+								string
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description">The locally-unique identifier for the initiating component deployment.</span>
+			
+							</div>
+						</li>
+		
+						<li class="property">
+							<header>
+								<span class="property_name">deleted</span>
+								<span class="property_type">
+			
+								boolean
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description"></span>
+			
+							</div>
+						</li>
+		
+						<li class="property property_required">
+							<header>
+								<span class="property_name">deployment_id</span>
+								<span class="property_type">
+			
+								string
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description">The globally-unique identifier for the initiating deployment.</span>
+			
+							</div>
+						</li>
+		
+						<li class="property">
+							<header>
+								<span class="property_name">hostname</span>
+								<span class="property_type">
+			
+								string
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description">The hostname of this Instance.</span>
+			
+							</div>
+						</li>
+		
+						<li class="property">
+							<header>
+								<span class="property_name">id</span>
+								<span class="property_type">
+			
+								string
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description">The ID of the Instance.</span>
+			
+							</div>
+						</li>
+		
+						<li class="property property_required">
+							<header>
+								<span class="property_name">ipv4_addrs</span>
+								<span class="property_type">
+			
+								array
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description">The IPv4 address assigned to this Instance.</span>
+			
+							</div>
+						</li>
+		
+						<li class="property property_required">
+							<header>
+								<span class="property_name">ipv6_addrs</span>
+								<span class="property_type">
+			
+								array
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description">The IPv6 address assigned to this Instance.</span>
+			
+							</div>
+						</li>
+		
+						<li class="property">
+							<header>
+								<span class="property_name">oper_status</span>
+								<span class="property_type">
+			
+								enum
+			
+								</span>
+			
+								<span class="property_enum">
+				
+									<span class="property_enum_value">UNDEPLOYED</span>
+				
+									<span class="property_enum_value">CHECK_DEPLOY_REQUIRED</span>
+				
+									<span class="property_enum_value">DEPLOYING</span>
+				
+									<span class="property_enum_value">UNDEPLOYING</span>
+				
+									<span class="property_enum_value">DEPLOYED_FS</span>
+				
+									<span class="property_enum_value">DEPLOYED</span>
+				
+									<span class="property_enum_value">UP</span>
+				
+									<span class="property_enum_value">DOWN</span>
+				
+									<span class="property_enum_value">BOOTING</span>
+				
+									<span class="property_enum_value">GOING_DOWN</span>
+				
+									<span class="property_enum_value">ORPHANED</span>
+				
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description">The current recognize Instance status.</span>
+			
+							</div>
+						</li>
+		
+						<li class="property property_required">
+							<header>
+								<span class="property_name">org_id</span>
+								<span class="property_type">
+			
+								string
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description">The globally-unique identifier for the owning organization.</span>
+			
+							</div>
+						</li>
+		
+						<li class="property">
+							<header>
+								<span class="property_name">primary_mac_address</span>
+								<span class="property_type">
+			
+								string
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description">The primary MAC address of this Instance.</span>
+			
+							</div>
+						</li>
+		
+						<li class="property">
+							<header>
+								<span class="property_name">rm_serial_number</span>
+								<span class="property_type">
+			
+								string
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description">The serial number of the Resource Module hosting this Instance.</span>
+			
+							</div>
+						</li>
+		
+						<li class="property property_required">
+							<header>
+								<span class="property_name">storage_pool</span>
+								<span class="property_type">
+			
+								string
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description">The storage pool of this Instance.</span>
+			
+							</div>
+						</li>
+		
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="paths">
+			<header>
+			<h4>Operations</h4>
+	
+			<div class="path">
+				<div class="path_body">
+					<ul>
+		
+						<li class="method">
+							<div class="content_block">
+								<div class="content_body">
+									<header class="method_header">
+										<span class="method_description">get</span>
+										<span class="method_name">GET</span>
+										<span class="path_name">/api/instances</span>
+			
+									</header>
+									<div class="method_body content_body">
+			
+			
+				
+					
+				
+					
+				
+					
+										<div class="responses">
+											<h5>Responses</h5>
+											<ul>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">200</span>
+														<span class="response_description">OK</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">401</span>
+														<span class="response_description">Unauthorized</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">403</span>
+														<span class="response_description">Forbidden</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">404</span>
+														<span class="response_description">Not Found</span>
+													</header>
+												</li>
+			
+											</ul>
+										</div>
+									</div>
+								</div>
+								<aside class="code-gutter">
+			
+									<pre data-src class="language-javascript">
+										<code class="language-javascript">
+// 200
+Instance[]
+										</code>
+									</pre>
+			
+								</aside>
+							</div>
+						</li>
+		
+					</ul>
+				</div>
+			</div>
+	
+			<div class="path">
+				<div class="path_body">
+					<ul>
+		
+						<li class="method">
+							<div class="content_block">
+								<div class="content_body">
+									<header class="method_header">
+										<span class="method_description">get</span>
+										<span class="method_name">GET</span>
+										<span class="path_name">/api/instances/{id}</span>
+			
+									</header>
+									<div class="method_body content_body">
+			
+			
+				
+										<div class="method_summary">
+											<h5>Path Parameters</h5>
+											<ul class="path_params params">
+				
+												<li class="path_param param_required param">
+													<header class="param_header">
+														<span class="param_name">id</span>
+														<span class="param_type">
+														string
+														</span>
+														
+					
+													</header>
+													<div class="path_param_body param_body">
+														<span class="param_description">id</span>
+													</div>
+												</li>
+			
+											</ul>
+										</div>
+			
+				
+					
+				
+					
+										<div class="responses">
+											<h5>Responses</h5>
+											<ul>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">200</span>
+														<span class="response_description">OK</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">401</span>
+														<span class="response_description">Unauthorized</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">403</span>
+														<span class="response_description">Forbidden</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">404</span>
+														<span class="response_description">Not Found</span>
+													</header>
+												</li>
+			
+											</ul>
+										</div>
+									</div>
+								</div>
+								<aside class="code-gutter">
+			
+									<pre data-src class="language-javascript">
+										<code class="language-javascript">
+// 200
+Instance
+										</code>
+									</pre>
+			
+								</aside>
+							</div>
+						</li>
+		
+					</ul>
+				</div>
+			</div>
+	
+		</div>
+	</article>
+
+	<article id="Images" class="collection">
+		<div class="content_block">
+			<header>
+				<h2><span class="collection_name">Images</span><a class="top_link" href="#top">top</a></h2>
+				<div>
+				
+				<p><em>This is a place holder</em></p>
+
+				</div>
+			</header>
+			<aside class="code-gutter">
+				<pre data-src class="language-javascript">
+					<code class="language-javascript">
+// Image
+{
+  "arch": string
+  "description": string
+  "distribution": string
+  "init_system": enum
+  // The name of the image.
+  "name": string
+  "org_id": string
+  // The image from which this one is
+  // derived.
+  "parent_image": string
+  // The version of the parent image
+  // from which this image is derived.
+  "parent_snap": string
+  "properties": object
+  // Size in bytes of the image.
+  "size": int64
+  "type": string
+  "vendor": string
+  "version": string
+  "versions": array
+}
+					</code>
+				</pre>
+			</aside>
+		</div>
+		<div class="content_block">
+			<div class="resource">
+				<header class="resource_header">
+					<h4>Schema</h4>
+					<span class="resource_name">Image</span>
+					<span class="resource_type">object</span>
+				</header>
+				<div class="body resource_body">
+						<ul class="properties">
+		
+						<li class="property">
+							<header>
+								<span class="property_name">arch</span>
+								<span class="property_type">
+			
+								string
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description"></span>
+			
+							</div>
+						</li>
+		
+						<li class="property">
+							<header>
+								<span class="property_name">description</span>
+								<span class="property_type">
+			
+								string
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description"></span>
+			
+							</div>
+						</li>
+		
+						<li class="property">
+							<header>
+								<span class="property_name">distribution</span>
+								<span class="property_type">
+			
+								string
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description"></span>
+			
+							</div>
+						</li>
+		
+						<li class="property">
+							<header>
+								<span class="property_name">init_system</span>
+								<span class="property_type">
+			
+								enum
+			
+								</span>
+			
+								<span class="property_enum">
+				
+									<span class="property_enum_value">SYSTEM_D</span>
+				
+									<span class="property_enum_value">INIT</span>
+				
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description"></span>
+			
+							</div>
+						</li>
+		
+						<li class="property">
+							<header>
+								<span class="property_name">name</span>
+								<span class="property_type">
+			
+								string
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description">The name of the image.</span>
+			
+							</div>
+						</li>
+		
+						<li class="property">
+							<header>
+								<span class="property_name">org_id</span>
+								<span class="property_type">
+			
+								string
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description"></span>
+			
+							</div>
+						</li>
+		
+						<li class="property">
+							<header>
+								<span class="property_name">parent_image</span>
+								<span class="property_type">
+			
+								string
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description">The image from which this one is derived.</span>
+			
+							</div>
+						</li>
+		
+						<li class="property">
+							<header>
+								<span class="property_name">parent_snap</span>
+								<span class="property_type">
+			
+								string
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description">The version of the parent image from which this image is derived.</span>
+			
+							</div>
+						</li>
+		
+						<li class="property">
+							<header>
+								<span class="property_name">properties</span>
+								<span class="property_type">
+			
+								object
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description"></span>
+			
+							</div>
+						</li>
+		
+						<li class="property">
+							<header>
+								<span class="property_name">size</span>
+								<span class="property_type">
+			
+								int64
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description">Size in bytes of the image.</span>
+			
+							</div>
+						</li>
+		
+						<li class="property">
+							<header>
+								<span class="property_name">type</span>
+								<span class="property_type">
+			
+								string
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description"></span>
+			
+							</div>
+						</li>
+		
+						<li class="property">
+							<header>
+								<span class="property_name">vendor</span>
+								<span class="property_type">
+			
+								string
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description"></span>
+			
+							</div>
+						</li>
+		
+						<li class="property">
+							<header>
+								<span class="property_name">version</span>
+								<span class="property_type">
+			
+								string
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description"></span>
+			
+							</div>
+						</li>
+		
+						<li class="property">
+							<header>
+								<span class="property_name">versions</span>
+								<span class="property_type">
+			
+								array
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description"></span>
+			
+							</div>
+						</li>
+		
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="paths">
+			<header>
+			<h4>Operations</h4>
+	
+			<div class="path">
+				<div class="path_body">
+					<ul>
+		
+						<li class="method">
+							<div class="content_block">
+								<div class="content_body">
+									<header class="method_header">
+										<span class="method_description">get</span>
+										<span class="method_name">GET</span>
+										<span class="path_name">/api/images</span>
+			
+									</header>
+									<div class="method_body content_body">
+			
+			
+				
+					
+				
+					
+				
+					
+										<div class="responses">
+											<h5>Responses</h5>
+											<ul>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">200</span>
+														<span class="response_description">OK</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">401</span>
+														<span class="response_description">Unauthorized</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">403</span>
+														<span class="response_description">Forbidden</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">404</span>
+														<span class="response_description">Not Found</span>
+													</header>
+												</li>
+			
+											</ul>
+										</div>
+									</div>
+								</div>
+								<aside class="code-gutter">
+			
+									<pre data-src class="language-javascript">
+										<code class="language-javascript">
+// 200
+Image[]
+										</code>
+									</pre>
+			
+								</aside>
+							</div>
+						</li>
+		
+					</ul>
+				</div>
+			</div>
+	
+			<div class="path">
+				<div class="path_body">
+					<ul>
+		
+						<li class="method">
+							<div class="content_block">
+								<div class="content_body">
+									<header class="method_header">
+										<span class="method_description">get</span>
+										<span class="method_name">GET</span>
+										<span class="path_name">/api/images/{name}</span>
+			
+									</header>
+									<div class="method_body content_body">
+			
+			
+				
+										<div class="method_summary">
+											<h5>Path Parameters</h5>
+											<ul class="path_params params">
+				
+												<li class="path_param param_required param">
+													<header class="param_header">
+														<span class="param_name">name</span>
+														<span class="param_type">
+														string
+														</span>
+														
+					
+													</header>
+													<div class="path_param_body param_body">
+														<span class="param_description">name</span>
+													</div>
+												</li>
+			
+											</ul>
+										</div>
+			
+				
+					
+				
+					
+										<div class="responses">
+											<h5>Responses</h5>
+											<ul>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">200</span>
+														<span class="response_description">OK</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">401</span>
+														<span class="response_description">Unauthorized</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">403</span>
+														<span class="response_description">Forbidden</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">404</span>
+														<span class="response_description">Not Found</span>
+													</header>
+												</li>
+			
+											</ul>
+										</div>
+									</div>
+								</div>
+								<aside class="code-gutter">
+			
+									<pre data-src class="language-javascript">
+										<code class="language-javascript">
+// 200
+Image
+										</code>
+									</pre>
+			
+								</aside>
+							</div>
+						</li>
+		
+					</ul>
+				</div>
+			</div>
+	
+		</div>
+	</article>
+
+	<article id="Resource Modules" class="collection">
+		<div class="content_block">
+			<header>
+				<h2><span class="collection_name">Resource Modules</span><a class="top_link" href="#top">top</a></h2>
+				<div>
+				
+				<p><em>This is a place holder</em></p>
+
+				</div>
+			</header>
+			<aside class="code-gutter">
+				<pre data-src class="language-javascript">
+					<code class="language-javascript">
+// Resource Module
+{
+  // A value indicating whether the
+  // Resource Module is connected.
+  "connected": boolean
+  // The globally-unique identifier of
+  // the Deployment using the Resource
+  // Module.
+  "deployment_id": string
+  // The read speed of the embedded
+  // storage.
+  "embedded_storage_read_speed": int32
+  // The type of embedded storage
+  // available to the Resource
+  // Module.(0 = NAND, 1 = SATA)
+  "embedded_storage_type": byte
+  // The estimated number of write
+  // cycles the of embedded storagewas
+  // designed for.
+  "embedded_storage_write_cycles": int32
+  // The write speed of the embedded
+  // storage.
+  "embedded_storage_write_speed": int32
+  // The globally-unique identifier of
+  // the Enclosure housing theResource
+  // Module.
+  "enclosure_id": int32
+  // A map of interfaces to their
+  // connected switch ports.
+  "ethernet_port_map": object
+  // An ISO 8601 timestamp identifying
+  // the first time a Resource Module
+  // was connected.
+  "first_connected": string
+  // An ISO 8601 timestamp identifying
+  // the last time a Resource Module
+  // was connected.
+  "last_connected": string
+  // The architecture of the Resource
+  // Module's master CPU
+  "master_cpu_arch": byte
+  // The architecture version of the
+  // Resource Module's master CPU
+  "master_cpu_arch_version": byte
+  // The number of cores in the
+  // Resource Module's master CPU
+  "master_cpu_core_count": int32
+  // The data path width of the
+  // Resource Module's master CPU
+  "master_cpu_datapath_width": byte
+  // The integer width of the Resource
+  // Module's master CPU
+  "master_cpu_integer_width": byte
+  // The memory address width of the
+  // Resource Module's master CPU
+  "master_cpu_memory_addr_width": byte
+  // The maximum input voltage
+  // supported by the Resource Module.
+  "maximum_input_voltage": double
+  // The maximum power draw in watts.
+  "maximum_power": int32
+  // The minimum input voltage
+  // supported by the Resource Module.
+  "minimum_input_voltage": double
+  "module_function": string
+  // The index of the slot a module is
+  // current attached to.
+  "module_index": int32
+  // The number of PCIe lanes per
+  // link.
+  "pcie_lane_per_link": byte
+  // The total number of PCIe links
+  // available.
+  "pcie_link_count": byte
+  // The version of PCIe the Resoure
+  // Module supports.
+  "pcie_version": byte
+  // The current power state of the
+  // Resource Module.
+  "power_state": enum
+  // The amount of RAM currently
+  // allocated to the Resource Module.
+  "ram_amount": int32
+  // The speed of the RAM the Resource
+  // Module has access to.
+  "ram_speed": int32
+  // The globally-unique identifier of
+  // the Resource Pool to which the
+  // Resource Module belongs.
+  "resource_pool_id": string
+  // The serial number of the Resource
+  // Module.
+  "serial_number": string
+  // The architecture of the Resource
+  // Module's slave CPU
+  "slave_cpu_arch": byte
+  // The architecture version of the
+  // Resource Module's slave CPU
+  "slave_cpu_arch_version": byte
+  // The number of cores in the
+  // Resource Module's slave CPU
+  "slave_cpu_core_count": int32
+  // The data path width of the
+  // Resource Module's slave CPU
+  "slave_cpu_datapath_width": byte
+  // The integer width of the Resource
+  // Module's slave CPU
+  "slave_cpu_integer_width": byte
+  // The memory address width of the
+  // Resource Module's slave CPU
+  "slave_cpu_memory_addr_width": byte
+  // An ISO 8601 timestamp identifying
+  // the last time a Resource Module's
+  // state was changed.
+  "updated": string
+}
+					</code>
+				</pre>
+			</aside>
+		</div>
+		<div class="content_block">
+			<div class="resource">
+				<header class="resource_header">
+					<h4>Schema</h4>
+					<span class="resource_name">Resource Module</span>
+					<span class="resource_type">object</span>
+				</header>
+				<div class="body resource_body">
+						<ul class="properties">
+		
+						<li class="property property_required">
+							<header>
+								<span class="property_name">connected</span>
+								<span class="property_type">
+			
+								boolean
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description">A value indicating whether the Resource Module is connected.</span>
+			
+							</div>
+						</li>
+		
+						<li class="property">
+							<header>
+								<span class="property_name">deployment_id</span>
+								<span class="property_type">
+			
+								string
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description">The globally-unique identifier of the Deployment using the Resource Module.</span>
+			
+							</div>
+						</li>
+		
+						<li class="property">
+							<header>
+								<span class="property_name">embedded_storage_read_speed</span>
+								<span class="property_type">
+			
+								int32
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description">The read speed of the embedded storage.</span>
+			
+							</div>
+						</li>
+		
+						<li class="property property_required">
+							<header>
+								<span class="property_name">embedded_storage_type</span>
+								<span class="property_type">
+			
+								byte
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description">The type of embedded storage available to the Resource Module.(0 = NAND, 1 = SATA)</span>
+			
+							</div>
+						</li>
+		
+						<li class="property">
+							<header>
+								<span class="property_name">embedded_storage_write_cycles</span>
+								<span class="property_type">
+			
+								int32
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description">The estimated number of write cycles the of embedded storagewas designed for.</span>
+			
+							</div>
+						</li>
+		
+						<li class="property">
+							<header>
+								<span class="property_name">embedded_storage_write_speed</span>
+								<span class="property_type">
+			
+								int32
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description">The write speed of the embedded storage.</span>
+			
+							</div>
+						</li>
+		
+						<li class="property">
+							<header>
+								<span class="property_name">enclosure_id</span>
+								<span class="property_type">
+			
+								int32
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description">The globally-unique identifier of the Enclosure housing theResource Module.</span>
+			
+							</div>
+						</li>
+		
+						<li class="property">
+							<header>
+								<span class="property_name">ethernet_port_map</span>
+								<span class="property_type">
+			
+								object
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description">A map of interfaces to their connected switch ports.</span>
+			
+							</div>
+						</li>
+		
+						<li class="property property_required">
+							<header>
+								<span class="property_name">first_connected</span>
+								<span class="property_type">
+			
+								string
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description">An ISO 8601 timestamp identifying the first time a Resource Module was connected.</span>
+			
+							</div>
+						</li>
+		
+						<li class="property property_required">
+							<header>
+								<span class="property_name">last_connected</span>
+								<span class="property_type">
+			
+								string
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description">An ISO 8601 timestamp identifying the last time a Resource Module was connected.</span>
+			
+							</div>
+						</li>
+		
+						<li class="property property_required">
+							<header>
+								<span class="property_name">master_cpu_arch</span>
+								<span class="property_type">
+			
+								byte
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description">The architecture of the Resource Module's master CPU</span>
+			
+							</div>
+						</li>
+		
+						<li class="property property_required">
+							<header>
+								<span class="property_name">master_cpu_arch_version</span>
+								<span class="property_type">
+			
+								byte
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description">The architecture version of the Resource Module's master CPU</span>
+			
+							</div>
+						</li>
+		
+						<li class="property property_required">
+							<header>
+								<span class="property_name">master_cpu_core_count</span>
+								<span class="property_type">
+			
+								int32
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description">The number of cores in the Resource Module's master CPU</span>
+			
+							</div>
+						</li>
+		
+						<li class="property property_required">
+							<header>
+								<span class="property_name">master_cpu_datapath_width</span>
+								<span class="property_type">
+			
+								byte
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description">The data path width of the Resource Module's master CPU</span>
+			
+							</div>
+						</li>
+		
+						<li class="property property_required">
+							<header>
+								<span class="property_name">master_cpu_integer_width</span>
+								<span class="property_type">
+			
+								byte
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description">The integer width of the Resource Module's master CPU</span>
+			
+							</div>
+						</li>
+		
+						<li class="property property_required">
+							<header>
+								<span class="property_name">master_cpu_memory_addr_width</span>
+								<span class="property_type">
+			
+								byte
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description">The memory address width of the Resource Module's master CPU</span>
+			
+							</div>
+						</li>
+		
+						<li class="property property_required">
+							<header>
+								<span class="property_name">maximum_input_voltage</span>
+								<span class="property_type">
+			
+								double
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description">The maximum input voltage supported by the Resource Module.</span>
+			
+							</div>
+						</li>
+		
+						<li class="property property_required">
+							<header>
+								<span class="property_name">maximum_power</span>
+								<span class="property_type">
+			
+								int32
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description">The maximum power draw in watts.</span>
+			
+							</div>
+						</li>
+		
+						<li class="property property_required">
+							<header>
+								<span class="property_name">minimum_input_voltage</span>
+								<span class="property_type">
+			
+								double
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description">The minimum input voltage supported by the Resource Module.</span>
+			
+							</div>
+						</li>
+		
+						<li class="property">
+							<header>
+								<span class="property_name">module_function</span>
+								<span class="property_type">
+			
+								string
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description"></span>
+			
+							</div>
+						</li>
+		
+						<li class="property">
+							<header>
+								<span class="property_name">module_index</span>
+								<span class="property_type">
+			
+								int32
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description">The index of the slot a module is current attached to.</span>
+			
+							</div>
+						</li>
+		
+						<li class="property property_required">
+							<header>
+								<span class="property_name">pcie_lane_per_link</span>
+								<span class="property_type">
+			
+								byte
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description">The number of PCIe lanes per link.</span>
+			
+							</div>
+						</li>
+		
+						<li class="property property_required">
+							<header>
+								<span class="property_name">pcie_link_count</span>
+								<span class="property_type">
+			
+								byte
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description">The total number of PCIe links available.</span>
+			
+							</div>
+						</li>
+		
+						<li class="property property_required">
+							<header>
+								<span class="property_name">pcie_version</span>
+								<span class="property_type">
+			
+								byte
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description">The version of PCIe the Resoure Module supports.</span>
+			
+							</div>
+						</li>
+		
+						<li class="property property_required">
+							<header>
+								<span class="property_name">power_state</span>
+								<span class="property_type">
+			
+								enum
+			
+								</span>
+			
+								<span class="property_enum">
+				
+									<span class="property_enum_value">ON</span>
+				
+									<span class="property_enum_value">OFF</span>
+				
+									<span class="property_enum_value">UNKNOWN</span>
+				
+									<span class="property_enum_value">COMING_UP</span>
+				
+									<span class="property_enum_value">GOING_DOWN</span>
+				
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description">The current power state of the Resource Module.</span>
+			
+							</div>
+						</li>
+		
+						<li class="property property_required">
+							<header>
+								<span class="property_name">ram_amount</span>
+								<span class="property_type">
+			
+								int32
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description">The amount of RAM currently allocated to the Resource Module.</span>
+			
+							</div>
+						</li>
+		
+						<li class="property property_required">
+							<header>
+								<span class="property_name">ram_speed</span>
+								<span class="property_type">
+			
+								int32
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description">The speed of the RAM the Resource Module has access to.</span>
+			
+							</div>
+						</li>
+		
+						<li class="property">
+							<header>
+								<span class="property_name">resource_pool_id</span>
+								<span class="property_type">
+			
+								string
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description">The globally-unique identifier of the Resource Pool to which the Resource Module belongs.</span>
+			
+							</div>
+						</li>
+		
+						<li class="property property_required">
+							<header>
+								<span class="property_name">serial_number</span>
+								<span class="property_type">
+			
+								string
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description">The serial number of the Resource Module.</span>
+			
+							</div>
+						</li>
+		
+						<li class="property property_required">
+							<header>
+								<span class="property_name">slave_cpu_arch</span>
+								<span class="property_type">
+			
+								byte
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description">The architecture of the Resource Module's slave CPU</span>
+			
+							</div>
+						</li>
+		
+						<li class="property property_required">
+							<header>
+								<span class="property_name">slave_cpu_arch_version</span>
+								<span class="property_type">
+			
+								byte
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description">The architecture version of the Resource Module's slave CPU</span>
+			
+							</div>
+						</li>
+		
+						<li class="property property_required">
+							<header>
+								<span class="property_name">slave_cpu_core_count</span>
+								<span class="property_type">
+			
+								int32
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description">The number of cores in the Resource Module's slave CPU</span>
+			
+							</div>
+						</li>
+		
+						<li class="property property_required">
+							<header>
+								<span class="property_name">slave_cpu_datapath_width</span>
+								<span class="property_type">
+			
+								byte
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description">The data path width of the Resource Module's slave CPU</span>
+			
+							</div>
+						</li>
+		
+						<li class="property property_required">
+							<header>
+								<span class="property_name">slave_cpu_integer_width</span>
+								<span class="property_type">
+			
+								byte
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description">The integer width of the Resource Module's slave CPU</span>
+			
+							</div>
+						</li>
+		
+						<li class="property property_required">
+							<header>
+								<span class="property_name">slave_cpu_memory_addr_width</span>
+								<span class="property_type">
+			
+								byte
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description">The memory address width of the Resource Module's slave CPU</span>
+			
+							</div>
+						</li>
+		
+						<li class="property property_required">
+							<header>
+								<span class="property_name">updated</span>
+								<span class="property_type">
+			
+								string
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description">An ISO 8601 timestamp identifying the last time a Resource Module's state was changed.</span>
+			
+							</div>
+						</li>
+		
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="paths">
+			<header>
+			<h4>Operations</h4>
+	
+			<div class="path">
+				<div class="path_body">
+					<ul>
+		
+						<li class="method">
+							<div class="content_block">
+								<div class="content_body">
+									<header class="method_header">
+										<span class="method_description">get</span>
+										<span class="method_name">GET</span>
+										<span class="path_name">/api/resource_modules</span>
+			
+										<span class="query_params params">
+				
+											<span class="query_param param"><span class="query_param_name param_name">size</span><span class="query_param_type param_type">int32</span></span>
+				
+											<span class="query_param param"><span class="query_param_name param_name">page</span><span class="query_param_type param_type">int32</span></span>
+				
+											<span class="query_param param"><span class="query_param_name param_name">query</span><span class="query_param_type param_type">string</span></span>
+				
+										</span>
+			
+									</header>
+									<div class="method_body content_body">
+			
+			
+				
+					
+				
+										<div class="method_summary">
+											<h5>Query Parameters</h5>
+											<ul class="query_params params">
+				
+												<li class="query_param param_defaulted param">
+													<header class="param_header">
+														<span class="param_name">size</span>
+														<span class="param_type">
+														int32
+														</span>
+														<span class="param_default">100</span>
+					
+													</header>
+													<div class="query_param_body param_body">
+														<span class="param_description">size</span>
+													</div>
+												</li>
+			
+												<li class="query_param param_defaulted param">
+													<header class="param_header">
+														<span class="param_name">page</span>
+														<span class="param_type">
+														int32
+														</span>
+														<span class="param_default">0</span>
+					
+													</header>
+													<div class="query_param_body param_body">
+														<span class="param_description">page</span>
+													</div>
+												</li>
+			
+												<li class="query_param param_defaulted param">
+													<header class="param_header">
+														<span class="param_name">query</span>
+														<span class="param_type">
+														string
+														</span>
+														<span class="param_default">*:*</span>
+					
+													</header>
+													<div class="query_param_body param_body">
+														<span class="param_description">query</span>
+													</div>
+												</li>
+			
+											</ul>
+										</div>
+			
+				
+					
+										<div class="responses">
+											<h5>Responses</h5>
+											<ul>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">200</span>
+														<span class="response_description">OK</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">401</span>
+														<span class="response_description">Unauthorized</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">403</span>
+														<span class="response_description">Forbidden</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">404</span>
+														<span class="response_description">Not Found</span>
+													</header>
+												</li>
+			
+											</ul>
+										</div>
+									</div>
+								</div>
+								<aside class="code-gutter">
+			
+									<pre data-src class="language-javascript">
+										<code class="language-javascript">
+// 200
+{
+  "content": ResourceModule[]
+  "first": boolean
+  "last": boolean
+  "number": int32
+  "number_of_elements": int32
+  "size": int32
+  "sort": object
+  "total_elements": int64
+  "total_pages": int32
+}
+										</code>
+									</pre>
+			
+								</aside>
+							</div>
+						</li>
+		
+					</ul>
+				</div>
+			</div>
+	
+			<div class="path">
+				<div class="path_body">
+					<ul>
+		
+						<li class="method">
+							<div class="content_block">
+								<div class="content_body">
+									<header class="method_header">
+										<span class="method_description">get</span>
+										<span class="method_name">GET</span>
+										<span class="path_name">/api/resource_modules/{serialNumber}</span>
+			
+									</header>
+									<div class="method_body content_body">
+			
+			
+				
+										<div class="method_summary">
+											<h5>Path Parameters</h5>
+											<ul class="path_params params">
+				
+												<li class="path_param param_required param">
+													<header class="param_header">
+														<span class="param_name">serialNumber</span>
+														<span class="param_type">
+														string
+														</span>
+														
+					
+													</header>
+													<div class="path_param_body param_body">
+														<span class="param_description">serialNumber</span>
+													</div>
+												</li>
+			
+											</ul>
+										</div>
+			
+				
+					
+				
+					
+										<div class="responses">
+											<h5>Responses</h5>
+											<ul>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">200</span>
+														<span class="response_description">OK</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">401</span>
+														<span class="response_description">Unauthorized</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">403</span>
+														<span class="response_description">Forbidden</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">404</span>
+														<span class="response_description">Not Found</span>
+													</header>
+												</li>
+			
+											</ul>
+										</div>
+									</div>
+								</div>
+								<aside class="code-gutter">
+			
+									<pre data-src class="language-javascript">
+										<code class="language-javascript">
+// 200
+ResourceModule
+										</code>
+									</pre>
+			
+								</aside>
+							</div>
+						</li>
+		
+						<li class="method">
+							<div class="content_block">
+								<div class="content_body">
+									<header class="method_header">
+										<span class="method_description">put</span>
+										<span class="method_name">PUT</span>
+										<span class="path_name">/api/resource_modules/{serialNumber}</span>
+			
+									</header>
+									<div class="method_body content_body">
+			
+			
+				
+										<div class="method_summary">
+											<h5>Path Parameters</h5>
+											<ul class="path_params params">
+				
+												<li class="path_param param_required param">
+													<header class="param_header">
+														<span class="param_name">serialNumber</span>
+														<span class="param_type">
+														string
+														</span>
+														
+					
+													</header>
+													<div class="path_param_body param_body">
+														<span class="param_description">serialNumber</span>
+													</div>
+												</li>
+			
+											</ul>
+										</div>
+			
+				
+					
+				
+					
+										<div class="responses">
+											<h5>Responses</h5>
+											<ul>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">200</span>
+														<span class="response_description">OK</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">201</span>
+														<span class="response_description">Created</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">401</span>
+														<span class="response_description">Unauthorized</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">403</span>
+														<span class="response_description">Forbidden</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">404</span>
+														<span class="response_description">Not Found</span>
+													</header>
+												</li>
+			
+											</ul>
+										</div>
+									</div>
+								</div>
+								<aside class="code-gutter">
+			
+								</aside>
+							</div>
+						</li>
+		
+					</ul>
+				</div>
+			</div>
+	
+		</div>
+	</article>
+
+	<article id="Resource Pools" class="collection">
+		<div class="content_block">
+			<header>
+				<h2><span class="collection_name">Resource Pools</span><a class="top_link" href="#top">top</a></h2>
+				<div>
+				
+				<p><em>This is a place holder</em></p>
+
+				</div>
+			</header>
+			<aside class="code-gutter">
+				<pre data-src class="language-javascript">
+					<code class="language-javascript">
+// Resource Pool
+{
+  "created": string
+  // A boolean value indicating
+  // whether this Resource Pool is the
+  // default for the account.
+  "default": boolean
+  // The description of the Resource
+  // Pool.
+  "description": string
+  // The globally unique identifier
+  // for the Resource Pool.
+  "id": string
+  // The account-local, friendly name
+  // of the Resource Pool.
+  "name": string
+}
+					</code>
+				</pre>
+			</aside>
+		</div>
+		<div class="content_block">
+			<div class="resource">
+				<header class="resource_header">
+					<h4>Schema</h4>
+					<span class="resource_name">Resource Pool</span>
+					<span class="resource_type">object</span>
+				</header>
+				<div class="body resource_body">
+						<ul class="properties">
+		
+						<li class="property">
+							<header>
+								<span class="property_name">created</span>
+								<span class="property_type">
+			
+								string
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description"></span>
+			
+							</div>
+						</li>
+		
+						<li class="property">
+							<header>
+								<span class="property_name">default</span>
+								<span class="property_type">
+			
+								boolean
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description">A boolean value indicating whether this Resource Pool is the default for the account.</span>
+			
+							</div>
+						</li>
+		
+						<li class="property">
+							<header>
+								<span class="property_name">description</span>
+								<span class="property_type">
+			
+								string
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description">The description of the Resource Pool.</span>
+			
+							</div>
+						</li>
+		
+						<li class="property">
+							<header>
+								<span class="property_name">id</span>
+								<span class="property_type">
+			
+								string
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description">The globally unique identifier for the Resource Pool.</span>
+			
+							</div>
+						</li>
+		
+						<li class="property property_required">
+							<header>
+								<span class="property_name">name</span>
+								<span class="property_type">
+			
+								string
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description">The account-local, friendly name of the Resource Pool.</span>
+			
+							</div>
+						</li>
+		
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="paths">
+			<header>
+			<h4>Operations</h4>
+	
+			<div class="path">
+				<div class="path_body">
+					<ul>
+		
+						<li class="method">
+							<div class="content_block">
+								<div class="content_body">
+									<header class="method_header">
+										<span class="method_description">get</span>
+										<span class="method_name">GET</span>
+										<span class="path_name">/api/resource_pools</span>
+			
+										<span class="query_params params">
+				
+											<span class="query_param param"><span class="query_param_name param_name">names</span><span class="query_param_type param_type">array</span></span>
+				
+										</span>
+			
+									</header>
+									<div class="method_body content_body">
+			
+			
+				
+					
+				
+										<div class="method_summary">
+											<h5>Query Parameters</h5>
+											<ul class="query_params params">
+				
+												<li class="query_param param">
+													<header class="param_header">
+														<span class="param_name">names</span>
+														<span class="param_type">
+														array
+														</span>
+														
+					
+													</header>
+													<div class="query_param_body param_body">
+														<span class="param_description">names</span>
+													</div>
+												</li>
+			
+											</ul>
+										</div>
+			
+				
+					
+										<div class="responses">
+											<h5>Responses</h5>
+											<ul>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">200</span>
+														<span class="response_description">OK</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">401</span>
+														<span class="response_description">Unauthorized</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">403</span>
+														<span class="response_description">Forbidden</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">404</span>
+														<span class="response_description">Not Found</span>
+													</header>
+												</li>
+			
+											</ul>
+										</div>
+									</div>
+								</div>
+								<aside class="code-gutter">
+			
+									<pre data-src class="language-javascript">
+										<code class="language-javascript">
+// 200
+ResourcePool[]
+										</code>
+									</pre>
+			
+								</aside>
+							</div>
+						</li>
+		
+						<li class="method">
+							<div class="content_block">
+								<div class="content_body">
+									<header class="method_header">
+										<span class="method_description">post</span>
+										<span class="method_name">POST</span>
+										<span class="path_name">/api/resource_pools</span>
+			
+									</header>
+									<div class="method_body content_body">
+			
+			
+				
+					
+				
+					
+				
+					
+										<div class="responses">
+											<h5>Responses</h5>
+											<ul>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">200</span>
+														<span class="response_description">OK</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">201</span>
+														<span class="response_description">Created</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">401</span>
+														<span class="response_description">Unauthorized</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">403</span>
+														<span class="response_description">Forbidden</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">404</span>
+														<span class="response_description">Not Found</span>
+													</header>
+												</li>
+			
+											</ul>
+										</div>
+									</div>
+								</div>
+								<aside class="code-gutter">
+			
+								</aside>
+							</div>
+						</li>
+		
+					</ul>
+				</div>
+			</div>
+	
+			<div class="path">
+				<div class="path_body">
+					<ul>
+		
+						<li class="method">
+							<div class="content_block">
+								<div class="content_body">
+									<header class="method_header">
+										<span class="method_description">getById</span>
+										<span class="method_name">GET</span>
+										<span class="path_name">/api/resource_pools/{id}</span>
+			
+									</header>
+									<div class="method_body content_body">
+			
+			
+				
+										<div class="method_summary">
+											<h5>Path Parameters</h5>
+											<ul class="path_params params">
+				
+												<li class="path_param param_required param">
+													<header class="param_header">
+														<span class="param_name">id</span>
+														<span class="param_type">
+														string
+														</span>
+														
+					
+													</header>
+													<div class="path_param_body param_body">
+														<span class="param_description">id</span>
+													</div>
+												</li>
+			
+											</ul>
+										</div>
+			
+				
+					
+				
+					
+										<div class="responses">
+											<h5>Responses</h5>
+											<ul>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">200</span>
+														<span class="response_description">OK</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">401</span>
+														<span class="response_description">Unauthorized</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">403</span>
+														<span class="response_description">Forbidden</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">404</span>
+														<span class="response_description">Not Found</span>
+													</header>
+												</li>
+			
+											</ul>
+										</div>
+									</div>
+								</div>
+								<aside class="code-gutter">
+			
+									<pre data-src class="language-javascript">
+										<code class="language-javascript">
+// 200
+ResourcePool
+										</code>
+									</pre>
+			
+								</aside>
+							</div>
+						</li>
+		
+						<li class="method">
+							<div class="content_block">
+								<div class="content_body">
+									<header class="method_header">
+										<span class="method_description">delete</span>
+										<span class="method_name">DELETE</span>
+										<span class="path_name">/api/resource_pools/{id}</span>
+			
+									</header>
+									<div class="method_body content_body">
+			
+			
+				
+										<div class="method_summary">
+											<h5>Path Parameters</h5>
+											<ul class="path_params params">
+				
+												<li class="path_param param_required param">
+													<header class="param_header">
+														<span class="param_name">id</span>
+														<span class="param_type">
+														string
+														</span>
+														
+					
+													</header>
+													<div class="path_param_body param_body">
+														<span class="param_description">id</span>
+													</div>
+												</li>
+			
+											</ul>
+										</div>
+			
+				
+					
+				
+					
+										<div class="responses">
+											<h5>Responses</h5>
+											<ul>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">200</span>
+														<span class="response_description">OK</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">204</span>
+														<span class="response_description">No Content</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">401</span>
+														<span class="response_description">Unauthorized</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">403</span>
+														<span class="response_description">Forbidden</span>
+													</header>
+												</li>
+			
+											</ul>
+										</div>
+									</div>
+								</div>
+								<aside class="code-gutter">
+			
+								</aside>
+							</div>
+						</li>
+		
+					</ul>
+				</div>
+			</div>
+	
+		</div>
+	</article>
+
+	<article id="Snapshots" class="collection">
+		<div class="content_block">
+			<header>
+				<h2><span class="collection_name">Snapshots</span><a class="top_link" href="#top">top</a></h2>
+				<div>
+				
+				<p><em>This is a place holder</em></p>
+
+				</div>
+			</header>
+			<aside class="code-gutter">
+				<pre data-src class="language-javascript">
+					<code class="language-javascript">
+// Snapshot
+{
+  // The snapshot id.
+  "id": int64
+  // The snapshot name.
+  "name": string
+  "note": string
+  // Size in bytes of the snapshot.
+  "size": int64
+}
+					</code>
+				</pre>
+			</aside>
+		</div>
+		<div class="content_block">
+			<div class="resource">
+				<header class="resource_header">
+					<h4>Schema</h4>
+					<span class="resource_name">Snapshot</span>
+					<span class="resource_type">object</span>
+				</header>
+				<div class="body resource_body">
+						<ul class="properties">
+		
+						<li class="property">
+							<header>
+								<span class="property_name">id</span>
+								<span class="property_type">
+			
+								int64
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description">The snapshot id.</span>
+			
+							</div>
+						</li>
+		
+						<li class="property">
+							<header>
+								<span class="property_name">name</span>
+								<span class="property_type">
+			
+								string
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description">The snapshot name.</span>
+			
+							</div>
+						</li>
+		
+						<li class="property">
+							<header>
+								<span class="property_name">note</span>
+								<span class="property_type">
+			
+								string
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description"></span>
+			
+							</div>
+						</li>
+		
+						<li class="property">
+							<header>
+								<span class="property_name">size</span>
+								<span class="property_type">
+			
+								int64
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description">Size in bytes of the snapshot.</span>
+			
+							</div>
+						</li>
+		
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="paths">
+			<header>
+			<h4>Operations</h4>
+	
+			<div class="path">
+				<div class="path_body">
+					<ul>
+		
+						<li class="method">
+							<div class="content_block">
+								<div class="content_body">
+									<header class="method_header">
+										<span class="method_description">get</span>
+										<span class="method_name">GET</span>
+										<span class="path_name">/api/snapshots</span>
+			
+									</header>
+									<div class="method_body content_body">
+			
+			
+				
+					
+				
+					
+				
+					
+										<div class="responses">
+											<h5>Responses</h5>
+											<ul>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">200</span>
+														<span class="response_description">OK</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">401</span>
+														<span class="response_description">Unauthorized</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">403</span>
+														<span class="response_description">Forbidden</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">404</span>
+														<span class="response_description">Not Found</span>
+													</header>
+												</li>
+			
+											</ul>
+										</div>
+									</div>
+								</div>
+								<aside class="code-gutter">
+			
+									<pre data-src class="language-javascript">
+										<code class="language-javascript">
+// 200
+Snapshot[]
+										</code>
+									</pre>
+			
+								</aside>
+							</div>
+						</li>
+		
+					</ul>
+				</div>
+			</div>
+	
+			<div class="path">
+				<div class="path_body">
+					<ul>
+		
+						<li class="method">
+							<div class="content_block">
+								<div class="content_body">
+									<header class="method_header">
+										<span class="method_description">get</span>
+										<span class="method_name">GET</span>
+										<span class="path_name">/api/snapshots/{name}</span>
+			
+									</header>
+									<div class="method_body content_body">
+			
+			
+				
+										<div class="method_summary">
+											<h5>Path Parameters</h5>
+											<ul class="path_params params">
+				
+												<li class="path_param param_required param">
+													<header class="param_header">
+														<span class="param_name">name</span>
+														<span class="param_type">
+														string
+														</span>
+														
+					
+													</header>
+													<div class="path_param_body param_body">
+														<span class="param_description">name</span>
+													</div>
+												</li>
+			
+											</ul>
+										</div>
+			
+				
+					
+				
+					
+										<div class="responses">
+											<h5>Responses</h5>
+											<ul>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">200</span>
+														<span class="response_description">OK</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">401</span>
+														<span class="response_description">Unauthorized</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">403</span>
+														<span class="response_description">Forbidden</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">404</span>
+														<span class="response_description">Not Found</span>
+													</header>
+												</li>
+			
+											</ul>
+										</div>
+									</div>
+								</div>
+								<aside class="code-gutter">
+			
+									<pre data-src class="language-javascript">
+										<code class="language-javascript">
+// 200
+Snapshot
+										</code>
+									</pre>
+			
+								</aside>
+							</div>
+						</li>
+		
+					</ul>
+				</div>
+			</div>
+	
+		</div>
+	</article>
+
+	<article id="Stores" class="collection">
+		<div class="content_block">
+			<header>
+				<h2><span class="collection_name">Stores</span><a class="top_link" href="#top">top</a></h2>
+				<div>
+				
+				<p><em>This is a place holder</em></p>
+
+				</div>
+			</header>
+			<aside class="code-gutter">
+				<pre data-src class="language-javascript">
+					<code class="language-javascript">
+// Store
+{
+  "created": string
+  "definition": object
+  "deployment_id": string
+  "name": string
+  "reserved": int64
+  "used": int64
+}
+					</code>
+				</pre>
+			</aside>
+		</div>
+		<div class="content_block">
+			<div class="resource">
+				<header class="resource_header">
+					<h4>Schema</h4>
+					<span class="resource_name">Store</span>
+					<span class="resource_type">object</span>
+				</header>
+				<div class="body resource_body">
+						<ul class="properties">
+		
+						<li class="property">
+							<header>
+								<span class="property_name">created</span>
+								<span class="property_type">
+			
+								string
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description"></span>
+			
+							</div>
+						</li>
+		
+						<li class="property">
+							<header>
+								<span class="property_name">definition</span>
+								<span class="property_type">
+			
+								object
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description"></span>
+			
+									<ul class="properties">
+		
+						<li class="property">
+							<header>
+								<span class="property_name">access</span>
+								<span class="property_type">
+			
+								object
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description"></span>
+			
+									<ul class="properties">
+		
+						<li class="property">
+							<header>
+								<span class="property_name">anyone</span>
+								<span class="property_type">
+			
+								enum
+			
+								</span>
+			
+								<span class="property_enum">
+				
+									<span class="property_enum_value">READ</span>
+				
+									<span class="property_enum_value">WRITE</span>
+				
+									<span class="property_enum_value">NONE</span>
+				
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description"></span>
+			
+							</div>
+						</li>
+		
+						<li class="property">
+							<header>
+								<span class="property_name">resource_pool</span>
+								<span class="property_type">
+			
+								enum
+			
+								</span>
+			
+								<span class="property_enum">
+				
+									<span class="property_enum_value">READ</span>
+				
+									<span class="property_enum_value">WRITE</span>
+				
+									<span class="property_enum_value">NONE</span>
+				
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description"></span>
+			
+							</div>
+						</li>
+		
+						<li class="property">
+							<header>
+								<span class="property_name">service</span>
+								<span class="property_type">
+			
+								enum
+			
+								</span>
+			
+								<span class="property_enum">
+				
+									<span class="property_enum_value">READ</span>
+				
+									<span class="property_enum_value">WRITE</span>
+				
+									<span class="property_enum_value">NONE</span>
+				
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description"></span>
+			
+							</div>
+						</li>
+		
+					</ul>
+			
+							</div>
+						</li>
+		
+						<li class="property">
+							<header>
+								<span class="property_name">compressed</span>
+								<span class="property_type">
+			
+								boolean
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description"></span>
+			
+							</div>
+						</li>
+		
+						<li class="property">
+							<header>
+								<span class="property_name">encrypted</span>
+								<span class="property_type">
+			
+								boolean
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description"></span>
+			
+							</div>
+						</li>
+		
+						<li class="property">
+							<header>
+								<span class="property_name">name</span>
+								<span class="property_type">
+			
+								string
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description"></span>
+			
+							</div>
+						</li>
+		
+						<li class="property">
+							<header>
+								<span class="property_name">replicas</span>
+								<span class="property_type">
+			
+								object
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description"></span>
+			
+									<ul class="properties">
+		
+						<li class="property">
+							<header>
+								<span class="property_name">max</span>
+								<span class="property_type">
+			
+								int32
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description"></span>
+			
+							</div>
+						</li>
+		
+						<li class="property">
+							<header>
+								<span class="property_name">min</span>
+								<span class="property_type">
+			
+								int32
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description"></span>
+			
+							</div>
+						</li>
+		
+					</ul>
+			
+							</div>
+						</li>
+		
+						<li class="property">
+							<header>
+								<span class="property_name">replication</span>
+								<span class="property_type">
+			
+								enum
+			
+								</span>
+			
+								<span class="property_enum">
+				
+									<span class="property_enum_value">REPLICATED</span>
+				
+									<span class="property_enum_value">ERASURE</span>
+				
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description"></span>
+			
+							</div>
+						</li>
+		
+						<li class="property">
+							<header>
+								<span class="property_name">reserved</span>
+								<span class="property_type">
+			
+								boolean
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description"></span>
+			
+							</div>
+						</li>
+		
+						<li class="property">
+							<header>
+								<span class="property_name">size</span>
+								<span class="property_type">
+			
+								string
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description"></span>
+			
+							</div>
+						</li>
+		
+					</ul>
+			
+							</div>
+						</li>
+		
+						<li class="property">
+							<header>
+								<span class="property_name">deployment_id</span>
+								<span class="property_type">
+			
+								string
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description"></span>
+			
+							</div>
+						</li>
+		
+						<li class="property">
+							<header>
+								<span class="property_name">name</span>
+								<span class="property_type">
+			
+								string
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description"></span>
+			
+							</div>
+						</li>
+		
+						<li class="property">
+							<header>
+								<span class="property_name">reserved</span>
+								<span class="property_type">
+			
+								int64
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description"></span>
+			
+							</div>
+						</li>
+		
+						<li class="property">
+							<header>
+								<span class="property_name">used</span>
+								<span class="property_type">
+			
+								int64
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description"></span>
+			
+							</div>
+						</li>
+		
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="paths">
+			<header>
+			<h4>Operations</h4>
+	
+			<div class="path">
+				<div class="path_body">
+					<ul>
+		
+						<li class="method">
+							<div class="content_block">
+								<div class="content_body">
+									<header class="method_header">
+										<span class="method_description">get</span>
+										<span class="method_name">GET</span>
+										<span class="path_name">/api/stores</span>
+			
+									</header>
+									<div class="method_body content_body">
+			
+			
+				
+					
+				
+					
+				
+					
+										<div class="responses">
+											<h5>Responses</h5>
+											<ul>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">200</span>
+														<span class="response_description">OK</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">401</span>
+														<span class="response_description">Unauthorized</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">403</span>
+														<span class="response_description">Forbidden</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">404</span>
+														<span class="response_description">Not Found</span>
+													</header>
+												</li>
+			
+											</ul>
+										</div>
+									</div>
+								</div>
+								<aside class="code-gutter">
+			
+									<pre data-src class="language-javascript">
+										<code class="language-javascript">
+// 200
+Store[]
+										</code>
+									</pre>
+			
+								</aside>
+							</div>
+						</li>
+		
+					</ul>
+				</div>
+			</div>
+	
+			<div class="path">
+				<div class="path_body">
+					<ul>
+		
+						<li class="method">
+							<div class="content_block">
+								<div class="content_body">
+									<header class="method_header">
+										<span class="method_description">get</span>
+										<span class="method_name">GET</span>
+										<span class="path_name">/api/stores/{name}</span>
+			
+									</header>
+									<div class="method_body content_body">
+			
+			
+				
+										<div class="method_summary">
+											<h5>Path Parameters</h5>
+											<ul class="path_params params">
+				
+												<li class="path_param param_required param">
+													<header class="param_header">
+														<span class="param_name">name</span>
+														<span class="param_type">
+														string
+														</span>
+														
+					
+													</header>
+													<div class="path_param_body param_body">
+														<span class="param_description">name</span>
+													</div>
+												</li>
+			
+											</ul>
+										</div>
+			
+				
+					
+				
+					
+										<div class="responses">
+											<h5>Responses</h5>
+											<ul>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">200</span>
+														<span class="response_description">OK</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">401</span>
+														<span class="response_description">Unauthorized</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">403</span>
+														<span class="response_description">Forbidden</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">404</span>
+														<span class="response_description">Not Found</span>
+													</header>
+												</li>
+			
+											</ul>
+										</div>
+									</div>
+								</div>
+								<aside class="code-gutter">
+			
+									<pre data-src class="language-javascript">
+										<code class="language-javascript">
+// 200
+Store
+										</code>
+									</pre>
+			
+								</aside>
+							</div>
+						</li>
+		
+					</ul>
+				</div>
+			</div>
+	
+		</div>
+	</article>
+
+	<article id="Components" class="collection">
+		<div class="content_block">
+			<header>
+				<h2><span class="collection_name">Components</span><a class="top_link" href="#top">top</a></h2>
+				<div>
+				
+				<p><em>This is a place holder</em></p>
+
+				</div>
+			</header>
+			<aside class="code-gutter">
+				<pre data-src class="language-javascript">
+					<code class="language-javascript">
+// Component
+{
+  "completed": string
+  "id": string
+  "initiated": string
+  "message": string
+  "name": string
+  "status": enum
+}
+					</code>
+				</pre>
+			</aside>
+		</div>
+		<div class="content_block">
+			<div class="resource">
+				<header class="resource_header">
+					<h4>Schema</h4>
+					<span class="resource_name">Component</span>
+					<span class="resource_type">object</span>
+				</header>
+				<div class="body resource_body">
+						<ul class="properties">
+		
+						<li class="property">
+							<header>
+								<span class="property_name">completed</span>
+								<span class="property_type">
+			
+								string
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description"></span>
+			
+							</div>
+						</li>
+		
+						<li class="property">
+							<header>
+								<span class="property_name">id</span>
+								<span class="property_type">
+			
+								string
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description"></span>
+			
+							</div>
+						</li>
+		
+						<li class="property">
+							<header>
+								<span class="property_name">initiated</span>
+								<span class="property_type">
+			
+								string
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description"></span>
+			
+							</div>
+						</li>
+		
+						<li class="property">
+							<header>
+								<span class="property_name">message</span>
+								<span class="property_type">
+			
+								string
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description"></span>
+			
+							</div>
+						</li>
+		
+						<li class="property">
+							<header>
+								<span class="property_name">name</span>
+								<span class="property_type">
+			
+								string
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description"></span>
+			
+							</div>
+						</li>
+		
+						<li class="property">
+							<header>
+								<span class="property_name">status</span>
+								<span class="property_type">
+			
+								enum
+			
+								</span>
+			
+								<span class="property_enum">
+				
+									<span class="property_enum_value">QUEUED</span>
+				
+									<span class="property_enum_value">PREPARING</span>
+				
+									<span class="property_enum_value">DEPLOYING</span>
+				
+									<span class="property_enum_value">DEPLOYED</span>
+				
+									<span class="property_enum_value">BRING_UP</span>
+				
+									<span class="property_enum_value">UP</span>
+				
+									<span class="property_enum_value">BRING_DOWN</span>
+				
+									<span class="property_enum_value">DOWN</span>
+				
+									<span class="property_enum_value">DESTROYING</span>
+				
+									<span class="property_enum_value">DESTROYED</span>
+				
+									<span class="property_enum_value">CANCELED</span>
+				
+									<span class="property_enum_value">FAILED</span>
+				
+									<span class="property_enum_value">DELETING</span>
+				
+									<span class="property_enum_value">DELETED</span>
+				
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description"></span>
+			
+							</div>
+						</li>
+		
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="paths">
+			<header>
+			<h4>Operations</h4>
+	
+			<div class="path">
+				<div class="path_body">
+					<ul>
+		
+						<li class="method">
+							<div class="content_block">
+								<div class="content_body">
+									<header class="method_header">
+										<span class="method_description">Get all components</span>
+										<span class="method_name">GET</span>
+										<span class="path_name">/api/components</span>
+			
+										<span class="query_params params">
+				
+											<span class="query_param param"><span class="query_param_name param_name">name</span><span class="query_param_type param_type">string</span></span>
+				
+											<span class="query_param param"><span class="query_param_name param_name">typeId</span><span class="query_param_type param_type">int32</span></span>
+				
+											<span class="query_param param"><span class="query_param_name param_name">type</span><span class="query_param_type param_type">string</span></span>
+				
+											<span class="query_param param"><span class="query_param_name param_name">enclosureId</span><span class="query_param_type param_type">int32</span></span>
+				
+										</span>
+			
+									</header>
+									<div class="method_body content_body">
+			
+			
+				
+					
+				
+										<div class="method_summary">
+											<h5>Query Parameters</h5>
+											<ul class="query_params params">
+				
+												<li class="query_param param">
+													<header class="param_header">
+														<span class="param_name">name</span>
+														<span class="param_type">
+														string
+														</span>
+														
+					
+													</header>
+													<div class="query_param_body param_body">
+														<span class="param_description">name</span>
+													</div>
+												</li>
+			
+												<li class="query_param param">
+													<header class="param_header">
+														<span class="param_name">typeId</span>
+														<span class="param_type">
+														int32
+														</span>
+														
+					
+													</header>
+													<div class="query_param_body param_body">
+														<span class="param_description">typeId</span>
+													</div>
+												</li>
+			
+												<li class="query_param param">
+													<header class="param_header">
+														<span class="param_name">type</span>
+														<span class="param_type">
+														string
+														</span>
+														
+					
+													</header>
+													<div class="query_param_body param_body">
+														<span class="param_description">type</span>
+													</div>
+												</li>
+			
+												<li class="query_param param">
+													<header class="param_header">
+														<span class="param_name">enclosureId</span>
+														<span class="param_type">
+														int32
+														</span>
+														
+					
+													</header>
+													<div class="query_param_body param_body">
+														<span class="param_description">enclosureId</span>
+													</div>
+												</li>
+			
+											</ul>
+										</div>
+			
+				
+					
+										<div class="responses">
+											<h5>Responses</h5>
+											<ul>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">200</span>
+														<span class="response_description">OK</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">401</span>
+														<span class="response_description">Unauthorized</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">403</span>
+														<span class="response_description">Forbidden</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">404</span>
+														<span class="response_description">Not Found</span>
+													</header>
+												</li>
+			
+											</ul>
+										</div>
+									</div>
+								</div>
+								<aside class="code-gutter">
+			
+									<pre data-src class="language-javascript">
+										<code class="language-javascript">
+// 200
+[
+  {
+    "enclosure_id": int32
+    "id": int64
+    "name": string
+    "parent_id": int64
+    "timestamp": string
+    "type": int32
+    "type_id": int32
+    "type_name": string
+  }
+]
+										</code>
+									</pre>
+			
+								</aside>
+							</div>
+						</li>
+		
+					</ul>
+				</div>
+			</div>
+	
+			<div class="path">
+				<div class="path_body">
+					<ul>
+		
+						<li class="method">
+							<div class="content_block">
+								<div class="content_body">
+									<header class="method_header">
+										<span class="method_description">Get component by id</span>
+										<span class="method_name">GET</span>
+										<span class="path_name">/api/components/{componentId}</span>
+			
+									</header>
+									<div class="method_body content_body">
+			
+			
+				
+										<div class="method_summary">
+											<h5>Path Parameters</h5>
+											<ul class="path_params params">
+				
+												<li class="path_param param_required param">
+													<header class="param_header">
+														<span class="param_name">componentId</span>
+														<span class="param_type">
+														int64
+														</span>
+														
+					
+													</header>
+													<div class="path_param_body param_body">
+														<span class="param_description">componentId</span>
+													</div>
+												</li>
+			
+											</ul>
+										</div>
+			
+				
+					
+				
+					
+										<div class="responses">
+											<h5>Responses</h5>
+											<ul>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">200</span>
+														<span class="response_description">OK</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">401</span>
+														<span class="response_description">Unauthorized</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">403</span>
+														<span class="response_description">Forbidden</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">404</span>
+														<span class="response_description">Not Found</span>
+													</header>
+												</li>
+			
+											</ul>
+										</div>
+									</div>
+								</div>
+								<aside class="code-gutter">
+			
+									<pre data-src class="language-javascript">
+										<code class="language-javascript">
+// 200
+{
+  "enclosure_id": int32
+  "id": int64
+  "name": string
+  "parent_id": int64
+  "timestamp": string
+  "type": int32
+  "type_id": int32
+  "type_name": string
+}
+										</code>
+									</pre>
+			
+								</aside>
+							</div>
+						</li>
+		
+					</ul>
+				</div>
+			</div>
+	
+		</div>
+	</article>
+
+	<article id="Events" class="collection">
+		<div class="content_block">
+			<header>
+				<h2><span class="collection_name">Events</span><a class="top_link" href="#top">top</a></h2>
+				<div>
+				
+				<p><em>This is a place holder</em></p>
+
+				</div>
+			</header>
+			<aside class="code-gutter">
+				<pre data-src class="language-javascript">
+					<code class="language-javascript">
+// Event
+{
+  "enclosure_id": int32
+  // The id of the Event.
+  "id": string
+  // All properties relating to the
+  // Event.
+  "properties": object
+  // The ISO8601 formatted timestamp
+  // of the event.
+  "timestamp": string
+  // The type or category of the
+  // Event.
+  "type": string
+}
+					</code>
+				</pre>
+			</aside>
+		</div>
+		<div class="content_block">
+			<div class="resource">
+				<header class="resource_header">
+					<h4>Schema</h4>
+					<span class="resource_name">Event</span>
+					<span class="resource_type">object</span>
+				</header>
+				<div class="body resource_body">
+						<ul class="properties">
+		
+						<li class="property">
+							<header>
+								<span class="property_name">enclosure_id</span>
+								<span class="property_type">
+			
+								int32
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description"></span>
+			
+							</div>
+						</li>
+		
+						<li class="property">
+							<header>
+								<span class="property_name">id</span>
+								<span class="property_type">
+			
+								string
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description">The id of the Event.</span>
+			
+							</div>
+						</li>
+		
+						<li class="property">
+							<header>
+								<span class="property_name">properties</span>
+								<span class="property_type">
+			
+								object
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description">All properties relating to the Event.</span>
+			
+							</div>
+						</li>
+		
+						<li class="property property_required">
+							<header>
+								<span class="property_name">timestamp</span>
+								<span class="property_type">
+			
+								string
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description">The ISO8601 formatted timestamp of the event.</span>
+			
+							</div>
+						</li>
+		
+						<li class="property property_required">
+							<header>
+								<span class="property_name">type</span>
+								<span class="property_type">
+			
+								string
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description">The type or category of the Event.</span>
+			
+							</div>
+						</li>
+		
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="paths">
+			<header>
+			<h4>Operations</h4>
+	
+			<div class="path">
+				<div class="path_body">
+					<ul>
+		
+						<li class="method">
+							<div class="content_block">
+								<div class="content_body">
+									<header class="method_header">
+										<span class="method_description">get</span>
+										<span class="method_name">GET</span>
+										<span class="path_name">/api/events</span>
+			
+										<span class="query_params params">
+				
+											<span class="query_param param"><span class="query_param_name param_name">size</span><span class="query_param_type param_type">int32</span></span>
+				
+											<span class="query_param param"><span class="query_param_name param_name">page</span><span class="query_param_type param_type">int32</span></span>
+				
+											<span class="query_param param"><span class="query_param_name param_name">query</span><span class="query_param_type param_type">string</span></span>
+				
+										</span>
+			
+									</header>
+									<div class="method_body content_body">
+			
+			
+				
+					
+				
+										<div class="method_summary">
+											<h5>Query Parameters</h5>
+											<ul class="query_params params">
+				
+												<li class="query_param param_defaulted param">
+													<header class="param_header">
+														<span class="param_name">size</span>
+														<span class="param_type">
+														int32
+														</span>
+														<span class="param_default">100</span>
+					
+													</header>
+													<div class="query_param_body param_body">
+														<span class="param_description">size</span>
+													</div>
+												</li>
+			
+												<li class="query_param param_defaulted param">
+													<header class="param_header">
+														<span class="param_name">page</span>
+														<span class="param_type">
+														int32
+														</span>
+														<span class="param_default">0</span>
+					
+													</header>
+													<div class="query_param_body param_body">
+														<span class="param_description">page</span>
+													</div>
+												</li>
+			
+												<li class="query_param param_defaulted param">
+													<header class="param_header">
+														<span class="param_name">query</span>
+														<span class="param_type">
+														string
+														</span>
+														<span class="param_default">*:*</span>
+					
+													</header>
+													<div class="query_param_body param_body">
+														<span class="param_description">query</span>
+													</div>
+												</li>
+			
+											</ul>
+										</div>
+			
+				
+					
+										<div class="responses">
+											<h5>Responses</h5>
+											<ul>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">200</span>
+														<span class="response_description">OK</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">401</span>
+														<span class="response_description">Unauthorized</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">403</span>
+														<span class="response_description">Forbidden</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">404</span>
+														<span class="response_description">Not Found</span>
+													</header>
+												</li>
+			
+											</ul>
+										</div>
+									</div>
+								</div>
+								<aside class="code-gutter">
+			
+									<pre data-src class="language-javascript">
+										<code class="language-javascript">
+// 200
+{
+  "content": Event[]
+  "first": boolean
+  "last": boolean
+  "number": int32
+  "number_of_elements": int32
+  "size": int32
+  "sort": object
+  "total_elements": int64
+  "total_pages": int32
+}
+										</code>
+									</pre>
+			
+								</aside>
+							</div>
+						</li>
+		
+					</ul>
+				</div>
+			</div>
+	
+		</div>
+	</article>
+
+	<article id="Metrics" class="collection">
+		<div class="content_block">
+			<header>
+				<h2><span class="collection_name">Metrics</span><a class="top_link" href="#top">top</a></h2>
+				<div>
+				
+				<p><em>This is a place holder</em></p>
+
+				</div>
+			</header>
+			<aside class="code-gutter">
+				<pre data-src class="language-javascript">
+					<code class="language-javascript">
+// Metric
+{
+  // The globally-unique identifier of
+  // the component that originated the
+  // metric.
+  "component_id": object
+  // The globally-unique identifier of
+  // the enclosure that originated the
+  // metric.
+  "enclosure_id": int32
+  // The ISO8601 formatted timestamp
+  // of the metric.
+  "timestamp": string
+  // The type or category of the
+  // metric.
+  "type": string
+  // The value of the metric.
+  "value": double
+}
+					</code>
+				</pre>
+			</aside>
+		</div>
+		<div class="content_block">
+			<div class="resource">
+				<header class="resource_header">
+					<h4>Schema</h4>
+					<span class="resource_name">Metric</span>
+					<span class="resource_type">object</span>
+				</header>
+				<div class="body resource_body">
+						<ul class="properties">
+		
+						<li class="property property_required">
+							<header>
+								<span class="property_name">component_id</span>
+								<span class="property_type">
+			
+								object
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description">The globally-unique identifier of the component that originated the metric.</span>
+			
+									<ul class="properties">
+		
+						<li class="property property_required">
+							<header>
+								<span class="property_name">enclosure_id</span>
+								<span class="property_type">
+			
+								int32
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description">The 32-bit globally unique enclosure ID.</span>
+			
+							</div>
+						</li>
+		
+						<li class="property property_required">
+							<header>
+								<span class="property_name">subtype</span>
+								<span class="property_type">
+			
+								int32
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description">The subtype of the component as an integer.</span>
+			
+							</div>
+						</li>
+		
+						<li class="property property_required">
+							<header>
+								<span class="property_name">subtype_id</span>
+								<span class="property_type">
+			
+								int32
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description">The subtype id of the component.</span>
+			
+							</div>
+						</li>
+		
+						<li class="property property_required">
+							<header>
+								<span class="property_name">subtype_name</span>
+								<span class="property_type">
+			
+								string
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description">The subtype of the component as a string.</span>
+			
+							</div>
+						</li>
+		
+						<li class="property property_required">
+							<header>
+								<span class="property_name">type</span>
+								<span class="property_type">
+			
+								int32
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description">The type of the component as an integer.</span>
+			
+							</div>
+						</li>
+		
+						<li class="property property_required">
+							<header>
+								<span class="property_name">type_id</span>
+								<span class="property_type">
+			
+								int32
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description">The type id of the component.</span>
+			
+							</div>
+						</li>
+		
+						<li class="property property_required">
+							<header>
+								<span class="property_name">type_name</span>
+								<span class="property_type">
+			
+								string
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description">The type of the component as a string.</span>
+			
+							</div>
+						</li>
+		
+						<li class="property property_required">
+							<header>
+								<span class="property_name">value</span>
+								<span class="property_type">
+			
+								int64
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description">The 64-bit globally unique component ID.</span>
+			
+							</div>
+						</li>
+		
+					</ul>
+			
+							</div>
+						</li>
+		
+						<li class="property property_required">
+							<header>
+								<span class="property_name">enclosure_id</span>
+								<span class="property_type">
+			
+								int32
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description">The globally-unique identifier of the enclosure that originated the metric.</span>
+			
+							</div>
+						</li>
+		
+						<li class="property property_required">
+							<header>
+								<span class="property_name">timestamp</span>
+								<span class="property_type">
+			
+								string
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description">The ISO8601 formatted timestamp of the metric.</span>
+			
+							</div>
+						</li>
+		
+						<li class="property property_required">
+							<header>
+								<span class="property_name">type</span>
+								<span class="property_type">
+			
+								string
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description">The type or category of the metric.</span>
+			
+							</div>
+						</li>
+		
+						<li class="property property_required">
+							<header>
+								<span class="property_name">value</span>
+								<span class="property_type">
+			
+								double
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description">The value of the metric.</span>
+			
+							</div>
+						</li>
+		
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="paths">
+			<header>
+			<h4>Operations</h4>
+	
+			<div class="path">
+				<div class="path_body">
+					<ul>
+		
+						<li class="method">
+							<div class="content_block">
+								<div class="content_body">
+									<header class="method_header">
+										<span class="method_description">get</span>
+										<span class="method_name">GET</span>
+										<span class="path_name">/api/metrics</span>
+			
+										<span class="query_params params">
+				
+											<span class="query_param param"><span class="query_param_name param_name">cursorTtl</span><span class="query_param_type param_type">int64</span></span>
+				
+											<span class="query_param param"><span class="query_param_name param_name">cursorId</span><span class="query_param_type param_type">string</span></span>
+				
+											<span class="query_param param"><span class="query_param_name param_name">types</span><span class="query_param_type param_type">array</span></span>
+				
+											<span class="query_param param"><span class="query_param_name param_name">pageSize</span><span class="query_param_type param_type">int32</span></span>
+				
+											<span class="query_param param"><span class="query_param_name param_name">page</span><span class="query_param_type param_type">int32</span></span>
+				
+											<span class="query_param param"><span class="query_param_name param_name">to</span><span class="query_param_type param_type">int64</span></span>
+				
+											<span class="query_param param"><span class="query_param_name param_name">from</span><span class="query_param_type param_type">int64</span></span>
+				
+										</span>
+			
+									</header>
+									<div class="method_body content_body">
+			
+			
+				
+					
+				
+										<div class="method_summary">
+											<h5>Query Parameters</h5>
+											<ul class="query_params params">
+				
+												<li class="query_param param_defaulted param">
+													<header class="param_header">
+														<span class="param_name">cursorTtl</span>
+														<span class="param_type">
+														int64
+														</span>
+														<span class="param_default">60000</span>
+					
+													</header>
+													<div class="query_param_body param_body">
+														<span class="param_description">cursorTtl</span>
+													</div>
+												</li>
+			
+												<li class="query_param param">
+													<header class="param_header">
+														<span class="param_name">cursorId</span>
+														<span class="param_type">
+														string
+														</span>
+														
+					
+													</header>
+													<div class="query_param_body param_body">
+														<span class="param_description">cursorId</span>
+													</div>
+												</li>
+			
+												<li class="query_param param_defaulted param">
+													<header class="param_header">
+														<span class="param_name">types</span>
+														<span class="param_type">
+														array
+														</span>
+														<span class="param_default">*</span>
+					
+													</header>
+													<div class="query_param_body param_body">
+														<span class="param_description">types</span>
+													</div>
+												</li>
+			
+												<li class="query_param param_defaulted param">
+													<header class="param_header">
+														<span class="param_name">pageSize</span>
+														<span class="param_type">
+														int32
+														</span>
+														<span class="param_default">100</span>
+					
+													</header>
+													<div class="query_param_body param_body">
+														<span class="param_description">pageSize</span>
+													</div>
+												</li>
+			
+												<li class="query_param param_defaulted param">
+													<header class="param_header">
+														<span class="param_name">page</span>
+														<span class="param_type">
+														int32
+														</span>
+														<span class="param_default">0</span>
+					
+													</header>
+													<div class="query_param_body param_body">
+														<span class="param_description">page</span>
+													</div>
+												</li>
+			
+												<li class="query_param param">
+													<header class="param_header">
+														<span class="param_name">to</span>
+														<span class="param_type">
+														int64
+														</span>
+														
+					
+													</header>
+													<div class="query_param_body param_body">
+														<span class="param_description">to</span>
+													</div>
+												</li>
+			
+												<li class="query_param param">
+													<header class="param_header">
+														<span class="param_name">from</span>
+														<span class="param_type">
+														int64
+														</span>
+														
+					
+													</header>
+													<div class="query_param_body param_body">
+														<span class="param_description">from</span>
+													</div>
+												</li>
+			
+											</ul>
+										</div>
+			
+				
+					
+										<div class="responses">
+											<h5>Responses</h5>
+											<ul>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">200</span>
+														<span class="response_description">OK</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">401</span>
+														<span class="response_description">Unauthorized</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">403</span>
+														<span class="response_description">Forbidden</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">404</span>
+														<span class="response_description">Not Found</span>
+													</header>
+												</li>
+			
+											</ul>
+										</div>
+									</div>
+								</div>
+								<aside class="code-gutter">
+			
+									<pre data-src class="language-javascript">
+										<code class="language-javascript">
+// 200
+Metric[]
+										</code>
+									</pre>
+			
+								</aside>
+							</div>
+						</li>
+		
+					</ul>
+				</div>
+			</div>
+	
+			<div class="path">
+				<div class="path_body">
+					<ul>
+		
+						<li class="method">
+							<div class="content_block">
+								<div class="content_body">
+									<header class="method_header">
+										<span class="method_description">prepareCursor</span>
+										<span class="method_name">GET</span>
+										<span class="path_name">/api/metrics/cursor</span>
+			
+										<span class="query_params params">
+				
+											<span class="query_param param"><span class="query_param_name param_name">types</span><span class="query_param_type param_type">array</span></span>
+				
+											<span class="query_param param"><span class="query_param_name param_name">pageSize</span><span class="query_param_type param_type">int32</span></span>
+				
+											<span class="query_param param"><span class="query_param_name param_name">ttl</span><span class="query_param_type param_type">int64</span></span>
+				
+											<span class="query_param param"><span class="query_param_name param_name">to</span><span class="query_param_type param_type">int64</span></span>
+				
+											<span class="query_param param"><span class="query_param_name param_name">from</span><span class="query_param_type param_type">int64</span></span>
+				
+										</span>
+			
+									</header>
+									<div class="method_body content_body">
+			
+			
+				
+					
+				
+										<div class="method_summary">
+											<h5>Query Parameters</h5>
+											<ul class="query_params params">
+				
+												<li class="query_param param_defaulted param">
+													<header class="param_header">
+														<span class="param_name">types</span>
+														<span class="param_type">
+														array
+														</span>
+														<span class="param_default">*</span>
+					
+													</header>
+													<div class="query_param_body param_body">
+														<span class="param_description">types</span>
+													</div>
+												</li>
+			
+												<li class="query_param param_defaulted param">
+													<header class="param_header">
+														<span class="param_name">pageSize</span>
+														<span class="param_type">
+														int32
+														</span>
+														<span class="param_default">1000</span>
+					
+													</header>
+													<div class="query_param_body param_body">
+														<span class="param_description">pageSize</span>
+													</div>
+												</li>
+			
+												<li class="query_param param_defaulted param">
+													<header class="param_header">
+														<span class="param_name">ttl</span>
+														<span class="param_type">
+														int64
+														</span>
+														<span class="param_default">60000</span>
+					
+													</header>
+													<div class="query_param_body param_body">
+														<span class="param_description">ttl</span>
+													</div>
+												</li>
+			
+												<li class="query_param param">
+													<header class="param_header">
+														<span class="param_name">to</span>
+														<span class="param_type">
+														int64
+														</span>
+														
+					
+													</header>
+													<div class="query_param_body param_body">
+														<span class="param_description">to</span>
+													</div>
+												</li>
+			
+												<li class="query_param param">
+													<header class="param_header">
+														<span class="param_name">from</span>
+														<span class="param_type">
+														int64
+														</span>
+														
+					
+													</header>
+													<div class="query_param_body param_body">
+														<span class="param_description">from</span>
+													</div>
+												</li>
+			
+											</ul>
+										</div>
+			
+				
+					
+										<div class="responses">
+											<h5>Responses</h5>
+											<ul>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">200</span>
+														<span class="response_description">OK</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">401</span>
+														<span class="response_description">Unauthorized</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">403</span>
+														<span class="response_description">Forbidden</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">404</span>
+														<span class="response_description">Not Found</span>
+													</header>
+												</li>
+			
+											</ul>
+										</div>
+									</div>
+								</div>
+								<aside class="code-gutter">
+			
+									<pre data-src class="language-javascript">
+										<code class="language-javascript">
+// 200
+{
+  // The id to use when retrieving
+  // data
+  "cursor_id": string
+  // The number of items returned per
+  // GET
+  "items_per_get": int32
+}
+										</code>
+									</pre>
+			
+								</aside>
+							</div>
+						</li>
+		
+					</ul>
+				</div>
+			</div>
+	
+		</div>
+	</article>
+
+	<article id="Versions" class="collection">
+		<div class="content_block">
+			<header>
+				<h2><span class="collection_name">Versions</span><a class="top_link" href="#top">top</a></h2>
+				<div>
+				
+				<p><em>This is a place holder</em></p>
+
+				</div>
+			</header>
+			<aside class="code-gutter">
+				<pre data-src class="language-javascript">
+					<code class="language-javascript">
+// Version
+{
+  // The mime types supported by POST
+  // and PUT in this version of the
+  // API.
+  "consumes": string[]
+  // The mime types returnable by this
+  // version of the API.
+  "produces": string[]
+  // The version number of the API.
+  "version": string
+}
+					</code>
+				</pre>
+			</aside>
+		</div>
+		<div class="content_block">
+			<div class="resource">
+				<header class="resource_header">
+					<h4>Schema</h4>
+					<span class="resource_name">Version</span>
+					<span class="resource_type">object</span>
+				</header>
+				<div class="body resource_body">
+						<ul class="properties">
+		
+						<li class="property">
+							<header>
+								<span class="property_name">consumes</span>
+								<span class="property_type">
+			
+								array
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description">The mime types supported by POST and PUT in this version of the API.</span>
+			
+							</div>
+						</li>
+		
+						<li class="property">
+							<header>
+								<span class="property_name">produces</span>
+								<span class="property_type">
+			
+								array
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description">The mime types returnable by this version of the API.</span>
+			
+							</div>
+						</li>
+		
+						<li class="property">
+							<header>
+								<span class="property_name">version</span>
+								<span class="property_type">
+			
+								string
+			
+								</span>
+			
+							</header>
+							<div class="property_summary">
+								<span class="property_description">The version number of the API.</span>
+			
+							</div>
+						</li>
+		
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="paths">
+			<header>
+			<h4>Operations</h4>
+	
+			<div class="path">
+				<div class="path_body">
+					<ul>
+		
+						<li class="method">
+							<div class="content_block">
+								<div class="content_body">
+									<header class="method_header">
+										<span class="method_description">get</span>
+										<span class="method_name">GET</span>
+										<span class="path_name">/api/versions</span>
+			
+									</header>
+									<div class="method_body content_body">
+			
+			
+				
+					
+				
+					
+				
+					
+										<div class="responses">
+											<h5>Responses</h5>
+											<ul>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">200</span>
+														<span class="response_description">OK</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">401</span>
+														<span class="response_description">Unauthorized</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">403</span>
+														<span class="response_description">Forbidden</span>
+													</header>
+												</li>
+			
+												<li class="response">
+													<header class="response_header">
+														<span class="response_code">404</span>
+														<span class="response_description">Not Found</span>
+													</header>
+												</li>
+			
+											</ul>
+										</div>
+									</div>
+								</div>
+								<aside class="code-gutter">
+			
+									<pre data-src class="language-javascript">
+										<code class="language-javascript">
+// 200
+Version[]
+										</code>
+									</pre>
+			
+								</aside>
+							</div>
+						</li>
+		
+					</ul>
+				</div>
+			</div>
+	
+		</div>
+	</article>
+
+</section>
+<script type="text/javascript">
+(function() {
+	var style = document.createElement('style'),
+		height = Math.max(
+	        document.documentElement.clientHeight,
+	        document.body.scrollHeight,
+	        document.documentElement.scrollHeight,
+	        document.body.offsetHeight,
+	        document.documentElement.offsetHeight
+	    );
+	style.textContent = 'body::before { height: ' + height + 'px; }';
+	document.head.appendChild(style);
+})();
+</script>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Senient Systems</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li>
+            
+              Senient Systems
+            
+            </li>
+            
+            <li><a href="mailto:engineering@senient.com">engineering@senient.com</a></li>
+            
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-2">
+        <ul class="social-media-list">
+          
+          <li>
+            <a href="https://github.com/senient"><span class="icon icon--github"><svg viewBox="0 0 16 16" width="16px" height="16px"><path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/></svg>
+</span><span class="username">senient</span></a>
+
+          </li>
+          
+
+          
+          <li>
+            <a href="https://twitter.com/senient_systems"><span class="icon icon--twitter"><svg viewBox="0 0 16 16" width="16px" height="16px"><path fill="#828282" d="M15.969,3.058c-0.586,0.26-1.217,0.436-1.878,0.515c0.675-0.405,1.194-1.045,1.438-1.809c-0.632,0.375-1.332,0.647-2.076,0.793c-0.596-0.636-1.446-1.033-2.387-1.033c-1.806,0-3.27,1.464-3.27,3.27 c0,0.256,0.029,0.506,0.085,0.745C5.163,5.404,2.753,4.102,1.14,2.124C0.859,2.607,0.698,3.168,0.698,3.767 c0,1.134,0.577,2.135,1.455,2.722C1.616,6.472,1.112,6.325,0.671,6.08c0,0.014,0,0.027,0,0.041c0,1.584,1.127,2.906,2.623,3.206 C3.02,9.402,2.731,9.442,2.433,9.442c-0.211,0-0.416-0.021-0.615-0.059c0.416,1.299,1.624,2.245,3.055,2.271 c-1.119,0.877-2.529,1.4-4.061,1.4c-0.264,0-0.524-0.015-0.78-0.046c1.447,0.928,3.166,1.469,5.013,1.469 c6.015,0,9.304-4.983,9.304-9.304c0-0.142-0.003-0.283-0.009-0.423C14.976,4.29,15.531,3.714,15.969,3.058z"/></svg>
+</span><span class="username">senient_systems</span></a>
+
+          </li>
+          
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-3">
+        <p>This is the new home of documentation and code for getting started with the Senient Cloud Platform API.
+</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+<script type="text/javascript" src="/assets/js/prism.js"></script>
+
+
+  </body>
+
+</html>

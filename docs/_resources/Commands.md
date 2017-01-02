@@ -1,0 +1,1 @@
+Within the Senient Cloud Platform, there is a barrier between the management system and the hosting environment. The Command pipeline is responsible for initiating any operations that mutate the hosting environment.

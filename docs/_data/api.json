@@ -1,0 +1,3824 @@
+[
+    {
+        "name": "Commands",
+        "description": "<p>Within the Senient Cloud Platform, there is a barrier between the management system and the hosting environment. The Command pipeline is responsible for initiating any operations that mutate the hosting environment.</p>",
+        "basePath": "/api/commands",
+        "group": {
+            "name": "Orchestration",
+            "weight": 0
+        },
+        "resource": {
+            "type": "object",
+            "properties": [
+                {
+                    "type": "string",
+                    "description": "The date and time that the Command completed (if it has).",
+                    "name": "completed"
+                },
+                {
+                    "type": "string",
+                    "description": "An auto-generated unique identifier of the Command.",
+                    "name": "id"
+                },
+                {
+                    "type": "string",
+                    "description": "The instance id of the IMS node that originated the Command.",
+                    "name": "ims_instance_id"
+                },
+                {
+                    "type": "string",
+                    "description": "The date and time when the Command was initiated.",
+                    "name": "initiated"
+                },
+                {
+                    "type": "string",
+                    "description": "The Name of the uer who initiated the Command.",
+                    "name": "initiated_by"
+                },
+                {
+                    "type": "string",
+                    "description": "The date and time that the Command was last updated.",
+                    "name": "last_updated"
+                },
+                {
+                    "type": "string",
+                    "description": "The current human-readable message about the state of the Command.",
+                    "name": "message"
+                },
+                {
+                    "type": "object",
+                    "description": "A dictionary of metadata associated with the Command.",
+                    "properties": {},
+                    "name": "metadata"
+                },
+                {
+                    "type": "string",
+                    "description": "The identifier for the organization to which the Command is applicable.",
+                    "name": "org_id"
+                },
+                {
+                    "type": "object",
+                    "description": "A dictionary of properties applicable to the Command.",
+                    "properties": {},
+                    "name": "properties"
+                },
+                {
+                    "type": "enum",
+                    "description": "The current status of the Command.",
+                    "enum": [
+                        "QUEUED",
+                        "PREPARING",
+                        "EXECUTING",
+                        "FAILED",
+                        "SUCCESSFUL",
+                        "CANCELLED"
+                    ],
+                    "name": "status"
+                },
+                {
+                    "type": "string",
+                    "description": "The type of Command to be performed.",
+                    "name": "type"
+                },
+                {
+                    "type": "boolean",
+                    "example": false,
+                    "description": "A value indicating whether or not a Command has passed validation.",
+                    "name": "valid"
+                },
+                {
+                    "type": "array",
+                    "description": "A list of messages resulting from the validation of the Command.",
+                    "items": {
+                        "$ref": "#/definitions/CommandValidationMessage",
+                        "type": {
+                            "type": "object",
+                            "properties": [
+                                {
+                                    "type": "string",
+                                    "name": "command_id"
+                                },
+                                {
+                                    "type": "boolean",
+                                    "name": "fatal"
+                                },
+                                {
+                                    "type": "string",
+                                    "name": "message"
+                                },
+                                {
+                                    "type": "string",
+                                    "name": "property"
+                                }
+                            ]
+                        },
+                        "isRef": true
+                    },
+                    "name": "validation_messages"
+                }
+            ],
+            "description": "Commands represent changes to be made to Services and Resources within the Senient Environment.",
+            "name": "Command",
+            "example": "{\n  // The date and time that the\n  // Command completed (if it has).\n  \"completed\": string\n  // An auto-generated unique\n  // identifier of the Command.\n  \"id\": string\n  // The instance id of the IMS node\n  // that originated the Command.\n  \"ims_instance_id\": string\n  // The date and time when the\n  // Command was initiated.\n  \"initiated\": string\n  // The Name of the uer who initiated\n  // the Command.\n  \"initiated_by\": string\n  // The date and time that the\n  // Command was last updated.\n  \"last_updated\": string\n  // The current human-readable\n  // message about the state of the\n  // Command.\n  \"message\": string\n  // A dictionary of metadata\n  // associated with the Command.\n  \"metadata\": object\n  // The identifier for the\n  // organization to which the Command\n  // is applicable.\n  \"org_id\": string\n  // A dictionary of properties\n  // applicable to the Command.\n  \"properties\": object\n  // The current status of the\n  // Command.\n  \"status\": enum\n  // The type of Command to be\n  // performed.\n  \"type\": string\n  // A value indicating whether or not\n  // a Command has passed validation.\n  \"valid\": boolean\n  // A list of messages resulting from\n  // the validation of the Command.\n  \"validation_messages\": array\n}"
+        },
+        "paths": [
+            {
+                "name": "/api/commands",
+                "methods": [
+                    {
+                        "name": "GET",
+                        "description": "Retrieve all Commands that match {query}.",
+                        "parameters": {
+                            "query": [
+                                {
+                                    "name": "size",
+                                    "in": "query",
+                                    "description": "The number of Commands to return per query.",
+                                    "required": false,
+                                    "type": "integer",
+                                    "default": 100,
+                                    "format": "int32"
+                                },
+                                {
+                                    "name": "page",
+                                    "in": "query",
+                                    "description": "The page offset to return.",
+                                    "required": false,
+                                    "type": "integer",
+                                    "default": 0,
+                                    "format": "int32"
+                                },
+                                {
+                                    "name": "query",
+                                    "in": "query",
+                                    "description": "A query string to filter the Commands with.",
+                                    "required": false,
+                                    "type": "string",
+                                    "default": "*:*"
+                                }
+                            ]
+                        },
+                        "model": {
+                            "$ref": "#/definitions/Command",
+                            "type": "Command"
+                        },
+                        "responses": [
+                            {
+                                "description": "OK",
+                                "schema": {
+                                    "$ref": "#/definitions/Command",
+                                    "type": "Command"
+                                },
+                                "code": "200"
+                            },
+                            {
+                                "description": "Unauthorized",
+                                "code": "401"
+                            },
+                            {
+                                "description": "Forbidden",
+                                "code": "403"
+                            },
+                            {
+                                "description": "Not Found",
+                                "code": "404"
+                            }
+                        ],
+                        "example": "Command"
+                    },
+                    {
+                        "name": "POST",
+                        "description": "Initiate a new command.",
+                        "parameters": {
+                            "body": [
+                                {
+                                    "in": "body",
+                                    "name": "command",
+                                    "description": "command",
+                                    "required": true,
+                                    "schema": {
+                                        "$ref": "#/definitions/Command"
+                                    }
+                                }
+                            ]
+                        },
+                        "responses": [
+                            {
+                                "description": "OK",
+                                "schema": {
+                                    "$ref": "#/definitions/Command",
+                                    "type": "Command"
+                                },
+                                "code": "200"
+                            },
+                            {
+                                "description": "Created",
+                                "code": "201"
+                            },
+                            {
+                                "description": "Unauthorized",
+                                "code": "401"
+                            },
+                            {
+                                "description": "Forbidden",
+                                "code": "403"
+                            },
+                            {
+                                "description": "Not Found",
+                                "code": "404"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "/api/commands/{id}",
+                "methods": [
+                    {
+                        "name": "GET",
+                        "description": "Retrieve a specific Command by its Id.",
+                        "parameters": {
+                            "path": [
+                                {
+                                    "name": "id",
+                                    "in": "path",
+                                    "description": "The id of the command to retrieve.",
+                                    "required": false,
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "model": {
+                            "$ref": "#/definitions/Command",
+                            "type": "Command"
+                        },
+                        "responses": [
+                            {
+                                "description": "OK",
+                                "schema": {
+                                    "$ref": "#/definitions/Command",
+                                    "type": "Command"
+                                },
+                                "code": "200"
+                            },
+                            {
+                                "description": "Unauthorized",
+                                "code": "401"
+                            },
+                            {
+                                "description": "Forbidden",
+                                "code": "403"
+                            },
+                            {
+                                "description": "Not Found",
+                                "code": "404"
+                            }
+                        ],
+                        "example": "Command"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "Definitions",
+        "description": "A collection of all service definitions.",
+        "basePath": "/api/definitions",
+        "group": {
+            "name": "Orchestration",
+            "weight": 0
+        },
+        "resource": {
+            "type": "object",
+            "properties": [
+                {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ComponentDefinition",
+                        "type": {
+                            "type": "object",
+                            "properties": [
+                                {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Asset",
+                                        "type": {
+                                            "type": "object",
+                                            "properties": [
+                                                {
+                                                    "type": "string",
+                                                    "name": "local_path"
+                                                },
+                                                {
+                                                    "type": "string",
+                                                    "name": "remote_path"
+                                                }
+                                            ]
+                                        },
+                                        "isRef": true
+                                    },
+                                    "name": "assets"
+                                },
+                                {
+                                    "type": "string",
+                                    "name": "base_image"
+                                },
+                                {
+                                    "type": "integer",
+                                    "format": "int32",
+                                    "name": "min_instances"
+                                },
+                                {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/StoreMount",
+                                        "type": {
+                                            "type": "object",
+                                            "properties": []
+                                        },
+                                        "isRef": true
+                                    },
+                                    "name": "mounts"
+                                },
+                                {
+                                    "type": "string",
+                                    "name": "name"
+                                },
+                                {
+                                    "type": "string",
+                                    "name": "script"
+                                }
+                            ]
+                        },
+                        "isRef": true
+                    },
+                    "name": "components"
+                },
+                {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "name": "meta"
+                },
+                {
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "#/definitions/ModuleType",
+                        "type": {
+                            "type": "object",
+                            "properties": [
+                                {
+                                    "type": "string",
+                                    "name": "architecture"
+                                },
+                                {
+                                    "type": "string",
+                                    "name": "direct_attached_storage"
+                                },
+                                {
+                                    "type": "string",
+                                    "name": "embedded_storage"
+                                },
+                                {
+                                    "type": "string",
+                                    "name": "memory"
+                                }
+                            ]
+                        },
+                        "isRef": true
+                    },
+                    "name": "module_types"
+                },
+                {
+                    "type": "string",
+                    "name": "name"
+                },
+                {
+                    "type": "string",
+                    "name": "namespace"
+                },
+                {
+                    "$ref": "#/definitions/DefinitionIdentifier",
+                    "name": "parent",
+                    "type": {
+                        "type": "object",
+                        "properties": [
+                            {
+                                "type": "string",
+                                "name": "name"
+                            },
+                            {
+                                "type": "string",
+                                "name": "namespace"
+                            },
+                            {
+                                "type": "string",
+                                "name": "version"
+                            }
+                        ]
+                    },
+                    "isRef": true
+                },
+                {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "name": "properties"
+                },
+                {
+                    "type": "boolean",
+                    "name": "public"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/StoreDefinition",
+                        "type": {
+                            "type": "object",
+                            "properties": [
+                                {
+                                    "$ref": "#/definitions/StoreAccess",
+                                    "name": "access",
+                                    "type": {
+                                        "type": "object",
+                                        "properties": [
+                                            {
+                                                "type": "enum",
+                                                "enum": [
+                                                    "READ",
+                                                    "WRITE",
+                                                    "NONE"
+                                                ],
+                                                "name": "anyone"
+                                            },
+                                            {
+                                                "type": "enum",
+                                                "enum": [
+                                                    "READ",
+                                                    "WRITE",
+                                                    "NONE"
+                                                ],
+                                                "name": "resource_pool"
+                                            },
+                                            {
+                                                "type": "enum",
+                                                "enum": [
+                                                    "READ",
+                                                    "WRITE",
+                                                    "NONE"
+                                                ],
+                                                "name": "service"
+                                            }
+                                        ]
+                                    },
+                                    "isRef": true
+                                },
+                                {
+                                    "type": "boolean",
+                                    "name": "compressed"
+                                },
+                                {
+                                    "type": "boolean",
+                                    "name": "encrypted"
+                                },
+                                {
+                                    "type": "string",
+                                    "name": "name"
+                                },
+                                {
+                                    "$ref": "#/definitions/IntRange",
+                                    "name": "replicas",
+                                    "type": {
+                                        "type": "object",
+                                        "properties": [
+                                            {
+                                                "type": "integer",
+                                                "format": "int32",
+                                                "name": "max"
+                                            },
+                                            {
+                                                "type": "integer",
+                                                "format": "int32",
+                                                "name": "min"
+                                            }
+                                        ]
+                                    },
+                                    "isRef": true
+                                },
+                                {
+                                    "type": "enum",
+                                    "enum": [
+                                        "REPLICATED",
+                                        "ERASURE"
+                                    ],
+                                    "name": "replication"
+                                },
+                                {
+                                    "type": "boolean",
+                                    "name": "reserved"
+                                },
+                                {
+                                    "type": "string",
+                                    "name": "size"
+                                }
+                            ]
+                        },
+                        "isRef": true
+                    },
+                    "name": "stores"
+                },
+                {
+                    "type": "string",
+                    "name": "version"
+                }
+            ],
+            "name": "Definition",
+            "example": "{\n  \"components\": array\n  \"meta\": object\n  \"module_types\": object\n  \"name\": string\n  \"namespace\": string\n  \"parent\": object\n  \"properties\": object\n  \"public\": boolean\n  \"stores\": array\n  \"version\": string\n}"
+        },
+        "paths": [
+            {
+                "name": "/api/definitions",
+                "methods": [
+                    {
+                        "name": "GET",
+                        "description": "getNamespaces",
+                        "parameters": {},
+                        "model": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "responses": [
+                            {
+                                "description": "OK",
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                "code": "200"
+                            },
+                            {
+                                "description": "Unauthorized",
+                                "code": "401"
+                            },
+                            {
+                                "description": "Forbidden",
+                                "code": "403"
+                            },
+                            {
+                                "description": "Not Found",
+                                "code": "404"
+                            }
+                        ],
+                        "example": "string[]"
+                    },
+                    {
+                        "name": "POST",
+                        "description": "post",
+                        "parameters": {
+                            "formData": [
+                                {
+                                    "name": "definition",
+                                    "in": "formData",
+                                    "description": "definition",
+                                    "required": true,
+                                    "type": "file"
+                                },
+                                {
+                                    "name": "assets",
+                                    "in": "formData",
+                                    "description": "assets",
+                                    "required": false,
+                                    "type": "array",
+                                    "items": {
+                                        "type": "file"
+                                    },
+                                    "collectionFormat": "multi"
+                                }
+                            ]
+                        },
+                        "responses": [
+                            {
+                                "description": "OK",
+                                "schema": {
+                                    "$ref": "#/definitions/Definition",
+                                    "type": "Definition"
+                                },
+                                "code": "200"
+                            },
+                            {
+                                "description": "Created",
+                                "code": "201"
+                            },
+                            {
+                                "description": "Unauthorized",
+                                "code": "401"
+                            },
+                            {
+                                "description": "Forbidden",
+                                "code": "403"
+                            },
+                            {
+                                "description": "Not Found",
+                                "code": "404"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "PUT",
+                        "description": "put",
+                        "parameters": {
+                            "formData": [
+                                {
+                                    "name": "definition",
+                                    "in": "formData",
+                                    "description": "definition",
+                                    "required": true,
+                                    "type": "file"
+                                },
+                                {
+                                    "name": "assets",
+                                    "in": "formData",
+                                    "description": "assets",
+                                    "required": false,
+                                    "type": "array",
+                                    "items": {
+                                        "type": "file"
+                                    },
+                                    "collectionFormat": "multi"
+                                }
+                            ]
+                        },
+                        "responses": [
+                            {
+                                "description": "OK",
+                                "schema": {
+                                    "$ref": "#/definitions/ResponseEntity",
+                                    "type": {
+                                        "type": "object",
+                                        "properties": [
+                                            {
+                                                "type": "object",
+                                                "properties": {},
+                                                "name": "body"
+                                            },
+                                            {
+                                                "type": "enum",
+                                                "enum": [
+                                                    "100",
+                                                    "101",
+                                                    "102",
+                                                    "103",
+                                                    "200",
+                                                    "201",
+                                                    "202",
+                                                    "203",
+                                                    "204",
+                                                    "205",
+                                                    "206",
+                                                    "207",
+                                                    "208",
+                                                    "226",
+                                                    "300",
+                                                    "301",
+                                                    "302",
+                                                    "303",
+                                                    "304",
+                                                    "305",
+                                                    "307",
+                                                    "308",
+                                                    "400",
+                                                    "401",
+                                                    "402",
+                                                    "403",
+                                                    "404",
+                                                    "405",
+                                                    "406",
+                                                    "407",
+                                                    "408",
+                                                    "409",
+                                                    "410",
+                                                    "411",
+                                                    "412",
+                                                    "413",
+                                                    "414",
+                                                    "415",
+                                                    "416",
+                                                    "417",
+                                                    "418",
+                                                    "419",
+                                                    "420",
+                                                    "421",
+                                                    "422",
+                                                    "423",
+                                                    "424",
+                                                    "426",
+                                                    "428",
+                                                    "429",
+                                                    "431",
+                                                    "451",
+                                                    "500",
+                                                    "501",
+                                                    "502",
+                                                    "503",
+                                                    "504",
+                                                    "505",
+                                                    "506",
+                                                    "507",
+                                                    "508",
+                                                    "509",
+                                                    "510",
+                                                    "511"
+                                                ],
+                                                "name": "status_code"
+                                            },
+                                            {
+                                                "type": "integer",
+                                                "format": "int32",
+                                                "name": "status_code_value"
+                                            }
+                                        ]
+                                    },
+                                    "isRef": true
+                                },
+                                "code": "200"
+                            },
+                            {
+                                "description": "Created",
+                                "code": "201"
+                            },
+                            {
+                                "description": "Unauthorized",
+                                "code": "401"
+                            },
+                            {
+                                "description": "Forbidden",
+                                "code": "403"
+                            },
+                            {
+                                "description": "Not Found",
+                                "code": "404"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "/api/definitions/{namespace}",
+                "methods": [
+                    {
+                        "name": "GET",
+                        "description": "getNames",
+                        "parameters": {
+                            "path": [
+                                {
+                                    "name": "namespace",
+                                    "in": "path",
+                                    "description": "namespace",
+                                    "required": true,
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "model": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "responses": [
+                            {
+                                "description": "OK",
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                "code": "200"
+                            },
+                            {
+                                "description": "Unauthorized",
+                                "code": "401"
+                            },
+                            {
+                                "description": "Forbidden",
+                                "code": "403"
+                            },
+                            {
+                                "description": "Not Found",
+                                "code": "404"
+                            }
+                        ],
+                        "example": "string[]"
+                    }
+                ]
+            },
+            {
+                "name": "/api/definitions/{namespace}/{name}",
+                "methods": [
+                    {
+                        "name": "GET",
+                        "description": "getVersions",
+                        "parameters": {
+                            "path": [
+                                {
+                                    "name": "name",
+                                    "in": "path",
+                                    "description": "name",
+                                    "required": true,
+                                    "type": "string"
+                                },
+                                {
+                                    "name": "namespace",
+                                    "in": "path",
+                                    "description": "namespace",
+                                    "required": true,
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "model": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "responses": [
+                            {
+                                "description": "OK",
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                "code": "200"
+                            },
+                            {
+                                "description": "Unauthorized",
+                                "code": "401"
+                            },
+                            {
+                                "description": "Forbidden",
+                                "code": "403"
+                            },
+                            {
+                                "description": "Not Found",
+                                "code": "404"
+                            }
+                        ],
+                        "example": "string[]"
+                    }
+                ]
+            },
+            {
+                "name": "/api/definitions/{namespace}/{name}/{version}/senient.json",
+                "methods": [
+                    {
+                        "name": "GET",
+                        "description": "getJson",
+                        "parameters": {
+                            "path": [
+                                {
+                                    "name": "version",
+                                    "in": "path",
+                                    "description": "version",
+                                    "required": true,
+                                    "type": "string"
+                                },
+                                {
+                                    "name": "name",
+                                    "in": "path",
+                                    "description": "name",
+                                    "required": true,
+                                    "type": "string"
+                                },
+                                {
+                                    "name": "namespace",
+                                    "in": "path",
+                                    "description": "namespace",
+                                    "required": true,
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "model": {
+                            "$ref": "#/definitions/Definition",
+                            "type": "Definition"
+                        },
+                        "responses": [
+                            {
+                                "description": "OK",
+                                "schema": {
+                                    "$ref": "#/definitions/Definition",
+                                    "type": "Definition"
+                                },
+                                "code": "200"
+                            },
+                            {
+                                "description": "Unauthorized",
+                                "code": "401"
+                            },
+                            {
+                                "description": "Forbidden",
+                                "code": "403"
+                            },
+                            {
+                                "description": "Not Found",
+                                "code": "404"
+                            }
+                        ],
+                        "example": "Definition"
+                    }
+                ]
+            },
+            {
+                "name": "/api/definitions/{namespace}/{name}/{version}/senient.yaml",
+                "methods": [
+                    {
+                        "name": "GET",
+                        "description": "Get definition file in YAML format.",
+                        "parameters": {
+                            "path": [
+                                {
+                                    "name": "version",
+                                    "in": "path",
+                                    "description": "version",
+                                    "required": true,
+                                    "type": "string"
+                                },
+                                {
+                                    "name": "name",
+                                    "in": "path",
+                                    "description": "name",
+                                    "required": true,
+                                    "type": "string"
+                                },
+                                {
+                                    "name": "namespace",
+                                    "in": "path",
+                                    "description": "namespace",
+                                    "required": true,
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "model": {
+                            "$ref": "#/definitions/Definition",
+                            "type": "Definition"
+                        },
+                        "responses": [
+                            {
+                                "description": "OK",
+                                "schema": {
+                                    "$ref": "#/definitions/Definition",
+                                    "type": "Definition"
+                                },
+                                "code": "200"
+                            },
+                            {
+                                "description": "Unauthorized",
+                                "code": "401"
+                            },
+                            {
+                                "description": "Forbidden",
+                                "code": "403"
+                            },
+                            {
+                                "description": "Not Found",
+                                "code": "404"
+                            }
+                        ],
+                        "example": "Definition"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "Deployments",
+        "description": "A collection of all service deployments.",
+        "basePath": "/api/deployments",
+        "group": {
+            "name": "Orchestration",
+            "weight": 0
+        },
+        "resource": {
+            "type": "object",
+            "properties": [
+                {
+                    "type": "string",
+                    "name": "command_id"
+                },
+                {
+                    "type": "string",
+                    "name": "completed"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Component",
+                        "type": "Component"
+                    },
+                    "name": "components"
+                },
+                {
+                    "$ref": "#/definitions/DefinitionIdentifier",
+                    "name": "definition",
+                    "type": {
+                        "type": "object",
+                        "properties": [
+                            {
+                                "type": "string",
+                                "name": "name"
+                            },
+                            {
+                                "type": "string",
+                                "name": "namespace"
+                            },
+                            {
+                                "type": "string",
+                                "name": "version"
+                            }
+                        ]
+                    },
+                    "isRef": true
+                },
+                {
+                    "type": "string",
+                    "name": "id"
+                },
+                {
+                    "type": "string",
+                    "name": "initiated"
+                },
+                {
+                    "type": "string",
+                    "name": "message"
+                },
+                {
+                    "type": "string",
+                    "name": "org_id"
+                },
+                {
+                    "type": "string",
+                    "name": "resource_pool_id"
+                },
+                {
+                    "type": "enum",
+                    "enum": [
+                        "QUEUED",
+                        "PREPARING",
+                        "DEPLOYING",
+                        "DEPLOYED",
+                        "BRING_UP",
+                        "UP",
+                        "BRING_DOWN",
+                        "DOWN",
+                        "DESTROYING",
+                        "DESTROYED",
+                        "CANCELED",
+                        "FAILED",
+                        "DELETING",
+                        "DELETED"
+                    ],
+                    "name": "status"
+                }
+            ],
+            "name": "Deployment",
+            "example": "{\n  \"command_id\": string\n  \"completed\": string\n  \"components\": Component[]\n  \"definition\": object\n  \"id\": string\n  \"initiated\": string\n  \"message\": string\n  \"org_id\": string\n  \"resource_pool_id\": string\n  \"status\": enum\n}"
+        },
+        "paths": [
+            {
+                "name": "/api/deployments",
+                "methods": [
+                    {
+                        "name": "GET",
+                        "description": "get",
+                        "parameters": {},
+                        "model": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Deployment",
+                                "type": "Deployment"
+                            }
+                        },
+                        "responses": [
+                            {
+                                "description": "OK",
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Deployment",
+                                        "type": "Deployment"
+                                    }
+                                },
+                                "code": "200"
+                            },
+                            {
+                                "description": "Unauthorized",
+                                "code": "401"
+                            },
+                            {
+                                "description": "Forbidden",
+                                "code": "403"
+                            },
+                            {
+                                "description": "Not Found",
+                                "code": "404"
+                            }
+                        ],
+                        "example": "Deployment[]"
+                    }
+                ]
+            },
+            {
+                "name": "/api/deployments/{id}",
+                "methods": [
+                    {
+                        "name": "GET",
+                        "description": "get",
+                        "parameters": {
+                            "path": [
+                                {
+                                    "name": "id",
+                                    "in": "path",
+                                    "description": "id",
+                                    "required": true,
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "model": {
+                            "$ref": "#/definitions/Deployment",
+                            "type": "Deployment"
+                        },
+                        "responses": [
+                            {
+                                "description": "OK",
+                                "schema": {
+                                    "$ref": "#/definitions/Deployment",
+                                    "type": "Deployment"
+                                },
+                                "code": "200"
+                            },
+                            {
+                                "description": "Unauthorized",
+                                "code": "401"
+                            },
+                            {
+                                "description": "Forbidden",
+                                "code": "403"
+                            },
+                            {
+                                "description": "Not Found",
+                                "code": "404"
+                            }
+                        ],
+                        "example": "Deployment"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "Instances",
+        "description": "A collection of all instances",
+        "basePath": "/api/instances",
+        "group": {
+            "name": "Orchestration",
+            "weight": 0
+        },
+        "resource": {
+            "type": "object",
+            "properties": [
+                {
+                    "type": "enum",
+                    "description": "The recognized target Instance status.",
+                    "enum": [
+                        "UNDEPLOYED",
+                        "CHECK_DEPLOY_REQUIRED",
+                        "DEPLOYING",
+                        "UNDEPLOYING",
+                        "DEPLOYED_FS",
+                        "DEPLOYED",
+                        "UP",
+                        "DOWN",
+                        "BOOTING",
+                        "GOING_DOWN",
+                        "ORPHANED"
+                    ],
+                    "name": "admin_status",
+                    "required": false
+                },
+                {
+                    "type": "string",
+                    "description": "The base image used for this Instance.",
+                    "name": "base_image",
+                    "required": false
+                },
+                {
+                    "type": "string",
+                    "description": "The locally-unique identifier for the initiating component deployment.",
+                    "name": "component_deployment_id",
+                    "required": true
+                },
+                {
+                    "type": "boolean",
+                    "name": "deleted",
+                    "required": false
+                },
+                {
+                    "type": "string",
+                    "description": "The globally-unique identifier for the initiating deployment.",
+                    "name": "deployment_id",
+                    "required": true
+                },
+                {
+                    "type": "string",
+                    "description": "The hostname of this Instance.",
+                    "name": "hostname",
+                    "required": false
+                },
+                {
+                    "type": "string",
+                    "description": "The ID of the Instance.",
+                    "name": "id",
+                    "required": false
+                },
+                {
+                    "type": "array",
+                    "description": "The IPv4 address assigned to this Instance.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "name": "ipv4_addrs",
+                    "required": true
+                },
+                {
+                    "type": "array",
+                    "description": "The IPv6 address assigned to this Instance.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "name": "ipv6_addrs",
+                    "required": true
+                },
+                {
+                    "type": "enum",
+                    "description": "The current recognize Instance status.",
+                    "enum": [
+                        "UNDEPLOYED",
+                        "CHECK_DEPLOY_REQUIRED",
+                        "DEPLOYING",
+                        "UNDEPLOYING",
+                        "DEPLOYED_FS",
+                        "DEPLOYED",
+                        "UP",
+                        "DOWN",
+                        "BOOTING",
+                        "GOING_DOWN",
+                        "ORPHANED"
+                    ],
+                    "name": "oper_status",
+                    "required": false
+                },
+                {
+                    "type": "string",
+                    "description": "The globally-unique identifier for the owning organization.",
+                    "name": "org_id",
+                    "required": true
+                },
+                {
+                    "type": "string",
+                    "description": "The primary MAC address of this Instance.",
+                    "name": "primary_mac_address",
+                    "required": false
+                },
+                {
+                    "type": "string",
+                    "description": "The serial number of the Resource Module hosting this Instance.",
+                    "name": "rm_serial_number",
+                    "required": false
+                },
+                {
+                    "type": "string",
+                    "description": "The storage pool of this Instance.",
+                    "name": "storage_pool",
+                    "required": true
+                }
+            ],
+            "name": "Instance",
+            "example": "{\n  // The recognized target Instance\n  // status.\n  \"admin_status\": enum\n  // The base image used for this\n  // Instance.\n  \"base_image\": string\n  // The locally-unique identifier for\n  // the initiating component\n  // deployment.\n  \"component_deployment_id\": string\n  \"deleted\": boolean\n  // The globally-unique identifier\n  // for the initiating deployment.\n  \"deployment_id\": string\n  // The hostname of this Instance.\n  \"hostname\": string\n  // The ID of the Instance.\n  \"id\": string\n  // The IPv4 address assigned to this\n  // Instance.\n  \"ipv4_addrs\": string[]\n  // The IPv6 address assigned to this\n  // Instance.\n  \"ipv6_addrs\": string[]\n  // The current recognize Instance\n  // status.\n  \"oper_status\": enum\n  // The globally-unique identifier\n  // for the owning organization.\n  \"org_id\": string\n  // The primary MAC address of this\n  // Instance.\n  \"primary_mac_address\": string\n  // The serial number of the Resource\n  // Module hosting this Instance.\n  \"rm_serial_number\": string\n  // The storage pool of this\n  // Instance.\n  \"storage_pool\": string\n}"
+        },
+        "paths": [
+            {
+                "name": "/api/instances",
+                "methods": [
+                    {
+                        "name": "GET",
+                        "description": "get",
+                        "parameters": {},
+                        "model": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Instance",
+                                "type": "Instance"
+                            }
+                        },
+                        "responses": [
+                            {
+                                "description": "OK",
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Instance",
+                                        "type": "Instance"
+                                    }
+                                },
+                                "code": "200"
+                            },
+                            {
+                                "description": "Unauthorized",
+                                "code": "401"
+                            },
+                            {
+                                "description": "Forbidden",
+                                "code": "403"
+                            },
+                            {
+                                "description": "Not Found",
+                                "code": "404"
+                            }
+                        ],
+                        "example": "Instance[]"
+                    }
+                ]
+            },
+            {
+                "name": "/api/instances/{id}",
+                "methods": [
+                    {
+                        "name": "GET",
+                        "description": "get",
+                        "parameters": {
+                            "path": [
+                                {
+                                    "name": "id",
+                                    "in": "path",
+                                    "description": "id",
+                                    "required": true,
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "model": {
+                            "$ref": "#/definitions/Instance",
+                            "type": "Instance"
+                        },
+                        "responses": [
+                            {
+                                "description": "OK",
+                                "schema": {
+                                    "$ref": "#/definitions/Instance",
+                                    "type": "Instance"
+                                },
+                                "code": "200"
+                            },
+                            {
+                                "description": "Unauthorized",
+                                "code": "401"
+                            },
+                            {
+                                "description": "Forbidden",
+                                "code": "403"
+                            },
+                            {
+                                "description": "Not Found",
+                                "code": "404"
+                            }
+                        ],
+                        "example": "Instance"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "Images",
+        "description": "A collection of all OS images.",
+        "basePath": "/api/images",
+        "group": {
+            "name": "Management",
+            "weight": 1
+        },
+        "resource": {
+            "type": "object",
+            "properties": [
+                {
+                    "type": "string",
+                    "name": "arch"
+                },
+                {
+                    "type": "string",
+                    "name": "description"
+                },
+                {
+                    "type": "string",
+                    "name": "distribution"
+                },
+                {
+                    "type": "enum",
+                    "enum": [
+                        "SYSTEM_D",
+                        "INIT"
+                    ],
+                    "name": "init_system"
+                },
+                {
+                    "type": "string",
+                    "description": "The name of the image.",
+                    "name": "name"
+                },
+                {
+                    "type": "string",
+                    "name": "org_id"
+                },
+                {
+                    "type": "string",
+                    "description": "The image from which this one is derived.",
+                    "name": "parent_image"
+                },
+                {
+                    "type": "string",
+                    "description": "The version of the parent image from which this image is derived.",
+                    "name": "parent_snap"
+                },
+                {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "name": "properties"
+                },
+                {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "Size in bytes of the image.",
+                    "name": "size"
+                },
+                {
+                    "type": "string",
+                    "name": "type"
+                },
+                {
+                    "type": "string",
+                    "name": "vendor"
+                },
+                {
+                    "type": "string",
+                    "name": "version"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ImageVersion",
+                        "type": {
+                            "type": "object",
+                            "properties": []
+                        },
+                        "isRef": true
+                    },
+                    "name": "versions"
+                }
+            ],
+            "name": "Image",
+            "example": "{\n  \"arch\": string\n  \"description\": string\n  \"distribution\": string\n  \"init_system\": enum\n  // The name of the image.\n  \"name\": string\n  \"org_id\": string\n  // The image from which this one is\n  // derived.\n  \"parent_image\": string\n  // The version of the parent image\n  // from which this image is derived.\n  \"parent_snap\": string\n  \"properties\": object\n  // Size in bytes of the image.\n  \"size\": int64\n  \"type\": string\n  \"vendor\": string\n  \"version\": string\n  \"versions\": array\n}"
+        },
+        "paths": [
+            {
+                "name": "/api/images",
+                "methods": [
+                    {
+                        "name": "GET",
+                        "description": "get",
+                        "parameters": {},
+                        "model": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Image",
+                                "type": "Image"
+                            }
+                        },
+                        "responses": [
+                            {
+                                "description": "OK",
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Image",
+                                        "type": "Image"
+                                    }
+                                },
+                                "code": "200"
+                            },
+                            {
+                                "description": "Unauthorized",
+                                "code": "401"
+                            },
+                            {
+                                "description": "Forbidden",
+                                "code": "403"
+                            },
+                            {
+                                "description": "Not Found",
+                                "code": "404"
+                            }
+                        ],
+                        "example": "Image[]"
+                    }
+                ]
+            },
+            {
+                "name": "/api/images/{name}",
+                "methods": [
+                    {
+                        "name": "GET",
+                        "description": "get",
+                        "parameters": {
+                            "path": [
+                                {
+                                    "name": "name",
+                                    "in": "path",
+                                    "description": "name",
+                                    "required": true,
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "model": {
+                            "$ref": "#/definitions/Image",
+                            "type": "Image"
+                        },
+                        "responses": [
+                            {
+                                "description": "OK",
+                                "schema": {
+                                    "$ref": "#/definitions/Image",
+                                    "type": "Image"
+                                },
+                                "code": "200"
+                            },
+                            {
+                                "description": "Unauthorized",
+                                "code": "401"
+                            },
+                            {
+                                "description": "Forbidden",
+                                "code": "403"
+                            },
+                            {
+                                "description": "Not Found",
+                                "code": "404"
+                            }
+                        ],
+                        "example": "Image"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "Resource Modules",
+        "description": "A collection of all resource modules.",
+        "basePath": "/api/resource_modules",
+        "group": {
+            "name": "Management",
+            "weight": 1
+        },
+        "resource": {
+            "type": "object",
+            "properties": [
+                {
+                    "type": "boolean",
+                    "example": false,
+                    "description": "A value indicating whether the Resource Module is connected.",
+                    "name": "connected",
+                    "required": true
+                },
+                {
+                    "type": "string",
+                    "description": "The globally-unique identifier of the Deployment using the Resource Module.",
+                    "name": "deployment_id",
+                    "required": false
+                },
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The read speed of the embedded storage.",
+                    "name": "embedded_storage_read_speed",
+                    "required": false
+                },
+                {
+                    "type": "string",
+                    "format": "byte",
+                    "description": "The type of embedded storage available to the Resource Module.(0 = NAND, 1 = SATA)",
+                    "name": "embedded_storage_type",
+                    "required": true
+                },
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The estimated number of write cycles the of embedded storagewas designed for.",
+                    "name": "embedded_storage_write_cycles",
+                    "required": false
+                },
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The write speed of the embedded storage.",
+                    "name": "embedded_storage_write_speed",
+                    "required": false
+                },
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The globally-unique identifier of the Enclosure housing theResource Module.",
+                    "name": "enclosure_id",
+                    "required": false
+                },
+                {
+                    "type": "object",
+                    "description": "A map of interfaces to their connected switch ports.",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "name": "ethernet_port_map",
+                    "required": false
+                },
+                {
+                    "type": "string",
+                    "description": "An ISO 8601 timestamp identifying the first time a Resource Module was connected.",
+                    "name": "first_connected",
+                    "required": true
+                },
+                {
+                    "type": "string",
+                    "description": "An ISO 8601 timestamp identifying the last time a Resource Module was connected.",
+                    "name": "last_connected",
+                    "required": true
+                },
+                {
+                    "type": "string",
+                    "format": "byte",
+                    "description": "The architecture of the Resource Module's master CPU",
+                    "name": "master_cpu_arch",
+                    "required": true
+                },
+                {
+                    "type": "string",
+                    "format": "byte",
+                    "description": "The architecture version of the Resource Module's master CPU",
+                    "name": "master_cpu_arch_version",
+                    "required": true
+                },
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The number of cores in the Resource Module's master CPU",
+                    "name": "master_cpu_core_count",
+                    "required": true
+                },
+                {
+                    "type": "string",
+                    "format": "byte",
+                    "description": "The data path width of the Resource Module's master CPU",
+                    "name": "master_cpu_datapath_width",
+                    "required": true
+                },
+                {
+                    "type": "string",
+                    "format": "byte",
+                    "description": "The integer width of the Resource Module's master CPU",
+                    "name": "master_cpu_integer_width",
+                    "required": true
+                },
+                {
+                    "type": "string",
+                    "format": "byte",
+                    "description": "The memory address width of the Resource Module's master CPU",
+                    "name": "master_cpu_memory_addr_width",
+                    "required": true
+                },
+                {
+                    "type": "number",
+                    "format": "double",
+                    "description": "The maximum input voltage supported by the Resource Module.",
+                    "name": "maximum_input_voltage",
+                    "required": true
+                },
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The maximum power draw in watts.",
+                    "name": "maximum_power",
+                    "required": true
+                },
+                {
+                    "type": "number",
+                    "format": "double",
+                    "description": "The minimum input voltage supported by the Resource Module.",
+                    "name": "minimum_input_voltage",
+                    "required": true
+                },
+                {
+                    "type": "string",
+                    "name": "module_function",
+                    "required": false
+                },
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The index of the slot a module is current attached to.",
+                    "name": "module_index",
+                    "required": false
+                },
+                {
+                    "type": "string",
+                    "format": "byte",
+                    "description": "The number of PCIe lanes per link.",
+                    "name": "pcie_lane_per_link",
+                    "required": true
+                },
+                {
+                    "type": "string",
+                    "format": "byte",
+                    "description": "The total number of PCIe links available.",
+                    "name": "pcie_link_count",
+                    "required": true
+                },
+                {
+                    "type": "string",
+                    "format": "byte",
+                    "description": "The version of PCIe the Resoure Module supports.",
+                    "name": "pcie_version",
+                    "required": true
+                },
+                {
+                    "type": "enum",
+                    "description": "The current power state of the Resource Module.",
+                    "enum": [
+                        "ON",
+                        "OFF",
+                        "UNKNOWN",
+                        "COMING_UP",
+                        "GOING_DOWN"
+                    ],
+                    "name": "power_state",
+                    "required": true
+                },
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The amount of RAM currently allocated to the Resource Module.",
+                    "name": "ram_amount",
+                    "required": true
+                },
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The speed of the RAM the Resource Module has access to.",
+                    "name": "ram_speed",
+                    "required": true
+                },
+                {
+                    "type": "string",
+                    "description": "The globally-unique identifier of the Resource Pool to which the Resource Module belongs.",
+                    "name": "resource_pool_id",
+                    "required": false
+                },
+                {
+                    "type": "string",
+                    "description": "The serial number of the Resource Module.",
+                    "name": "serial_number",
+                    "required": true
+                },
+                {
+                    "type": "string",
+                    "format": "byte",
+                    "description": "The architecture of the Resource Module's slave CPU",
+                    "name": "slave_cpu_arch",
+                    "required": true
+                },
+                {
+                    "type": "string",
+                    "format": "byte",
+                    "description": "The architecture version of the Resource Module's slave CPU",
+                    "name": "slave_cpu_arch_version",
+                    "required": true
+                },
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The number of cores in the Resource Module's slave CPU",
+                    "name": "slave_cpu_core_count",
+                    "required": true
+                },
+                {
+                    "type": "string",
+                    "format": "byte",
+                    "description": "The data path width of the Resource Module's slave CPU",
+                    "name": "slave_cpu_datapath_width",
+                    "required": true
+                },
+                {
+                    "type": "string",
+                    "format": "byte",
+                    "description": "The integer width of the Resource Module's slave CPU",
+                    "name": "slave_cpu_integer_width",
+                    "required": true
+                },
+                {
+                    "type": "string",
+                    "format": "byte",
+                    "description": "The memory address width of the Resource Module's slave CPU",
+                    "name": "slave_cpu_memory_addr_width",
+                    "required": true
+                },
+                {
+                    "type": "string",
+                    "description": "An ISO 8601 timestamp identifying the last time a Resource Module's state was changed.",
+                    "name": "updated",
+                    "required": true
+                }
+            ],
+            "name": "Resource Module",
+            "example": "{\n  // A value indicating whether the\n  // Resource Module is connected.\n  \"connected\": boolean\n  // The globally-unique identifier of\n  // the Deployment using the Resource\n  // Module.\n  \"deployment_id\": string\n  // The read speed of the embedded\n  // storage.\n  \"embedded_storage_read_speed\": int32\n  // The type of embedded storage\n  // available to the Resource\n  // Module.(0 = NAND, 1 = SATA)\n  \"embedded_storage_type\": byte\n  // The estimated number of write\n  // cycles the of embedded storagewas\n  // designed for.\n  \"embedded_storage_write_cycles\": int32\n  // The write speed of the embedded\n  // storage.\n  \"embedded_storage_write_speed\": int32\n  // The globally-unique identifier of\n  // the Enclosure housing theResource\n  // Module.\n  \"enclosure_id\": int32\n  // A map of interfaces to their\n  // connected switch ports.\n  \"ethernet_port_map\": object\n  // An ISO 8601 timestamp identifying\n  // the first time a Resource Module\n  // was connected.\n  \"first_connected\": string\n  // An ISO 8601 timestamp identifying\n  // the last time a Resource Module\n  // was connected.\n  \"last_connected\": string\n  // The architecture of the Resource\n  // Module's master CPU\n  \"master_cpu_arch\": byte\n  // The architecture version of the\n  // Resource Module's master CPU\n  \"master_cpu_arch_version\": byte\n  // The number of cores in the\n  // Resource Module's master CPU\n  \"master_cpu_core_count\": int32\n  // The data path width of the\n  // Resource Module's master CPU\n  \"master_cpu_datapath_width\": byte\n  // The integer width of the Resource\n  // Module's master CPU\n  \"master_cpu_integer_width\": byte\n  // The memory address width of the\n  // Resource Module's master CPU\n  \"master_cpu_memory_addr_width\": byte\n  // The maximum input voltage\n  // supported by the Resource Module.\n  \"maximum_input_voltage\": double\n  // The maximum power draw in watts.\n  \"maximum_power\": int32\n  // The minimum input voltage\n  // supported by the Resource Module.\n  \"minimum_input_voltage\": double\n  \"module_function\": string\n  // The index of the slot a module is\n  // current attached to.\n  \"module_index\": int32\n  // The number of PCIe lanes per\n  // link.\n  \"pcie_lane_per_link\": byte\n  // The total number of PCIe links\n  // available.\n  \"pcie_link_count\": byte\n  // The version of PCIe the Resoure\n  // Module supports.\n  \"pcie_version\": byte\n  // The current power state of the\n  // Resource Module.\n  \"power_state\": enum\n  // The amount of RAM currently\n  // allocated to the Resource Module.\n  \"ram_amount\": int32\n  // The speed of the RAM the Resource\n  // Module has access to.\n  \"ram_speed\": int32\n  // The globally-unique identifier of\n  // the Resource Pool to which the\n  // Resource Module belongs.\n  \"resource_pool_id\": string\n  // The serial number of the Resource\n  // Module.\n  \"serial_number\": string\n  // The architecture of the Resource\n  // Module's slave CPU\n  \"slave_cpu_arch\": byte\n  // The architecture version of the\n  // Resource Module's slave CPU\n  \"slave_cpu_arch_version\": byte\n  // The number of cores in the\n  // Resource Module's slave CPU\n  \"slave_cpu_core_count\": int32\n  // The data path width of the\n  // Resource Module's slave CPU\n  \"slave_cpu_datapath_width\": byte\n  // The integer width of the Resource\n  // Module's slave CPU\n  \"slave_cpu_integer_width\": byte\n  // The memory address width of the\n  // Resource Module's slave CPU\n  \"slave_cpu_memory_addr_width\": byte\n  // An ISO 8601 timestamp identifying\n  // the last time a Resource Module's\n  // state was changed.\n  \"updated\": string\n}"
+        },
+        "paths": [
+            {
+                "name": "/api/resource_modules",
+                "methods": [
+                    {
+                        "name": "GET",
+                        "description": "get",
+                        "parameters": {
+                            "query": [
+                                {
+                                    "name": "size",
+                                    "in": "query",
+                                    "description": "size",
+                                    "required": false,
+                                    "type": "integer",
+                                    "default": 100,
+                                    "format": "int32"
+                                },
+                                {
+                                    "name": "page",
+                                    "in": "query",
+                                    "description": "page",
+                                    "required": false,
+                                    "type": "integer",
+                                    "default": 0,
+                                    "format": "int32"
+                                },
+                                {
+                                    "name": "query",
+                                    "in": "query",
+                                    "description": "query",
+                                    "required": false,
+                                    "type": "string",
+                                    "default": "*:*"
+                                }
+                            ]
+                        },
+                        "model": {
+                            "$ref": "#/definitions/PageOfResourceModule",
+                            "type": {
+                                "type": "object",
+                                "properties": [
+                                    {
+                                        "type": "array",
+                                        "items": {
+                                            "$ref": "#/definitions/ResourceModule",
+                                            "type": "ResourceModule"
+                                        },
+                                        "name": "content"
+                                    },
+                                    {
+                                        "type": "boolean",
+                                        "name": "first"
+                                    },
+                                    {
+                                        "type": "boolean",
+                                        "name": "last"
+                                    },
+                                    {
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "name": "number"
+                                    },
+                                    {
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "name": "number_of_elements"
+                                    },
+                                    {
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "name": "size"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/Sort",
+                                        "name": "sort",
+                                        "type": {
+                                            "type": "object",
+                                            "properties": []
+                                        },
+                                        "isRef": true
+                                    },
+                                    {
+                                        "type": "integer",
+                                        "format": "int64",
+                                        "name": "total_elements"
+                                    },
+                                    {
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "name": "total_pages"
+                                    }
+                                ]
+                            },
+                            "isRef": true
+                        },
+                        "responses": [
+                            {
+                                "description": "OK",
+                                "schema": {
+                                    "$ref": "#/definitions/PageOfResourceModule",
+                                    "type": {
+                                        "type": "object",
+                                        "properties": [
+                                            {
+                                                "type": "array",
+                                                "items": {
+                                                    "$ref": "#/definitions/ResourceModule",
+                                                    "type": "ResourceModule"
+                                                },
+                                                "name": "content"
+                                            },
+                                            {
+                                                "type": "boolean",
+                                                "name": "first"
+                                            },
+                                            {
+                                                "type": "boolean",
+                                                "name": "last"
+                                            },
+                                            {
+                                                "type": "integer",
+                                                "format": "int32",
+                                                "name": "number"
+                                            },
+                                            {
+                                                "type": "integer",
+                                                "format": "int32",
+                                                "name": "number_of_elements"
+                                            },
+                                            {
+                                                "type": "integer",
+                                                "format": "int32",
+                                                "name": "size"
+                                            },
+                                            {
+                                                "$ref": "#/definitions/Sort",
+                                                "name": "sort",
+                                                "type": {
+                                                    "type": "object",
+                                                    "properties": []
+                                                },
+                                                "isRef": true
+                                            },
+                                            {
+                                                "type": "integer",
+                                                "format": "int64",
+                                                "name": "total_elements"
+                                            },
+                                            {
+                                                "type": "integer",
+                                                "format": "int32",
+                                                "name": "total_pages"
+                                            }
+                                        ]
+                                    },
+                                    "isRef": true
+                                },
+                                "code": "200"
+                            },
+                            {
+                                "description": "Unauthorized",
+                                "code": "401"
+                            },
+                            {
+                                "description": "Forbidden",
+                                "code": "403"
+                            },
+                            {
+                                "description": "Not Found",
+                                "code": "404"
+                            }
+                        ],
+                        "example": "{\n  \"content\": ResourceModule[]\n  \"first\": boolean\n  \"last\": boolean\n  \"number\": int32\n  \"number_of_elements\": int32\n  \"size\": int32\n  \"sort\": object\n  \"total_elements\": int64\n  \"total_pages\": int32\n}"
+                    }
+                ]
+            },
+            {
+                "name": "/api/resource_modules/{serialNumber}",
+                "methods": [
+                    {
+                        "name": "GET",
+                        "description": "get",
+                        "parameters": {
+                            "path": [
+                                {
+                                    "name": "serialNumber",
+                                    "in": "path",
+                                    "description": "serialNumber",
+                                    "required": true,
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "model": {
+                            "$ref": "#/definitions/ResourceModule",
+                            "type": "ResourceModule"
+                        },
+                        "responses": [
+                            {
+                                "description": "OK",
+                                "schema": {
+                                    "$ref": "#/definitions/ResourceModule",
+                                    "type": "ResourceModule"
+                                },
+                                "code": "200"
+                            },
+                            {
+                                "description": "Unauthorized",
+                                "code": "401"
+                            },
+                            {
+                                "description": "Forbidden",
+                                "code": "403"
+                            },
+                            {
+                                "description": "Not Found",
+                                "code": "404"
+                            }
+                        ],
+                        "example": "ResourceModule"
+                    },
+                    {
+                        "name": "PUT",
+                        "description": "put",
+                        "parameters": {
+                            "path": [
+                                {
+                                    "name": "serialNumber",
+                                    "in": "path",
+                                    "description": "serialNumber",
+                                    "required": true,
+                                    "type": "string"
+                                }
+                            ],
+                            "body": [
+                                {
+                                    "in": "body",
+                                    "name": "rm",
+                                    "description": "rm",
+                                    "required": true,
+                                    "schema": {
+                                        "$ref": "#/definitions/ResourceModule"
+                                    }
+                                }
+                            ]
+                        },
+                        "responses": [
+                            {
+                                "description": "OK",
+                                "schema": {
+                                    "$ref": "#/definitions/ResponseEntity",
+                                    "type": {
+                                        "type": "object",
+                                        "properties": [
+                                            {
+                                                "type": "object",
+                                                "properties": {},
+                                                "name": "body"
+                                            },
+                                            {
+                                                "type": "enum",
+                                                "enum": [
+                                                    "100",
+                                                    "101",
+                                                    "102",
+                                                    "103",
+                                                    "200",
+                                                    "201",
+                                                    "202",
+                                                    "203",
+                                                    "204",
+                                                    "205",
+                                                    "206",
+                                                    "207",
+                                                    "208",
+                                                    "226",
+                                                    "300",
+                                                    "301",
+                                                    "302",
+                                                    "303",
+                                                    "304",
+                                                    "305",
+                                                    "307",
+                                                    "308",
+                                                    "400",
+                                                    "401",
+                                                    "402",
+                                                    "403",
+                                                    "404",
+                                                    "405",
+                                                    "406",
+                                                    "407",
+                                                    "408",
+                                                    "409",
+                                                    "410",
+                                                    "411",
+                                                    "412",
+                                                    "413",
+                                                    "414",
+                                                    "415",
+                                                    "416",
+                                                    "417",
+                                                    "418",
+                                                    "419",
+                                                    "420",
+                                                    "421",
+                                                    "422",
+                                                    "423",
+                                                    "424",
+                                                    "426",
+                                                    "428",
+                                                    "429",
+                                                    "431",
+                                                    "451",
+                                                    "500",
+                                                    "501",
+                                                    "502",
+                                                    "503",
+                                                    "504",
+                                                    "505",
+                                                    "506",
+                                                    "507",
+                                                    "508",
+                                                    "509",
+                                                    "510",
+                                                    "511"
+                                                ],
+                                                "name": "status_code"
+                                            },
+                                            {
+                                                "type": "integer",
+                                                "format": "int32",
+                                                "name": "status_code_value"
+                                            }
+                                        ]
+                                    },
+                                    "isRef": true
+                                },
+                                "code": "200"
+                            },
+                            {
+                                "description": "Created",
+                                "code": "201"
+                            },
+                            {
+                                "description": "Unauthorized",
+                                "code": "401"
+                            },
+                            {
+                                "description": "Forbidden",
+                                "code": "403"
+                            },
+                            {
+                                "description": "Not Found",
+                                "code": "404"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "Resource Pools",
+        "description": "A collection of all resource pools.",
+        "basePath": "/api/resource_pools",
+        "group": {
+            "name": "Management",
+            "weight": 1
+        },
+        "resource": {
+            "type": "object",
+            "properties": [
+                {
+                    "type": "string",
+                    "name": "created",
+                    "required": false
+                },
+                {
+                    "type": "boolean",
+                    "example": false,
+                    "description": "A boolean value indicating whether this Resource Pool is the default for the account.",
+                    "name": "default",
+                    "required": false
+                },
+                {
+                    "type": "string",
+                    "description": "The description of the Resource Pool.",
+                    "name": "description",
+                    "required": false
+                },
+                {
+                    "type": "string",
+                    "description": "The globally unique identifier for the Resource Pool.",
+                    "name": "id",
+                    "required": false
+                },
+                {
+                    "type": "string",
+                    "description": "The account-local, friendly name of the Resource Pool.",
+                    "name": "name",
+                    "required": true
+                }
+            ],
+            "name": "Resource Pool",
+            "example": "{\n  \"created\": string\n  // A boolean value indicating\n  // whether this Resource Pool is the\n  // default for the account.\n  \"default\": boolean\n  // The description of the Resource\n  // Pool.\n  \"description\": string\n  // The globally unique identifier\n  // for the Resource Pool.\n  \"id\": string\n  // The account-local, friendly name\n  // of the Resource Pool.\n  \"name\": string\n}"
+        },
+        "paths": [
+            {
+                "name": "/api/resource_pools",
+                "methods": [
+                    {
+                        "name": "GET",
+                        "description": "get",
+                        "parameters": {
+                            "query": [
+                                {
+                                    "name": "names",
+                                    "in": "query",
+                                    "description": "names",
+                                    "required": false,
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    },
+                                    "collectionFormat": "multi"
+                                }
+                            ]
+                        },
+                        "model": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/ResourcePool",
+                                "type": "ResourcePool"
+                            }
+                        },
+                        "responses": [
+                            {
+                                "description": "OK",
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/ResourcePool",
+                                        "type": "ResourcePool"
+                                    }
+                                },
+                                "code": "200"
+                            },
+                            {
+                                "description": "Unauthorized",
+                                "code": "401"
+                            },
+                            {
+                                "description": "Forbidden",
+                                "code": "403"
+                            },
+                            {
+                                "description": "Not Found",
+                                "code": "404"
+                            }
+                        ],
+                        "example": "ResourcePool[]"
+                    },
+                    {
+                        "name": "POST",
+                        "description": "post",
+                        "parameters": {
+                            "body": [
+                                {
+                                    "in": "body",
+                                    "name": "resourcePool",
+                                    "description": "resourcePool",
+                                    "required": true,
+                                    "schema": {
+                                        "$ref": "#/definitions/ResourcePool"
+                                    }
+                                }
+                            ]
+                        },
+                        "responses": [
+                            {
+                                "description": "OK",
+                                "schema": {
+                                    "$ref": "#/definitions/ResourcePool",
+                                    "type": "ResourcePool"
+                                },
+                                "code": "200"
+                            },
+                            {
+                                "description": "Created",
+                                "code": "201"
+                            },
+                            {
+                                "description": "Unauthorized",
+                                "code": "401"
+                            },
+                            {
+                                "description": "Forbidden",
+                                "code": "403"
+                            },
+                            {
+                                "description": "Not Found",
+                                "code": "404"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "/api/resource_pools/{id}",
+                "methods": [
+                    {
+                        "name": "GET",
+                        "description": "getById",
+                        "parameters": {
+                            "path": [
+                                {
+                                    "name": "id",
+                                    "in": "path",
+                                    "description": "id",
+                                    "required": true,
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "model": {
+                            "$ref": "#/definitions/ResourcePool",
+                            "type": "ResourcePool"
+                        },
+                        "responses": [
+                            {
+                                "description": "OK",
+                                "schema": {
+                                    "$ref": "#/definitions/ResourcePool",
+                                    "type": "ResourcePool"
+                                },
+                                "code": "200"
+                            },
+                            {
+                                "description": "Unauthorized",
+                                "code": "401"
+                            },
+                            {
+                                "description": "Forbidden",
+                                "code": "403"
+                            },
+                            {
+                                "description": "Not Found",
+                                "code": "404"
+                            }
+                        ],
+                        "example": "ResourcePool"
+                    },
+                    {
+                        "name": "DELETE",
+                        "description": "delete",
+                        "parameters": {
+                            "path": [
+                                {
+                                    "name": "id",
+                                    "in": "path",
+                                    "description": "id",
+                                    "required": true,
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "responses": [
+                            {
+                                "description": "OK",
+                                "code": "200"
+                            },
+                            {
+                                "description": "No Content",
+                                "code": "204"
+                            },
+                            {
+                                "description": "Unauthorized",
+                                "code": "401"
+                            },
+                            {
+                                "description": "Forbidden",
+                                "code": "403"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "Snapshots",
+        "description": "A collection of all snapshots.",
+        "basePath": "/api/snapshots",
+        "group": {
+            "name": "Management",
+            "weight": 1
+        },
+        "resource": {
+            "type": "object",
+            "properties": [
+                {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "The snapshot id.",
+                    "name": "id"
+                },
+                {
+                    "type": "string",
+                    "description": "The snapshot name.",
+                    "name": "name"
+                },
+                {
+                    "type": "string",
+                    "name": "note"
+                },
+                {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "Size in bytes of the snapshot.",
+                    "name": "size"
+                }
+            ],
+            "name": "Snapshot",
+            "example": "{\n  // The snapshot id.\n  \"id\": int64\n  // The snapshot name.\n  \"name\": string\n  \"note\": string\n  // Size in bytes of the snapshot.\n  \"size\": int64\n}"
+        },
+        "paths": [
+            {
+                "name": "/api/snapshots",
+                "methods": [
+                    {
+                        "name": "GET",
+                        "description": "get",
+                        "parameters": {},
+                        "model": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Snapshot",
+                                "type": "Snapshot"
+                            }
+                        },
+                        "responses": [
+                            {
+                                "description": "OK",
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Snapshot",
+                                        "type": "Snapshot"
+                                    }
+                                },
+                                "code": "200"
+                            },
+                            {
+                                "description": "Unauthorized",
+                                "code": "401"
+                            },
+                            {
+                                "description": "Forbidden",
+                                "code": "403"
+                            },
+                            {
+                                "description": "Not Found",
+                                "code": "404"
+                            }
+                        ],
+                        "example": "Snapshot[]"
+                    }
+                ]
+            },
+            {
+                "name": "/api/snapshots/{name}",
+                "methods": [
+                    {
+                        "name": "GET",
+                        "description": "get",
+                        "parameters": {
+                            "path": [
+                                {
+                                    "name": "name",
+                                    "in": "path",
+                                    "description": "name",
+                                    "required": true,
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "model": {
+                            "$ref": "#/definitions/Snapshot",
+                            "type": "Snapshot"
+                        },
+                        "responses": [
+                            {
+                                "description": "OK",
+                                "schema": {
+                                    "$ref": "#/definitions/Snapshot",
+                                    "type": "Snapshot"
+                                },
+                                "code": "200"
+                            },
+                            {
+                                "description": "Unauthorized",
+                                "code": "401"
+                            },
+                            {
+                                "description": "Forbidden",
+                                "code": "403"
+                            },
+                            {
+                                "description": "Not Found",
+                                "code": "404"
+                            }
+                        ],
+                        "example": "Snapshot"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "Stores",
+        "description": "A collection of Stores.",
+        "basePath": "/api/stores",
+        "group": {
+            "name": "Management",
+            "weight": 1
+        },
+        "resource": {
+            "type": "object",
+            "properties": [
+                {
+                    "type": "string",
+                    "name": "created"
+                },
+                {
+                    "$ref": "#/definitions/StoreDefinition",
+                    "name": "definition",
+                    "type": {
+                        "type": "object",
+                        "properties": [
+                            {
+                                "$ref": "#/definitions/StoreAccess",
+                                "name": "access",
+                                "type": {
+                                    "type": "object",
+                                    "properties": [
+                                        {
+                                            "type": "enum",
+                                            "enum": [
+                                                "READ",
+                                                "WRITE",
+                                                "NONE"
+                                            ],
+                                            "name": "anyone"
+                                        },
+                                        {
+                                            "type": "enum",
+                                            "enum": [
+                                                "READ",
+                                                "WRITE",
+                                                "NONE"
+                                            ],
+                                            "name": "resource_pool"
+                                        },
+                                        {
+                                            "type": "enum",
+                                            "enum": [
+                                                "READ",
+                                                "WRITE",
+                                                "NONE"
+                                            ],
+                                            "name": "service"
+                                        }
+                                    ]
+                                },
+                                "isRef": true
+                            },
+                            {
+                                "type": "boolean",
+                                "name": "compressed"
+                            },
+                            {
+                                "type": "boolean",
+                                "name": "encrypted"
+                            },
+                            {
+                                "type": "string",
+                                "name": "name"
+                            },
+                            {
+                                "$ref": "#/definitions/IntRange",
+                                "name": "replicas",
+                                "type": {
+                                    "type": "object",
+                                    "properties": [
+                                        {
+                                            "type": "integer",
+                                            "format": "int32",
+                                            "name": "max"
+                                        },
+                                        {
+                                            "type": "integer",
+                                            "format": "int32",
+                                            "name": "min"
+                                        }
+                                    ]
+                                },
+                                "isRef": true
+                            },
+                            {
+                                "type": "enum",
+                                "enum": [
+                                    "REPLICATED",
+                                    "ERASURE"
+                                ],
+                                "name": "replication"
+                            },
+                            {
+                                "type": "boolean",
+                                "name": "reserved"
+                            },
+                            {
+                                "type": "string",
+                                "name": "size"
+                            }
+                        ]
+                    },
+                    "isRef": true
+                },
+                {
+                    "type": "string",
+                    "name": "deployment_id"
+                },
+                {
+                    "type": "string",
+                    "name": "name"
+                },
+                {
+                    "type": "integer",
+                    "format": "int64",
+                    "name": "reserved"
+                },
+                {
+                    "type": "integer",
+                    "format": "int64",
+                    "name": "used"
+                }
+            ],
+            "name": "Store",
+            "example": "{\n  \"created\": string\n  \"definition\": object\n  \"deployment_id\": string\n  \"name\": string\n  \"reserved\": int64\n  \"used\": int64\n}"
+        },
+        "paths": [
+            {
+                "name": "/api/stores",
+                "methods": [
+                    {
+                        "name": "GET",
+                        "description": "get",
+                        "parameters": {},
+                        "model": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Store",
+                                "type": "Store"
+                            }
+                        },
+                        "responses": [
+                            {
+                                "description": "OK",
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Store",
+                                        "type": "Store"
+                                    }
+                                },
+                                "code": "200"
+                            },
+                            {
+                                "description": "Unauthorized",
+                                "code": "401"
+                            },
+                            {
+                                "description": "Forbidden",
+                                "code": "403"
+                            },
+                            {
+                                "description": "Not Found",
+                                "code": "404"
+                            }
+                        ],
+                        "example": "Store[]"
+                    }
+                ]
+            },
+            {
+                "name": "/api/stores/{name}",
+                "methods": [
+                    {
+                        "name": "GET",
+                        "description": "get",
+                        "parameters": {
+                            "path": [
+                                {
+                                    "name": "name",
+                                    "in": "path",
+                                    "description": "name",
+                                    "required": true,
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "model": {
+                            "$ref": "#/definitions/Store",
+                            "type": "Store"
+                        },
+                        "responses": [
+                            {
+                                "description": "OK",
+                                "schema": {
+                                    "$ref": "#/definitions/Store",
+                                    "type": "Store"
+                                },
+                                "code": "200"
+                            },
+                            {
+                                "description": "Unauthorized",
+                                "code": "401"
+                            },
+                            {
+                                "description": "Forbidden",
+                                "code": "403"
+                            },
+                            {
+                                "description": "Not Found",
+                                "code": "404"
+                            }
+                        ],
+                        "example": "Store"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "Components",
+        "description": "A collection of components within the cloud platform.",
+        "basePath": "/api/components",
+        "group": {
+            "name": "Monitoring",
+            "weight": 2
+        },
+        "resource": {
+            "type": "object",
+            "properties": [
+                {
+                    "type": "string",
+                    "name": "completed"
+                },
+                {
+                    "type": "string",
+                    "name": "id"
+                },
+                {
+                    "type": "string",
+                    "name": "initiated"
+                },
+                {
+                    "type": "string",
+                    "name": "message"
+                },
+                {
+                    "type": "string",
+                    "name": "name"
+                },
+                {
+                    "type": "enum",
+                    "enum": [
+                        "QUEUED",
+                        "PREPARING",
+                        "DEPLOYING",
+                        "DEPLOYED",
+                        "BRING_UP",
+                        "UP",
+                        "BRING_DOWN",
+                        "DOWN",
+                        "DESTROYING",
+                        "DESTROYED",
+                        "CANCELED",
+                        "FAILED",
+                        "DELETING",
+                        "DELETED"
+                    ],
+                    "name": "status"
+                }
+            ],
+            "name": "Component",
+            "example": "{\n  \"completed\": string\n  \"id\": string\n  \"initiated\": string\n  \"message\": string\n  \"name\": string\n  \"status\": enum\n}"
+        },
+        "paths": [
+            {
+                "name": "/api/components",
+                "methods": [
+                    {
+                        "name": "GET",
+                        "description": "Get all components",
+                        "parameters": {
+                            "query": [
+                                {
+                                    "name": "name",
+                                    "in": "query",
+                                    "description": "name",
+                                    "required": false,
+                                    "type": "string"
+                                },
+                                {
+                                    "name": "typeId",
+                                    "in": "query",
+                                    "description": "typeId",
+                                    "required": false,
+                                    "type": "integer",
+                                    "format": "int32"
+                                },
+                                {
+                                    "name": "type",
+                                    "in": "query",
+                                    "description": "type",
+                                    "required": false,
+                                    "type": "string"
+                                },
+                                {
+                                    "name": "enclosureId",
+                                    "in": "query",
+                                    "description": "enclosureId",
+                                    "required": false,
+                                    "type": "integer",
+                                    "format": "int32"
+                                }
+                            ]
+                        },
+                        "model": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/SystemComponent",
+                                "type": {
+                                    "type": "object",
+                                    "properties": [
+                                        {
+                                            "type": "integer",
+                                            "format": "int32",
+                                            "name": "enclosure_id"
+                                        },
+                                        {
+                                            "type": "integer",
+                                            "format": "int64",
+                                            "name": "id"
+                                        },
+                                        {
+                                            "type": "string",
+                                            "name": "name"
+                                        },
+                                        {
+                                            "type": "integer",
+                                            "format": "int64",
+                                            "name": "parent_id"
+                                        },
+                                        {
+                                            "type": "string",
+                                            "name": "timestamp"
+                                        },
+                                        {
+                                            "type": "integer",
+                                            "format": "int32",
+                                            "name": "type"
+                                        },
+                                        {
+                                            "type": "integer",
+                                            "format": "int32",
+                                            "name": "type_id"
+                                        },
+                                        {
+                                            "type": "string",
+                                            "name": "type_name"
+                                        }
+                                    ]
+                                },
+                                "isRef": true
+                            }
+                        },
+                        "responses": [
+                            {
+                                "description": "OK",
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/SystemComponent",
+                                        "type": {
+                                            "type": "object",
+                                            "properties": [
+                                                {
+                                                    "type": "integer",
+                                                    "format": "int32",
+                                                    "name": "enclosure_id"
+                                                },
+                                                {
+                                                    "type": "integer",
+                                                    "format": "int64",
+                                                    "name": "id"
+                                                },
+                                                {
+                                                    "type": "string",
+                                                    "name": "name"
+                                                },
+                                                {
+                                                    "type": "integer",
+                                                    "format": "int64",
+                                                    "name": "parent_id"
+                                                },
+                                                {
+                                                    "type": "string",
+                                                    "name": "timestamp"
+                                                },
+                                                {
+                                                    "type": "integer",
+                                                    "format": "int32",
+                                                    "name": "type"
+                                                },
+                                                {
+                                                    "type": "integer",
+                                                    "format": "int32",
+                                                    "name": "type_id"
+                                                },
+                                                {
+                                                    "type": "string",
+                                                    "name": "type_name"
+                                                }
+                                            ]
+                                        },
+                                        "isRef": true
+                                    }
+                                },
+                                "code": "200"
+                            },
+                            {
+                                "description": "Unauthorized",
+                                "code": "401"
+                            },
+                            {
+                                "description": "Forbidden",
+                                "code": "403"
+                            },
+                            {
+                                "description": "Not Found",
+                                "code": "404"
+                            }
+                        ],
+                        "example": "[\n  {\n    \"enclosure_id\": int32\n    \"id\": int64\n    \"name\": string\n    \"parent_id\": int64\n    \"timestamp\": string\n    \"type\": int32\n    \"type_id\": int32\n    \"type_name\": string\n  }\n]"
+                    }
+                ]
+            },
+            {
+                "name": "/api/components/{componentId}",
+                "methods": [
+                    {
+                        "name": "GET",
+                        "description": "Get component by id",
+                        "parameters": {
+                            "path": [
+                                {
+                                    "name": "componentId",
+                                    "in": "path",
+                                    "description": "componentId",
+                                    "required": true,
+                                    "type": "integer",
+                                    "format": "int64"
+                                }
+                            ]
+                        },
+                        "model": {
+                            "$ref": "#/definitions/SystemComponent",
+                            "type": {
+                                "type": "object",
+                                "properties": [
+                                    {
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "name": "enclosure_id"
+                                    },
+                                    {
+                                        "type": "integer",
+                                        "format": "int64",
+                                        "name": "id"
+                                    },
+                                    {
+                                        "type": "string",
+                                        "name": "name"
+                                    },
+                                    {
+                                        "type": "integer",
+                                        "format": "int64",
+                                        "name": "parent_id"
+                                    },
+                                    {
+                                        "type": "string",
+                                        "name": "timestamp"
+                                    },
+                                    {
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "name": "type"
+                                    },
+                                    {
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "name": "type_id"
+                                    },
+                                    {
+                                        "type": "string",
+                                        "name": "type_name"
+                                    }
+                                ]
+                            },
+                            "isRef": true
+                        },
+                        "responses": [
+                            {
+                                "description": "OK",
+                                "schema": {
+                                    "$ref": "#/definitions/SystemComponent",
+                                    "type": {
+                                        "type": "object",
+                                        "properties": [
+                                            {
+                                                "type": "integer",
+                                                "format": "int32",
+                                                "name": "enclosure_id"
+                                            },
+                                            {
+                                                "type": "integer",
+                                                "format": "int64",
+                                                "name": "id"
+                                            },
+                                            {
+                                                "type": "string",
+                                                "name": "name"
+                                            },
+                                            {
+                                                "type": "integer",
+                                                "format": "int64",
+                                                "name": "parent_id"
+                                            },
+                                            {
+                                                "type": "string",
+                                                "name": "timestamp"
+                                            },
+                                            {
+                                                "type": "integer",
+                                                "format": "int32",
+                                                "name": "type"
+                                            },
+                                            {
+                                                "type": "integer",
+                                                "format": "int32",
+                                                "name": "type_id"
+                                            },
+                                            {
+                                                "type": "string",
+                                                "name": "type_name"
+                                            }
+                                        ]
+                                    },
+                                    "isRef": true
+                                },
+                                "code": "200"
+                            },
+                            {
+                                "description": "Unauthorized",
+                                "code": "401"
+                            },
+                            {
+                                "description": "Forbidden",
+                                "code": "403"
+                            },
+                            {
+                                "description": "Not Found",
+                                "code": "404"
+                            }
+                        ],
+                        "example": "{\n  \"enclosure_id\": int32\n  \"id\": int64\n  \"name\": string\n  \"parent_id\": int64\n  \"timestamp\": string\n  \"type\": int32\n  \"type_id\": int32\n  \"type_name\": string\n}"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "Events",
+        "description": "A collection of events related to the cloud platform.",
+        "basePath": "/api/events",
+        "group": {
+            "name": "Monitoring",
+            "weight": 2
+        },
+        "resource": {
+            "type": "object",
+            "properties": [
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "name": "enclosure_id",
+                    "required": false
+                },
+                {
+                    "type": "string",
+                    "description": "The id of the Event.",
+                    "name": "id",
+                    "required": false
+                },
+                {
+                    "type": "object",
+                    "description": "All properties relating to the Event.",
+                    "properties": {},
+                    "name": "properties",
+                    "required": false
+                },
+                {
+                    "type": "string",
+                    "description": "The ISO8601 formatted timestamp of the event.",
+                    "name": "timestamp",
+                    "required": true
+                },
+                {
+                    "type": "string",
+                    "description": "The type or category of the Event.",
+                    "name": "type",
+                    "required": true
+                }
+            ],
+            "name": "Event",
+            "example": "{\n  \"enclosure_id\": int32\n  // The id of the Event.\n  \"id\": string\n  // All properties relating to the\n  // Event.\n  \"properties\": object\n  // The ISO8601 formatted timestamp\n  // of the event.\n  \"timestamp\": string\n  // The type or category of the\n  // Event.\n  \"type\": string\n}"
+        },
+        "paths": [
+            {
+                "name": "/api/events",
+                "methods": [
+                    {
+                        "name": "GET",
+                        "description": "get",
+                        "parameters": {
+                            "query": [
+                                {
+                                    "name": "size",
+                                    "in": "query",
+                                    "description": "size",
+                                    "required": false,
+                                    "type": "integer",
+                                    "default": 100,
+                                    "format": "int32"
+                                },
+                                {
+                                    "name": "page",
+                                    "in": "query",
+                                    "description": "page",
+                                    "required": false,
+                                    "type": "integer",
+                                    "default": 0,
+                                    "format": "int32"
+                                },
+                                {
+                                    "name": "query",
+                                    "in": "query",
+                                    "description": "query",
+                                    "required": false,
+                                    "type": "string",
+                                    "default": "*:*"
+                                }
+                            ]
+                        },
+                        "model": {
+                            "$ref": "#/definitions/PageOfEvent",
+                            "type": {
+                                "type": "object",
+                                "properties": [
+                                    {
+                                        "type": "array",
+                                        "items": {
+                                            "$ref": "#/definitions/Event",
+                                            "type": "Event"
+                                        },
+                                        "name": "content"
+                                    },
+                                    {
+                                        "type": "boolean",
+                                        "name": "first"
+                                    },
+                                    {
+                                        "type": "boolean",
+                                        "name": "last"
+                                    },
+                                    {
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "name": "number"
+                                    },
+                                    {
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "name": "number_of_elements"
+                                    },
+                                    {
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "name": "size"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/Sort",
+                                        "name": "sort",
+                                        "type": {
+                                            "type": "object",
+                                            "properties": []
+                                        },
+                                        "isRef": true
+                                    },
+                                    {
+                                        "type": "integer",
+                                        "format": "int64",
+                                        "name": "total_elements"
+                                    },
+                                    {
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "name": "total_pages"
+                                    }
+                                ]
+                            },
+                            "isRef": true
+                        },
+                        "responses": [
+                            {
+                                "description": "OK",
+                                "schema": {
+                                    "$ref": "#/definitions/PageOfEvent",
+                                    "type": {
+                                        "type": "object",
+                                        "properties": [
+                                            {
+                                                "type": "array",
+                                                "items": {
+                                                    "$ref": "#/definitions/Event",
+                                                    "type": "Event"
+                                                },
+                                                "name": "content"
+                                            },
+                                            {
+                                                "type": "boolean",
+                                                "name": "first"
+                                            },
+                                            {
+                                                "type": "boolean",
+                                                "name": "last"
+                                            },
+                                            {
+                                                "type": "integer",
+                                                "format": "int32",
+                                                "name": "number"
+                                            },
+                                            {
+                                                "type": "integer",
+                                                "format": "int32",
+                                                "name": "number_of_elements"
+                                            },
+                                            {
+                                                "type": "integer",
+                                                "format": "int32",
+                                                "name": "size"
+                                            },
+                                            {
+                                                "$ref": "#/definitions/Sort",
+                                                "name": "sort",
+                                                "type": {
+                                                    "type": "object",
+                                                    "properties": []
+                                                },
+                                                "isRef": true
+                                            },
+                                            {
+                                                "type": "integer",
+                                                "format": "int64",
+                                                "name": "total_elements"
+                                            },
+                                            {
+                                                "type": "integer",
+                                                "format": "int32",
+                                                "name": "total_pages"
+                                            }
+                                        ]
+                                    },
+                                    "isRef": true
+                                },
+                                "code": "200"
+                            },
+                            {
+                                "description": "Unauthorized",
+                                "code": "401"
+                            },
+                            {
+                                "description": "Forbidden",
+                                "code": "403"
+                            },
+                            {
+                                "description": "Not Found",
+                                "code": "404"
+                            }
+                        ],
+                        "example": "{\n  \"content\": Event[]\n  \"first\": boolean\n  \"last\": boolean\n  \"number\": int32\n  \"number_of_elements\": int32\n  \"size\": int32\n  \"sort\": object\n  \"total_elements\": int64\n  \"total_pages\": int32\n}"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "Metrics",
+        "description": "A collection of metrics related to the cloud platform.",
+        "basePath": "/api/metrics",
+        "group": {
+            "name": "Monitoring",
+            "weight": 2
+        },
+        "resource": {
+            "type": "object",
+            "properties": [
+                {
+                    "description": "The globally-unique identifier of the component that originated the metric.",
+                    "$ref": "#/definitions/ComponentId",
+                    "name": "component_id",
+                    "required": true,
+                    "type": {
+                        "type": "object",
+                        "required": [
+                            "enclosure_id",
+                            "subtype",
+                            "subtype_id",
+                            "subtype_name",
+                            "type",
+                            "type_id",
+                            "type_name",
+                            "value"
+                        ],
+                        "properties": [
+                            {
+                                "type": "integer",
+                                "format": "int32",
+                                "description": "The 32-bit globally unique enclosure ID.",
+                                "name": "enclosure_id",
+                                "required": true
+                            },
+                            {
+                                "type": "integer",
+                                "format": "int32",
+                                "description": "The subtype of the component as an integer.",
+                                "name": "subtype",
+                                "required": true
+                            },
+                            {
+                                "type": "integer",
+                                "format": "int32",
+                                "description": "The subtype id of the component.",
+                                "name": "subtype_id",
+                                "required": true
+                            },
+                            {
+                                "type": "string",
+                                "description": "The subtype of the component as a string.",
+                                "name": "subtype_name",
+                                "required": true
+                            },
+                            {
+                                "type": "integer",
+                                "format": "int32",
+                                "description": "The type of the component as an integer.",
+                                "name": "type",
+                                "required": true
+                            },
+                            {
+                                "type": "integer",
+                                "format": "int32",
+                                "description": "The type id of the component.",
+                                "name": "type_id",
+                                "required": true
+                            },
+                            {
+                                "type": "string",
+                                "description": "The type of the component as a string.",
+                                "name": "type_name",
+                                "required": true
+                            },
+                            {
+                                "type": "integer",
+                                "format": "int64",
+                                "description": "The 64-bit globally unique component ID.",
+                                "name": "value",
+                                "required": true
+                            }
+                        ]
+                    },
+                    "isRef": true
+                },
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The globally-unique identifier of the enclosure that originated the metric.",
+                    "name": "enclosure_id",
+                    "required": true
+                },
+                {
+                    "type": "string",
+                    "description": "The ISO8601 formatted timestamp of the metric.",
+                    "name": "timestamp",
+                    "required": true
+                },
+                {
+                    "type": "string",
+                    "description": "The type or category of the metric.",
+                    "name": "type",
+                    "required": true
+                },
+                {
+                    "type": "number",
+                    "format": "double",
+                    "description": "The value of the metric.",
+                    "name": "value",
+                    "required": true
+                }
+            ],
+            "name": "Metric",
+            "example": "{\n  // The globally-unique identifier of\n  // the component that originated the\n  // metric.\n  \"component_id\": object\n  // The globally-unique identifier of\n  // the enclosure that originated the\n  // metric.\n  \"enclosure_id\": int32\n  // The ISO8601 formatted timestamp\n  // of the metric.\n  \"timestamp\": string\n  // The type or category of the\n  // metric.\n  \"type\": string\n  // The value of the metric.\n  \"value\": double\n}"
+        },
+        "paths": [
+            {
+                "name": "/api/metrics",
+                "methods": [
+                    {
+                        "name": "GET",
+                        "description": "get",
+                        "parameters": {
+                            "query": [
+                                {
+                                    "name": "cursorTtl",
+                                    "in": "query",
+                                    "description": "cursorTtl",
+                                    "required": false,
+                                    "type": "integer",
+                                    "default": 60000,
+                                    "format": "int64"
+                                },
+                                {
+                                    "name": "cursorId",
+                                    "in": "query",
+                                    "description": "cursorId",
+                                    "required": false,
+                                    "type": "string"
+                                },
+                                {
+                                    "name": "types",
+                                    "in": "query",
+                                    "description": "types",
+                                    "required": false,
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    },
+                                    "collectionFormat": "multi",
+                                    "default": "*"
+                                },
+                                {
+                                    "name": "pageSize",
+                                    "in": "query",
+                                    "description": "pageSize",
+                                    "required": false,
+                                    "type": "integer",
+                                    "default": 100,
+                                    "format": "int32"
+                                },
+                                {
+                                    "name": "page",
+                                    "in": "query",
+                                    "description": "page",
+                                    "required": false,
+                                    "type": "integer",
+                                    "default": 0,
+                                    "format": "int32"
+                                },
+                                {
+                                    "name": "to",
+                                    "in": "query",
+                                    "description": "to",
+                                    "required": false,
+                                    "type": "integer",
+                                    "format": "int64"
+                                },
+                                {
+                                    "name": "from",
+                                    "in": "query",
+                                    "description": "from",
+                                    "required": false,
+                                    "type": "integer",
+                                    "format": "int64"
+                                }
+                            ]
+                        },
+                        "model": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Metric",
+                                "type": "Metric"
+                            }
+                        },
+                        "responses": [
+                            {
+                                "description": "OK",
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Metric",
+                                        "type": "Metric"
+                                    }
+                                },
+                                "code": "200"
+                            },
+                            {
+                                "description": "Unauthorized",
+                                "code": "401"
+                            },
+                            {
+                                "description": "Forbidden",
+                                "code": "403"
+                            },
+                            {
+                                "description": "Not Found",
+                                "code": "404"
+                            }
+                        ],
+                        "example": "Metric[]"
+                    }
+                ]
+            },
+            {
+                "name": "/api/metrics/cursor",
+                "methods": [
+                    {
+                        "name": "GET",
+                        "description": "prepareCursor",
+                        "parameters": {
+                            "query": [
+                                {
+                                    "name": "types",
+                                    "in": "query",
+                                    "description": "types",
+                                    "required": false,
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    },
+                                    "collectionFormat": "multi",
+                                    "default": "*"
+                                },
+                                {
+                                    "name": "pageSize",
+                                    "in": "query",
+                                    "description": "pageSize",
+                                    "required": false,
+                                    "type": "integer",
+                                    "default": 1000,
+                                    "format": "int32"
+                                },
+                                {
+                                    "name": "ttl",
+                                    "in": "query",
+                                    "description": "ttl",
+                                    "required": false,
+                                    "type": "integer",
+                                    "default": 60000,
+                                    "format": "int64"
+                                },
+                                {
+                                    "name": "to",
+                                    "in": "query",
+                                    "description": "to",
+                                    "required": false,
+                                    "type": "integer",
+                                    "format": "int64"
+                                },
+                                {
+                                    "name": "from",
+                                    "in": "query",
+                                    "description": "from",
+                                    "required": false,
+                                    "type": "integer",
+                                    "format": "int64"
+                                }
+                            ]
+                        },
+                        "model": {
+                            "$ref": "#/definitions/Cursor",
+                            "type": {
+                                "type": "object",
+                                "required": [
+                                    "cursor_id",
+                                    "items_per_get"
+                                ],
+                                "properties": [
+                                    {
+                                        "type": "string",
+                                        "description": "The id to use when retrieving data",
+                                        "name": "cursor_id",
+                                        "required": true
+                                    },
+                                    {
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "description": "The number of items returned per GET",
+                                        "name": "items_per_get",
+                                        "required": true
+                                    }
+                                ]
+                            },
+                            "isRef": true
+                        },
+                        "responses": [
+                            {
+                                "description": "OK",
+                                "schema": {
+                                    "$ref": "#/definitions/Cursor",
+                                    "type": {
+                                        "type": "object",
+                                        "required": [
+                                            "cursor_id",
+                                            "items_per_get"
+                                        ],
+                                        "properties": [
+                                            {
+                                                "type": "string",
+                                                "description": "The id to use when retrieving data",
+                                                "name": "cursor_id",
+                                                "required": true
+                                            },
+                                            {
+                                                "type": "integer",
+                                                "format": "int32",
+                                                "description": "The number of items returned per GET",
+                                                "name": "items_per_get",
+                                                "required": true
+                                            }
+                                        ]
+                                    },
+                                    "isRef": true
+                                },
+                                "code": "200"
+                            },
+                            {
+                                "description": "Unauthorized",
+                                "code": "401"
+                            },
+                            {
+                                "description": "Forbidden",
+                                "code": "403"
+                            },
+                            {
+                                "description": "Not Found",
+                                "code": "404"
+                            }
+                        ],
+                        "example": "{\n  // The id to use when retrieving\n  // data\n  \"cursor_id\": string\n  // The number of items returned per\n  // GET\n  \"items_per_get\": int32\n}"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "Versions",
+        "description": "A collection of all supported API versions.",
+        "basePath": "/api/versions",
+        "group": {
+            "name": "Utility",
+            "weight": 3
+        },
+        "resource": {
+            "type": "object",
+            "properties": [
+                {
+                    "type": "array",
+                    "description": "The mime types supported by POST and PUT in this version of the API.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "name": "consumes"
+                },
+                {
+                    "type": "array",
+                    "description": "The mime types returnable by this version of the API.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "name": "produces"
+                },
+                {
+                    "type": "string",
+                    "description": "The version number of the API.",
+                    "name": "version"
+                }
+            ],
+            "name": "Version",
+            "example": "{\n  // The mime types supported by POST\n  // and PUT in this version of the\n  // API.\n  \"consumes\": string[]\n  // The mime types returnable by this\n  // version of the API.\n  \"produces\": string[]\n  // The version number of the API.\n  \"version\": string\n}"
+        },
+        "paths": [
+            {
+                "name": "/api/versions",
+                "methods": [
+                    {
+                        "name": "GET",
+                        "description": "get",
+                        "parameters": {},
+                        "model": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Version",
+                                "type": "Version"
+                            }
+                        },
+                        "responses": [
+                            {
+                                "description": "OK",
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Version",
+                                        "type": "Version"
+                                    }
+                                },
+                                "code": "200"
+                            },
+                            {
+                                "description": "Unauthorized",
+                                "code": "401"
+                            },
+                            {
+                                "description": "Forbidden",
+                                "code": "403"
+                            },
+                            {
+                                "description": "Not Found",
+                                "code": "404"
+                            }
+                        ],
+                        "example": "Version[]"
+                    }
+                ]
+            }
+        ]
+    }
+]

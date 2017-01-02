@@ -1,0 +1,31 @@
+					<ul class="properties">
+		{% for property in include.properties %}
+						<li class="property{% if property.required %} property_required{% endif %}">
+							<header>
+								<span class="property_name">{{ property.name }}</span>
+								<span class="property_type">
+			{% if property.isRef %}
+								object
+			{% elsif property.format %}
+								{{property.format}}
+			{% else %}
+								{{ property.type }}
+			{% endif %}
+								</span>
+			{% if property.enum %}
+								<span class="property_enum">
+				{% for enum_value in property.enum %}
+									<span class="property_enum_value">{{ enum_value }}</span>
+				{% endfor %}
+								</span>
+			{% endif %}
+							</header>
+							<div class="property_summary">
+								<span class="property_description">{{ property.description }}</span>
+			{% if property.isRef %}
+				{% include propertylist.html properties=property.type.properties %}
+			{% endif %}
+							</div>
+						</li>
+		{% endfor %}
+					</ul>
