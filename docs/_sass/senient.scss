@@ -1,0 +1,71 @@
+nav.left {
+	flex: 0 0 150px; 
+	padding-right: $spacing-unit * .5; 
+	border-right: 1px solid #ccc;
+}
+div.post-content {display: flex; flex-direction: row;}
+div.main {
+	padding-left: $spacing-unit * .5;
+	flex: 0 0 719px;
+
+	a.top_link {
+		float: right;
+	}
+}
+a:link {color: #245bfa;}
+a:hover {}
+
+h2 {color: #245bfa;}
+h3 {margin-left: 20px;}
+h4 {}
+
+header.method_header {
+	span.query_params::before { content: "?"; }
+	span.query_param {
+		&::before { content: "[&"; }
+		&:first-child::before { content: "["; }
+		&::after { content: "]"; }
+		&.param_required {
+			&:first-child::before { content: ""; }
+			&::before { content: "&"; }
+			&::after { content: ""; }
+		}
+
+		.query_param_name::after {
+			content: "=";
+		}
+
+		.query_param_type {
+			&::before {
+				content: "{ ";
+			}
+			&::after {
+				content: " }";
+			}
+		}
+	}
+}
+
+div.method_body {
+	li.param {
+		header.param_header {
+			&::after { content: "( optional )"; }
+		}
+
+		&.param_required {
+		header.param_header {
+			&::after { content: ""; }
+		}
+		}
+
+		div.param_body span.param_default::before {
+			content: "default: ";
+		}
+	}
+}
+
+div.wrapper {
+	display: flex;
+	flex: 0 0 100%;
+	max-width: none;
+}

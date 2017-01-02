@@ -1,0 +1,129 @@
+---
+layout: page
+title: API
+weight: 1
+permalink: /api/
+---
+<a name="top"></a>
+<nav class="left">
+<h4>Models</h4>
+{% for resource in site.data.api %}
+	<div>
+	<a href="#{{ resource.name }}" title="{{ resource.description }}">
+	{{ resource.name }}</a>
+	</div>
+{% endfor %}
+</nav>
+
+<div class="main">
+{% for endpoint in site.data.api %}
+	<section>
+		<h2><a id="{{ endpoint.name }}"></a><span>{{ endpoint.name }}</span><span>{{ endpoint.basePath }}</span><a class="top_link" href="#top">top</a></h2>
+		<h3>{{ endpoint.description }}</h3>
+		<div class="resource">
+			<header class="resource_header">
+				<h4>Resource</h4>
+				<span class="resource_name">{{ endpoint.resource.name }}</span>
+				<span class="resource_type">{{ endpoint.resource.type }}</span>
+			</header>
+			<div class="resource_body">
+				<ul>
+	{% for property in endpoint.resource.properties %}
+					<li class="property{% if property.required %} property_required{% endif %}">
+						<header>
+							<span class="property_name">{{ property.name }}</span>
+							<span class="property_type">{{ property.type }}</span>
+		{% if property.enum %}
+							<span class="property_enum">
+			{% for enum_value in property.enum %}
+								<span class="property_enum_value">{{ enum_value }}</span>
+			{% endfor %}
+							</span>
+		{% endif %}
+						</header>
+						<div class="property_summary">
+							<span class="property_description">{{ property.description }}</span>
+						</div>
+					</li>
+	{% endfor %}
+				</ul>
+			</div>
+		</div>
+		<div class="paths">
+			<h4>Paths</h4>
+			{% for path in endpoint.paths %}
+			<div class="path">
+				<header class="path_header">
+					<span class="path_name">{{ path.name }}</span>
+				</header>
+				<div class="path_body">
+					<ul>
+				{% for method in path.methods %}
+						<li class="method">
+							<header class="method_header">
+								<span class="method_name">{{ method.name }}</span>
+						{% if method.parameters.query %}
+								<span class="query_params params">
+							{% for param in method.parameters[param_in] %}
+									<span class="query_param{% if param.required %} param_required{% endif %} param"><span class="query_param_name param_name">{{ param.name }}</span><span class="query_param_type param_type">{% if param.format %}{{param.format}}{% else %}{{ param.type }}{% endif %}</span></span>
+							{% endfor %}
+								</span>
+						{% endif %}
+							</header>
+							<div class="method_body">
+								<span class="method_description">{{ method.description }}</span>
+						{% assign param_order = 'path|query|formData' | split: '|'] %}
+						{% for param_in in param_order %}
+							{% unless method.parameters[param_in] %}
+								{% continue %}
+							{% endunless %}
+								<div>
+									<h5>{{ param_in | replace: 'Data', '' | capitalize }} Parameters</h5>
+									<ul class="{{ param_in }}_params params">
+							{% for param in method.parameters[param_in] %}
+										<li class="{{ param_in }}_param{% if param.required %} param_required{% endif %} param">
+											<header class="param_header">
+												<span class="param_name">{{ param.name }}</span>
+												<span class="param_type">
+												{% if param.format %}{{param.format}}{% else %}{{ param.type }}{% endif %}
+												</span>
+								{% if param.enum %}
+												<span class="param_enum">
+									{% for enum_value in param.enum %}
+														<span class="param_enum_value">{{ enum_value }}</span>
+									{% endfor %}
+												</span>
+								{% endif %}
+											</header>
+											<div class="{{ param_in }}_param_body param_body">
+												{% if param.default %}<span class="param_default">{{param.default}}</span>{% endif %}<span class="param_description">{{param.description}}</span>
+											</div>
+										</li>
+							{% endfor %}
+									</ul>
+								</div>
+						{% endfor %}
+								<div class="responses">
+									<h5>Responses</h5>
+									<ul>
+						{% for response in method.responses %}
+										<li class="response">
+											<header class="response_header">
+												<span class="response_code">{{ response.code }}</span>
+												<span class="response_description">{{ response.description }}</span>
+											</header>
+										</li>
+						{% endfor %}
+									</ul>
+								</div>
+							</div>
+						</li>
+				{% endfor %}
+					</ul>
+				</div>
+			</div>
+			{% endfor %}
+		</div>
+	</section>
+{% endfor %}
+</div>

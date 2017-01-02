@@ -1,0 +1,2637 @@
+[
+    {
+        "name": "Snapshots",
+        "description": "A collection of all snapshots.",
+        "basePath": "/api/snapshots",
+        "resource": {
+            "type": "object",
+            "properties": [
+                {
+                    "type": "string",
+                    "description": "The cluster who owns the snapshot.",
+                    "name": "cluster"
+                },
+                {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "The snapshot id.",
+                    "name": "id"
+                },
+                {
+                    "type": "string",
+                    "description": "The image which has been snapshotted.",
+                    "name": "image"
+                },
+                {
+                    "type": "string",
+                    "description": "The snapshot name.",
+                    "name": "name"
+                },
+                {
+                    "type": "string",
+                    "description": "The pool who owns the snapshot.",
+                    "name": "pool"
+                },
+                {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "Size in bytes of the snapshot.",
+                    "name": "size"
+                }
+            ],
+            "name": "Snapshot"
+        },
+        "paths": [
+            {
+                "methods": [
+                    {
+                        "description": "get",
+                        "parameters": {},
+                        "responses": [
+                            {
+                                "description": "OK",
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Snapshot"
+                                    }
+                                },
+                                "code": "200"
+                            },
+                            {
+                                "description": "Unauthorized",
+                                "code": "401"
+                            },
+                            {
+                                "description": "Forbidden",
+                                "code": "403"
+                            },
+                            {
+                                "description": "Not Found",
+                                "code": "404"
+                            }
+                        ],
+                        "name": "GET"
+                    }
+                ],
+                "name": "/api/snapshots"
+            },
+            {
+                "methods": [
+                    {
+                        "description": "get",
+                        "parameters": {
+                            "path": [
+                                {
+                                    "name": "name",
+                                    "in": "path",
+                                    "description": "name",
+                                    "required": true,
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "responses": [
+                            {
+                                "description": "OK",
+                                "schema": {
+                                    "$ref": "#/definitions/Snapshot"
+                                },
+                                "code": "200"
+                            },
+                            {
+                                "description": "Unauthorized",
+                                "code": "401"
+                            },
+                            {
+                                "description": "Forbidden",
+                                "code": "403"
+                            },
+                            {
+                                "description": "Not Found",
+                                "code": "404"
+                            }
+                        ],
+                        "name": "GET"
+                    }
+                ],
+                "name": "/api/snapshots/{name}"
+            }
+        ]
+    },
+    {
+        "name": "Images",
+        "description": "A collection of all OS images.",
+        "basePath": "/api/images",
+        "resource": {
+            "type": "object",
+            "properties": [
+                {
+                    "type": "string",
+                    "description": "The CPU architecture the Image is built for.",
+                    "name": "arch",
+                    "required": true
+                },
+                {
+                    "type": "string",
+                    "description": "The distribution codename of the Image.",
+                    "name": "distrib_codename",
+                    "required": true
+                },
+                {
+                    "type": "string",
+                    "description": "The distribution description of the Image.",
+                    "name": "distrib_description",
+                    "required": true
+                },
+                {
+                    "type": "string",
+                    "description": "The distribution ID of the Image.",
+                    "name": "distrib_id",
+                    "required": true
+                },
+                {
+                    "type": "string",
+                    "description": "The distribution release of the Image.",
+                    "name": "distrib_release",
+                    "required": true
+                },
+                {
+                    "type": "string",
+                    "description": "The group to which the Image belongs.",
+                    "name": "group",
+                    "required": true
+                },
+                {
+                    "type": "string",
+                    "description": "The full path to this Image.",
+                    "name": "image_filename",
+                    "required": true
+                },
+                {
+                    "type": "string",
+                    "description": "The name of the Image.",
+                    "name": "image_name",
+                    "required": true
+                },
+                {
+                    "type": "string",
+                    "description": "The init system used by this Image.",
+                    "name": "init_system",
+                    "required": true
+                },
+                {
+                    "type": "string",
+                    "description": "The kernel release of the Image.",
+                    "name": "kernel_release",
+                    "required": true
+                },
+                {
+                    "type": "string",
+                    "description": "The globally unique organization identifier for owner of the image.",
+                    "name": "org_id",
+                    "required": false
+                },
+                {
+                    "type": "string",
+                    "description": "The address of the server where the Image is located.",
+                    "name": "server_address",
+                    "required": true
+                }
+            ],
+            "name": "Image"
+        },
+        "paths": [
+            {
+                "methods": [
+                    {
+                        "description": "get",
+                        "parameters": {},
+                        "responses": [
+                            {
+                                "description": "OK",
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Image"
+                                    }
+                                },
+                                "code": "200"
+                            },
+                            {
+                                "description": "Unauthorized",
+                                "code": "401"
+                            },
+                            {
+                                "description": "Forbidden",
+                                "code": "403"
+                            },
+                            {
+                                "description": "Not Found",
+                                "code": "404"
+                            }
+                        ],
+                        "name": "GET"
+                    }
+                ],
+                "name": "/api/images"
+            },
+            {
+                "methods": [
+                    {
+                        "description": "get",
+                        "parameters": {
+                            "path": [
+                                {
+                                    "name": "name",
+                                    "in": "path",
+                                    "description": "name",
+                                    "required": true,
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "responses": [
+                            {
+                                "description": "OK",
+                                "schema": {
+                                    "$ref": "#/definitions/Image"
+                                },
+                                "code": "200"
+                            },
+                            {
+                                "description": "Unauthorized",
+                                "code": "401"
+                            },
+                            {
+                                "description": "Forbidden",
+                                "code": "403"
+                            },
+                            {
+                                "description": "Not Found",
+                                "code": "404"
+                            }
+                        ],
+                        "name": "GET"
+                    }
+                ],
+                "name": "/api/images/{name}"
+            }
+        ]
+    },
+    {
+        "name": "Components",
+        "description": "A collection of components within the cloud platform.",
+        "basePath": "/api/components",
+        "resource": {
+            "type": "object",
+            "properties": [
+                {
+                    "type": "string",
+                    "name": "completed"
+                },
+                {
+                    "type": "string",
+                    "name": "id"
+                },
+                {
+                    "type": "string",
+                    "name": "initiated"
+                },
+                {
+                    "type": "string",
+                    "name": "message"
+                },
+                {
+                    "type": "string",
+                    "name": "name"
+                },
+                {
+                    "type": "string",
+                    "enum": [
+                        "QUEUED",
+                        "PREPARING",
+                        "DEPLOYING",
+                        "DEPLOYED",
+                        "BRING_UP",
+                        "UP",
+                        "BRING_DOWN",
+                        "DOWN",
+                        "DESTROYING",
+                        "DESTROYED",
+                        "CANCELED",
+                        "FAILED",
+                        "DELETING",
+                        "DELETED"
+                    ],
+                    "name": "status"
+                }
+            ],
+            "name": "Component"
+        },
+        "paths": [
+            {
+                "methods": [
+                    {
+                        "description": "Get all components",
+                        "parameters": {
+                            "query": [
+                                {
+                                    "name": "name",
+                                    "in": "query",
+                                    "description": "name",
+                                    "required": false,
+                                    "type": "string"
+                                },
+                                {
+                                    "name": "typeId",
+                                    "in": "query",
+                                    "description": "typeId",
+                                    "required": false,
+                                    "type": "integer",
+                                    "format": "int32"
+                                },
+                                {
+                                    "name": "type",
+                                    "in": "query",
+                                    "description": "type",
+                                    "required": false,
+                                    "type": "string"
+                                },
+                                {
+                                    "name": "enclosureId",
+                                    "in": "query",
+                                    "description": "enclosureId",
+                                    "required": false,
+                                    "type": "integer",
+                                    "format": "int32"
+                                }
+                            ]
+                        },
+                        "responses": [
+                            {
+                                "description": "OK",
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/SystemComponent"
+                                    }
+                                },
+                                "code": "200"
+                            },
+                            {
+                                "description": "Unauthorized",
+                                "code": "401"
+                            },
+                            {
+                                "description": "Forbidden",
+                                "code": "403"
+                            },
+                            {
+                                "description": "Not Found",
+                                "code": "404"
+                            }
+                        ],
+                        "name": "GET"
+                    }
+                ],
+                "name": "/api/components"
+            },
+            {
+                "methods": [
+                    {
+                        "description": "Get component by id",
+                        "parameters": {
+                            "path": [
+                                {
+                                    "name": "componentId",
+                                    "in": "path",
+                                    "description": "componentId",
+                                    "required": true,
+                                    "type": "integer",
+                                    "format": "int64"
+                                }
+                            ]
+                        },
+                        "responses": [
+                            {
+                                "description": "OK",
+                                "schema": {
+                                    "$ref": "#/definitions/SystemComponent"
+                                },
+                                "code": "200"
+                            },
+                            {
+                                "description": "Unauthorized",
+                                "code": "401"
+                            },
+                            {
+                                "description": "Forbidden",
+                                "code": "403"
+                            },
+                            {
+                                "description": "Not Found",
+                                "code": "404"
+                            }
+                        ],
+                        "name": "GET"
+                    }
+                ],
+                "name": "/api/components/{componentId}"
+            }
+        ]
+    },
+    {
+        "name": "Stores",
+        "description": "A collection of Stores.",
+        "basePath": "/api/stores",
+        "resource": {
+            "type": "object",
+            "properties": [
+                {
+                    "type": "string",
+                    "name": "created"
+                },
+                {
+                    "$ref": "#/definitions/StoreDefinition",
+                    "name": "definition"
+                },
+                {
+                    "type": "string",
+                    "name": "deployment_id"
+                },
+                {
+                    "type": "string",
+                    "name": "name"
+                },
+                {
+                    "type": "integer",
+                    "format": "int64",
+                    "name": "reserved"
+                },
+                {
+                    "type": "integer",
+                    "format": "int64",
+                    "name": "used"
+                }
+            ],
+            "name": "Store"
+        },
+        "paths": [
+            {
+                "methods": [
+                    {
+                        "description": "get",
+                        "parameters": {},
+                        "responses": [
+                            {
+                                "description": "OK",
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Store"
+                                    }
+                                },
+                                "code": "200"
+                            },
+                            {
+                                "description": "Unauthorized",
+                                "code": "401"
+                            },
+                            {
+                                "description": "Forbidden",
+                                "code": "403"
+                            },
+                            {
+                                "description": "Not Found",
+                                "code": "404"
+                            }
+                        ],
+                        "name": "GET"
+                    }
+                ],
+                "name": "/api/stores"
+            },
+            {
+                "methods": [
+                    {
+                        "description": "get",
+                        "parameters": {
+                            "path": [
+                                {
+                                    "name": "name",
+                                    "in": "path",
+                                    "description": "name",
+                                    "required": true,
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "responses": [
+                            {
+                                "description": "OK",
+                                "schema": {
+                                    "$ref": "#/definitions/Store"
+                                },
+                                "code": "200"
+                            },
+                            {
+                                "description": "Unauthorized",
+                                "code": "401"
+                            },
+                            {
+                                "description": "Forbidden",
+                                "code": "403"
+                            },
+                            {
+                                "description": "Not Found",
+                                "code": "404"
+                            }
+                        ],
+                        "name": "GET"
+                    }
+                ],
+                "name": "/api/stores/{name}"
+            }
+        ]
+    },
+    {
+        "name": "Versions",
+        "description": "A collection of all supported API versions.",
+        "basePath": "/api/versions",
+        "resource": {
+            "type": "object",
+            "properties": [
+                {
+                    "type": "array",
+                    "description": "The mime types supported by POST and PUT in this version of the API.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "name": "consumes"
+                },
+                {
+                    "type": "array",
+                    "description": "The mime types returnable by this version of the API.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "name": "produces"
+                },
+                {
+                    "type": "string",
+                    "description": "The version number of the API.",
+                    "name": "version"
+                }
+            ],
+            "name": "Version"
+        },
+        "paths": [
+            {
+                "methods": [
+                    {
+                        "description": "get",
+                        "parameters": {},
+                        "responses": [
+                            {
+                                "description": "OK",
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Version"
+                                    }
+                                },
+                                "code": "200"
+                            },
+                            {
+                                "description": "Unauthorized",
+                                "code": "401"
+                            },
+                            {
+                                "description": "Forbidden",
+                                "code": "403"
+                            },
+                            {
+                                "description": "Not Found",
+                                "code": "404"
+                            }
+                        ],
+                        "name": "GET"
+                    }
+                ],
+                "name": "/api/versions"
+            }
+        ]
+    },
+    {
+        "name": "Metrics",
+        "description": "A collection of metrics related to the cloud platform.",
+        "basePath": "/api/metrics",
+        "resource": {
+            "type": "object",
+            "properties": [
+                {
+                    "description": "The globally-unique identifier of the component that originated the metric.",
+                    "$ref": "#/definitions/ComponentId",
+                    "name": "component_id",
+                    "required": true
+                },
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The globally-unique identifier of the enclosure that originated the metric.",
+                    "name": "enclosure_id",
+                    "required": true
+                },
+                {
+                    "type": "string",
+                    "description": "The ISO8601 formatted timestamp of the metric.",
+                    "name": "timestamp",
+                    "required": true
+                },
+                {
+                    "type": "string",
+                    "description": "The type or category of the metric.",
+                    "name": "type",
+                    "required": true
+                },
+                {
+                    "type": "number",
+                    "format": "double",
+                    "description": "The value of the metric.",
+                    "name": "value",
+                    "required": true
+                }
+            ],
+            "name": "Metric"
+        },
+        "paths": [
+            {
+                "methods": [
+                    {
+                        "description": "get",
+                        "parameters": {
+                            "query": [
+                                {
+                                    "name": "cursorTtl",
+                                    "in": "query",
+                                    "description": "cursorTtl",
+                                    "required": false,
+                                    "type": "integer",
+                                    "default": 60000,
+                                    "format": "int64"
+                                },
+                                {
+                                    "name": "cursorId",
+                                    "in": "query",
+                                    "description": "cursorId",
+                                    "required": false,
+                                    "type": "string"
+                                },
+                                {
+                                    "name": "types",
+                                    "in": "query",
+                                    "description": "types",
+                                    "required": false,
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    },
+                                    "collectionFormat": "multi",
+                                    "default": "*"
+                                },
+                                {
+                                    "name": "pageSize",
+                                    "in": "query",
+                                    "description": "pageSize",
+                                    "required": false,
+                                    "type": "integer",
+                                    "default": 100,
+                                    "format": "int32"
+                                },
+                                {
+                                    "name": "page",
+                                    "in": "query",
+                                    "description": "page",
+                                    "required": false,
+                                    "type": "integer",
+                                    "default": 0,
+                                    "format": "int32"
+                                },
+                                {
+                                    "name": "to",
+                                    "in": "query",
+                                    "description": "to",
+                                    "required": false,
+                                    "type": "integer",
+                                    "format": "int64"
+                                },
+                                {
+                                    "name": "from",
+                                    "in": "query",
+                                    "description": "from",
+                                    "required": false,
+                                    "type": "integer",
+                                    "format": "int64"
+                                }
+                            ]
+                        },
+                        "responses": [
+                            {
+                                "description": "OK",
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Metric"
+                                    }
+                                },
+                                "code": "200"
+                            },
+                            {
+                                "description": "Unauthorized",
+                                "code": "401"
+                            },
+                            {
+                                "description": "Forbidden",
+                                "code": "403"
+                            },
+                            {
+                                "description": "Not Found",
+                                "code": "404"
+                            }
+                        ],
+                        "name": "GET"
+                    }
+                ],
+                "name": "/api/metrics"
+            },
+            {
+                "methods": [
+                    {
+                        "description": "prepareCursor",
+                        "parameters": {
+                            "query": [
+                                {
+                                    "name": "types",
+                                    "in": "query",
+                                    "description": "types",
+                                    "required": false,
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    },
+                                    "collectionFormat": "multi",
+                                    "default": "*"
+                                },
+                                {
+                                    "name": "itemsPerGet",
+                                    "in": "query",
+                                    "description": "itemsPerGet",
+                                    "required": false,
+                                    "type": "integer",
+                                    "default": 1000,
+                                    "format": "int32"
+                                },
+                                {
+                                    "name": "ttl",
+                                    "in": "query",
+                                    "description": "ttl",
+                                    "required": false,
+                                    "type": "integer",
+                                    "default": 60000,
+                                    "format": "int64"
+                                },
+                                {
+                                    "name": "to",
+                                    "in": "query",
+                                    "description": "to",
+                                    "required": false,
+                                    "type": "integer",
+                                    "format": "int64"
+                                },
+                                {
+                                    "name": "from",
+                                    "in": "query",
+                                    "description": "from",
+                                    "required": false,
+                                    "type": "integer",
+                                    "format": "int64"
+                                }
+                            ]
+                        },
+                        "responses": [
+                            {
+                                "description": "OK",
+                                "schema": {
+                                    "$ref": "#/definitions/Cursor"
+                                },
+                                "code": "200"
+                            },
+                            {
+                                "description": "Unauthorized",
+                                "code": "401"
+                            },
+                            {
+                                "description": "Forbidden",
+                                "code": "403"
+                            },
+                            {
+                                "description": "Not Found",
+                                "code": "404"
+                            }
+                        ],
+                        "name": "GET"
+                    }
+                ],
+                "name": "/api/metrics/cursor"
+            },
+            {
+                "methods": [
+                    {
+                        "description": "get",
+                        "parameters": {},
+                        "responses": [
+                            {
+                                "description": "OK",
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/MetricKey"
+                                    }
+                                },
+                                "code": "200"
+                            },
+                            {
+                                "description": "Unauthorized",
+                                "code": "401"
+                            },
+                            {
+                                "description": "Forbidden",
+                                "code": "403"
+                            },
+                            {
+                                "description": "Not Found",
+                                "code": "404"
+                            }
+                        ],
+                        "name": "GET"
+                    }
+                ],
+                "name": "/api/metrics/keys"
+            },
+            {
+                "methods": [
+                    {
+                        "description": "get",
+                        "parameters": {
+                            "path": [
+                                {
+                                    "name": "key",
+                                    "in": "path",
+                                    "description": "key",
+                                    "required": true,
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "responses": [
+                            {
+                                "description": "OK",
+                                "schema": {
+                                    "$ref": "#/definitions/MetricKey"
+                                },
+                                "code": "200"
+                            },
+                            {
+                                "description": "Unauthorized",
+                                "code": "401"
+                            },
+                            {
+                                "description": "Forbidden",
+                                "code": "403"
+                            },
+                            {
+                                "description": "Not Found",
+                                "code": "404"
+                            }
+                        ],
+                        "name": "GET"
+                    }
+                ],
+                "name": "/api/metrics/keys/{key}"
+            }
+        ]
+    },
+    {
+        "name": "Events",
+        "description": "A collection of events related to the cloud platform.",
+        "basePath": "/api/events",
+        "resource": {
+            "type": "object",
+            "properties": [
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "name": "enclosure_id",
+                    "required": false
+                },
+                {
+                    "type": "string",
+                    "description": "The id of the Event.",
+                    "name": "id",
+                    "required": false
+                },
+                {
+                    "type": "object",
+                    "description": "All properties relating to the Event.",
+                    "properties": {},
+                    "name": "properties",
+                    "required": false
+                },
+                {
+                    "type": "string",
+                    "description": "The ISO8601 formatted timestamp of the event.",
+                    "name": "timestamp",
+                    "required": true
+                },
+                {
+                    "type": "string",
+                    "description": "The type or category of the Event.",
+                    "name": "type",
+                    "required": true
+                }
+            ],
+            "name": "Event"
+        },
+        "paths": [
+            {
+                "methods": [
+                    {
+                        "description": "get",
+                        "parameters": {
+                            "query": [
+                                {
+                                    "name": "size",
+                                    "in": "query",
+                                    "description": "size",
+                                    "required": false,
+                                    "type": "integer",
+                                    "default": 100,
+                                    "format": "int32"
+                                },
+                                {
+                                    "name": "page",
+                                    "in": "query",
+                                    "description": "page",
+                                    "required": false,
+                                    "type": "integer",
+                                    "default": 0,
+                                    "format": "int32"
+                                },
+                                {
+                                    "name": "query",
+                                    "in": "query",
+                                    "description": "query",
+                                    "required": false,
+                                    "type": "string",
+                                    "default": "*:*"
+                                }
+                            ]
+                        },
+                        "responses": [
+                            {
+                                "description": "OK",
+                                "schema": {
+                                    "$ref": "#/definitions/PageOfEvent"
+                                },
+                                "code": "200"
+                            },
+                            {
+                                "description": "Unauthorized",
+                                "code": "401"
+                            },
+                            {
+                                "description": "Forbidden",
+                                "code": "403"
+                            },
+                            {
+                                "description": "Not Found",
+                                "code": "404"
+                            }
+                        ],
+                        "name": "GET"
+                    }
+                ],
+                "name": "/api/events"
+            }
+        ]
+    },
+    {
+        "name": "Commands",
+        "description": "A collection of all Commands.",
+        "basePath": "/api/commands",
+        "resource": {
+            "type": "object",
+            "properties": [
+                {
+                    "type": "string",
+                    "description": "The date and time that the Command completed (if it has).",
+                    "name": "completed"
+                },
+                {
+                    "type": "string",
+                    "description": "An auto-generated unique identifier of the Command.",
+                    "name": "id"
+                },
+                {
+                    "type": "string",
+                    "description": "The instance id of the IMS node that originated the Command.",
+                    "name": "ims_instance_id"
+                },
+                {
+                    "type": "string",
+                    "description": "The date and time when the Command was initiated.",
+                    "name": "initiated"
+                },
+                {
+                    "type": "string",
+                    "description": "The Name of the uer who initiated the Command.",
+                    "name": "initiated_by"
+                },
+                {
+                    "type": "string",
+                    "description": "The date and time that the Command was last updated.",
+                    "name": "last_updated"
+                },
+                {
+                    "type": "string",
+                    "description": "The current human-readable message about the state of the Command.",
+                    "name": "message"
+                },
+                {
+                    "type": "object",
+                    "description": "A dictionary of metadata associated with the Command.",
+                    "properties": {},
+                    "name": "metadata"
+                },
+                {
+                    "type": "string",
+                    "description": "The identifier for the organization to which the Command is applicable.",
+                    "name": "org_id"
+                },
+                {
+                    "type": "object",
+                    "description": "A dictionary of properties applicable to the Command.",
+                    "properties": {},
+                    "name": "properties"
+                },
+                {
+                    "type": "string",
+                    "description": "The current status of the Command.",
+                    "enum": [
+                        "QUEUED",
+                        "PREPARING",
+                        "EXECUTING",
+                        "FAILED",
+                        "SUCCESSFUL",
+                        "CANCELLED"
+                    ],
+                    "name": "status"
+                },
+                {
+                    "type": "string",
+                    "description": "The type of Command to be performed.",
+                    "name": "type"
+                },
+                {
+                    "type": "boolean",
+                    "example": false,
+                    "description": "A value indicating whether or not a Command has passed validation.",
+                    "name": "valid"
+                },
+                {
+                    "type": "array",
+                    "description": "A list of messages resulting from the validation of the Command.",
+                    "items": {
+                        "$ref": "#/definitions/CommandValidationMessage"
+                    },
+                    "name": "validation_messages"
+                }
+            ],
+            "description": "Commands represent changes to be made to Services and Resources within the Senient Environment.",
+            "name": "Command"
+        },
+        "paths": [
+            {
+                "methods": [
+                    {
+                        "description": "Query the Commands collection.",
+                        "parameters": {
+                            "query": [
+                                {
+                                    "name": "size",
+                                    "in": "query",
+                                    "description": "size",
+                                    "required": false,
+                                    "type": "integer",
+                                    "default": 100,
+                                    "format": "int32"
+                                },
+                                {
+                                    "name": "page",
+                                    "in": "query",
+                                    "description": "page",
+                                    "required": false,
+                                    "type": "integer",
+                                    "default": 0,
+                                    "format": "int32"
+                                },
+                                {
+                                    "name": "query",
+                                    "in": "query",
+                                    "description": "query",
+                                    "required": false,
+                                    "type": "string",
+                                    "default": "*:*"
+                                }
+                            ]
+                        },
+                        "responses": [
+                            {
+                                "description": "OK",
+                                "schema": {
+                                    "$ref": "#/definitions/Command"
+                                },
+                                "code": "200"
+                            },
+                            {
+                                "description": "Unauthorized",
+                                "code": "401"
+                            },
+                            {
+                                "description": "Forbidden",
+                                "code": "403"
+                            },
+                            {
+                                "description": "Not Found",
+                                "code": "404"
+                            }
+                        ],
+                        "name": "GET"
+                    },
+                    {
+                        "description": "Create a new Command.",
+                        "parameters": {
+                            "body": [
+                                {
+                                    "in": "body",
+                                    "name": "command",
+                                    "description": "command",
+                                    "required": true,
+                                    "schema": {
+                                        "$ref": "#/definitions/Command"
+                                    }
+                                }
+                            ]
+                        },
+                        "responses": [
+                            {
+                                "description": "OK",
+                                "schema": {
+                                    "$ref": "#/definitions/Command"
+                                },
+                                "code": "200"
+                            },
+                            {
+                                "description": "Created",
+                                "code": "201"
+                            },
+                            {
+                                "description": "Unauthorized",
+                                "code": "401"
+                            },
+                            {
+                                "description": "Forbidden",
+                                "code": "403"
+                            },
+                            {
+                                "description": "Not Found",
+                                "code": "404"
+                            }
+                        ],
+                        "name": "POST"
+                    }
+                ],
+                "name": "/api/commands"
+            },
+            {
+                "methods": [
+                    {
+                        "description": "Retrieve a specific Command.",
+                        "parameters": {
+                            "path": [
+                                {
+                                    "name": "id",
+                                    "in": "path",
+                                    "description": "id",
+                                    "required": true,
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "responses": [
+                            {
+                                "description": "OK",
+                                "schema": {
+                                    "$ref": "#/definitions/Command"
+                                },
+                                "code": "200"
+                            },
+                            {
+                                "description": "Unauthorized",
+                                "code": "401"
+                            },
+                            {
+                                "description": "Forbidden",
+                                "code": "403"
+                            },
+                            {
+                                "description": "Not Found",
+                                "code": "404"
+                            }
+                        ],
+                        "name": "GET"
+                    }
+                ],
+                "name": "/api/commands/{id}"
+            }
+        ]
+    },
+    {
+        "name": "Definitions",
+        "description": "A collection of all service definitions.",
+        "basePath": "/api/definitions",
+        "resource": {
+            "type": "object",
+            "properties": [
+                {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ComponentDefinition"
+                    },
+                    "name": "components"
+                },
+                {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "name": "meta"
+                },
+                {
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "#/definitions/ModuleType"
+                    },
+                    "name": "module_types"
+                },
+                {
+                    "type": "string",
+                    "name": "name"
+                },
+                {
+                    "type": "string",
+                    "name": "namespace"
+                },
+                {
+                    "$ref": "#/definitions/DefinitionIdentifier",
+                    "name": "parent"
+                },
+                {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "name": "properties"
+                },
+                {
+                    "type": "boolean",
+                    "name": "public"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/StoreDefinition"
+                    },
+                    "name": "stores"
+                },
+                {
+                    "type": "string",
+                    "name": "version"
+                }
+            ],
+            "name": "Definition"
+        },
+        "paths": [
+            {
+                "methods": [
+                    {
+                        "description": "getNamespaces",
+                        "parameters": {},
+                        "responses": [
+                            {
+                                "description": "OK",
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                "code": "200"
+                            },
+                            {
+                                "description": "Unauthorized",
+                                "code": "401"
+                            },
+                            {
+                                "description": "Forbidden",
+                                "code": "403"
+                            },
+                            {
+                                "description": "Not Found",
+                                "code": "404"
+                            }
+                        ],
+                        "name": "GET"
+                    },
+                    {
+                        "description": "post",
+                        "parameters": {
+                            "formData": [
+                                {
+                                    "name": "assets",
+                                    "in": "formData",
+                                    "description": "assets",
+                                    "required": true,
+                                    "type": "array",
+                                    "items": {
+                                        "type": "file"
+                                    },
+                                    "collectionFormat": "multi"
+                                },
+                                {
+                                    "name": "definition",
+                                    "in": "formData",
+                                    "description": "definition",
+                                    "required": true,
+                                    "type": "file"
+                                }
+                            ]
+                        },
+                        "responses": [
+                            {
+                                "description": "OK",
+                                "schema": {
+                                    "$ref": "#/definitions/Definition"
+                                },
+                                "code": "200"
+                            },
+                            {
+                                "description": "Created",
+                                "code": "201"
+                            },
+                            {
+                                "description": "Unauthorized",
+                                "code": "401"
+                            },
+                            {
+                                "description": "Forbidden",
+                                "code": "403"
+                            },
+                            {
+                                "description": "Not Found",
+                                "code": "404"
+                            }
+                        ],
+                        "name": "POST"
+                    },
+                    {
+                        "description": "put",
+                        "parameters": {
+                            "formData": [
+                                {
+                                    "name": "definition",
+                                    "in": "formData",
+                                    "description": "definition",
+                                    "required": true,
+                                    "type": "file"
+                                },
+                                {
+                                    "name": "assets",
+                                    "in": "formData",
+                                    "description": "assets",
+                                    "required": false,
+                                    "type": "array",
+                                    "items": {
+                                        "type": "file"
+                                    },
+                                    "collectionFormat": "multi"
+                                }
+                            ]
+                        },
+                        "responses": [
+                            {
+                                "description": "OK",
+                                "schema": {
+                                    "$ref": "#/definitions/ResponseEntity"
+                                },
+                                "code": "200"
+                            },
+                            {
+                                "description": "Created",
+                                "code": "201"
+                            },
+                            {
+                                "description": "Unauthorized",
+                                "code": "401"
+                            },
+                            {
+                                "description": "Forbidden",
+                                "code": "403"
+                            },
+                            {
+                                "description": "Not Found",
+                                "code": "404"
+                            }
+                        ],
+                        "name": "PUT"
+                    }
+                ],
+                "name": "/api/definitions"
+            },
+            {
+                "methods": [
+                    {
+                        "description": "getNames",
+                        "parameters": {
+                            "path": [
+                                {
+                                    "name": "namespace",
+                                    "in": "path",
+                                    "description": "namespace",
+                                    "required": true,
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "responses": [
+                            {
+                                "description": "OK",
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                "code": "200"
+                            },
+                            {
+                                "description": "Unauthorized",
+                                "code": "401"
+                            },
+                            {
+                                "description": "Forbidden",
+                                "code": "403"
+                            },
+                            {
+                                "description": "Not Found",
+                                "code": "404"
+                            }
+                        ],
+                        "name": "GET"
+                    }
+                ],
+                "name": "/api/definitions/{namespace}"
+            },
+            {
+                "methods": [
+                    {
+                        "description": "getVersions",
+                        "parameters": {
+                            "path": [
+                                {
+                                    "name": "name",
+                                    "in": "path",
+                                    "description": "name",
+                                    "required": true,
+                                    "type": "string"
+                                },
+                                {
+                                    "name": "namespace",
+                                    "in": "path",
+                                    "description": "namespace",
+                                    "required": true,
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "responses": [
+                            {
+                                "description": "OK",
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                "code": "200"
+                            },
+                            {
+                                "description": "Unauthorized",
+                                "code": "401"
+                            },
+                            {
+                                "description": "Forbidden",
+                                "code": "403"
+                            },
+                            {
+                                "description": "Not Found",
+                                "code": "404"
+                            }
+                        ],
+                        "name": "GET"
+                    }
+                ],
+                "name": "/api/definitions/{namespace}/{name}"
+            },
+            {
+                "methods": [
+                    {
+                        "description": "getJson",
+                        "parameters": {
+                            "path": [
+                                {
+                                    "name": "version",
+                                    "in": "path",
+                                    "description": "version",
+                                    "required": true,
+                                    "type": "string"
+                                },
+                                {
+                                    "name": "name",
+                                    "in": "path",
+                                    "description": "name",
+                                    "required": true,
+                                    "type": "string"
+                                },
+                                {
+                                    "name": "namespace",
+                                    "in": "path",
+                                    "description": "namespace",
+                                    "required": true,
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "responses": [
+                            {
+                                "description": "OK",
+                                "schema": {
+                                    "$ref": "#/definitions/Definition"
+                                },
+                                "code": "200"
+                            },
+                            {
+                                "description": "Unauthorized",
+                                "code": "401"
+                            },
+                            {
+                                "description": "Forbidden",
+                                "code": "403"
+                            },
+                            {
+                                "description": "Not Found",
+                                "code": "404"
+                            }
+                        ],
+                        "name": "GET"
+                    }
+                ],
+                "name": "/api/definitions/{namespace}/{name}/{version}/senient.json"
+            },
+            {
+                "methods": [
+                    {
+                        "description": "Get definition file in YAML format.",
+                        "parameters": {
+                            "path": [
+                                {
+                                    "name": "version",
+                                    "in": "path",
+                                    "description": "version",
+                                    "required": true,
+                                    "type": "string"
+                                },
+                                {
+                                    "name": "name",
+                                    "in": "path",
+                                    "description": "name",
+                                    "required": true,
+                                    "type": "string"
+                                },
+                                {
+                                    "name": "namespace",
+                                    "in": "path",
+                                    "description": "namespace",
+                                    "required": true,
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "responses": [
+                            {
+                                "description": "OK",
+                                "schema": {
+                                    "$ref": "#/definitions/Definition"
+                                },
+                                "code": "200"
+                            },
+                            {
+                                "description": "Unauthorized",
+                                "code": "401"
+                            },
+                            {
+                                "description": "Forbidden",
+                                "code": "403"
+                            },
+                            {
+                                "description": "Not Found",
+                                "code": "404"
+                            }
+                        ],
+                        "name": "GET"
+                    }
+                ],
+                "name": "/api/definitions/{namespace}/{name}/{version}/senient.yaml"
+            }
+        ]
+    },
+    {
+        "name": "Resource Modules",
+        "description": "A collection of all resource modules.",
+        "basePath": "/api/resource_modules",
+        "resource": {
+            "type": "object",
+            "properties": [
+                {
+                    "type": "boolean",
+                    "example": false,
+                    "description": "A value indicating whether the Resource Module is connected.",
+                    "name": "connected",
+                    "required": true
+                },
+                {
+                    "type": "string",
+                    "description": "The globally-unique identifier of the Deployment using the Resource Module.",
+                    "name": "deployment_id",
+                    "required": false
+                },
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The read speed of the embedded storage.",
+                    "name": "embedded_storage_read_speed",
+                    "required": false
+                },
+                {
+                    "type": "string",
+                    "format": "byte",
+                    "description": "The type of embedded storage available to the Resource Module.(0 = NAND, 1 = SATA)",
+                    "name": "embedded_storage_type",
+                    "required": true
+                },
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The estimated number of write cycles the of embedded storagewas designed for.",
+                    "name": "embedded_storage_write_cycles",
+                    "required": false
+                },
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The write speed of the embedded storage.",
+                    "name": "embedded_storage_write_speed",
+                    "required": false
+                },
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The globally-unique identifier of the Enclosure housing theResource Module.",
+                    "name": "enclosure_id",
+                    "required": false
+                },
+                {
+                    "type": "object",
+                    "description": "A map of interfaces to their connected switch ports.",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "name": "ethernet_port_map",
+                    "required": false
+                },
+                {
+                    "type": "string",
+                    "description": "An ISO 8601 timestamp identifying the first time a Resource Module was connected.",
+                    "name": "first_connected",
+                    "required": true
+                },
+                {
+                    "type": "string",
+                    "description": "An ISO 8601 timestamp identifying the last time a Resource Module was connected.",
+                    "name": "last_connected",
+                    "required": true
+                },
+                {
+                    "type": "string",
+                    "format": "byte",
+                    "description": "The architecture of the Resource Module's master CPU",
+                    "name": "master_cpu_arch",
+                    "required": true
+                },
+                {
+                    "type": "string",
+                    "format": "byte",
+                    "description": "The architecture version of the Resource Module's master CPU",
+                    "name": "master_cpu_arch_version",
+                    "required": true
+                },
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The number of cores in the Resource Module's master CPU",
+                    "name": "master_cpu_core_count",
+                    "required": true
+                },
+                {
+                    "type": "string",
+                    "format": "byte",
+                    "description": "The data path width of the Resource Module's master CPU",
+                    "name": "master_cpu_datapath_width",
+                    "required": true
+                },
+                {
+                    "type": "string",
+                    "format": "byte",
+                    "description": "The integer width of the Resource Module's master CPU",
+                    "name": "master_cpu_integer_width",
+                    "required": true
+                },
+                {
+                    "type": "string",
+                    "format": "byte",
+                    "description": "The memory address width of the Resource Module's master CPU",
+                    "name": "master_cpu_memory_addr_width",
+                    "required": true
+                },
+                {
+                    "type": "number",
+                    "format": "double",
+                    "description": "The maximum input voltage supported by the Resource Module.",
+                    "name": "maximum_input_voltage",
+                    "required": true
+                },
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The maximum power draw in watts.",
+                    "name": "maximum_power",
+                    "required": true
+                },
+                {
+                    "type": "number",
+                    "format": "double",
+                    "description": "The minimum input voltage supported by the Resource Module.",
+                    "name": "minimum_input_voltage",
+                    "required": true
+                },
+                {
+                    "type": "string",
+                    "name": "module_function",
+                    "required": false
+                },
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The index of the slot a module is current attached to.",
+                    "name": "module_index",
+                    "required": false
+                },
+                {
+                    "type": "string",
+                    "format": "byte",
+                    "description": "The number of PCIe lanes per link.",
+                    "name": "pcie_lane_per_link",
+                    "required": true
+                },
+                {
+                    "type": "string",
+                    "format": "byte",
+                    "description": "The total number of PCIe links available.",
+                    "name": "pcie_link_count",
+                    "required": true
+                },
+                {
+                    "type": "string",
+                    "format": "byte",
+                    "description": "The version of PCIe the Resoure Module supports.",
+                    "name": "pcie_version",
+                    "required": true
+                },
+                {
+                    "type": "string",
+                    "description": "The current power state of the Resource Module.",
+                    "enum": [
+                        "ON",
+                        "OFF",
+                        "UNKNOWN",
+                        "COMING_UP",
+                        "GOING_DOWN"
+                    ],
+                    "name": "power_state",
+                    "required": true
+                },
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The amount of RAM currently allocated to the Resource Module.",
+                    "name": "ram_amount",
+                    "required": true
+                },
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The speed of the RAM the Resource Module has access to.",
+                    "name": "ram_speed",
+                    "required": true
+                },
+                {
+                    "type": "string",
+                    "description": "The globally-unique identifier of the Resource Pool to which the Resource Module belongs.",
+                    "name": "resource_pool_id",
+                    "required": false
+                },
+                {
+                    "type": "string",
+                    "description": "The serial number of the Resource Module.",
+                    "name": "serial_number",
+                    "required": true
+                },
+                {
+                    "type": "string",
+                    "format": "byte",
+                    "description": "The architecture of the Resource Module's slave CPU",
+                    "name": "slave_cpu_arch",
+                    "required": true
+                },
+                {
+                    "type": "string",
+                    "format": "byte",
+                    "description": "The architecture version of the Resource Module's slave CPU",
+                    "name": "slave_cpu_arch_version",
+                    "required": true
+                },
+                {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The number of cores in the Resource Module's slave CPU",
+                    "name": "slave_cpu_core_count",
+                    "required": true
+                },
+                {
+                    "type": "string",
+                    "format": "byte",
+                    "description": "The data path width of the Resource Module's slave CPU",
+                    "name": "slave_cpu_datapath_width",
+                    "required": true
+                },
+                {
+                    "type": "string",
+                    "format": "byte",
+                    "description": "The integer width of the Resource Module's slave CPU",
+                    "name": "slave_cpu_integer_width",
+                    "required": true
+                },
+                {
+                    "type": "string",
+                    "format": "byte",
+                    "description": "The memory address width of the Resource Module's slave CPU",
+                    "name": "slave_cpu_memory_addr_width",
+                    "required": true
+                },
+                {
+                    "type": "string",
+                    "description": "An ISO 8601 timestamp identifying the last time a Resource Module's state was changed.",
+                    "name": "updated",
+                    "required": true
+                }
+            ],
+            "name": "Resource Module"
+        },
+        "paths": [
+            {
+                "methods": [
+                    {
+                        "description": "get",
+                        "parameters": {
+                            "query": [
+                                {
+                                    "name": "serial_numbers",
+                                    "in": "query",
+                                    "description": "serial_numbers",
+                                    "required": true,
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "responses": [
+                            {
+                                "description": "OK",
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/ResourceModule"
+                                    }
+                                },
+                                "code": "200"
+                            },
+                            {
+                                "description": "Unauthorized",
+                                "code": "401"
+                            },
+                            {
+                                "description": "Forbidden",
+                                "code": "403"
+                            },
+                            {
+                                "description": "Not Found",
+                                "code": "404"
+                            }
+                        ],
+                        "name": "GET"
+                    }
+                ],
+                "name": "/api/resource_modules"
+            },
+            {
+                "methods": [
+                    {
+                        "description": "get",
+                        "parameters": {
+                            "path": [
+                                {
+                                    "name": "serialNumber",
+                                    "in": "path",
+                                    "description": "serialNumber",
+                                    "required": true,
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "responses": [
+                            {
+                                "description": "OK",
+                                "schema": {
+                                    "$ref": "#/definitions/ResourceModule"
+                                },
+                                "code": "200"
+                            },
+                            {
+                                "description": "Unauthorized",
+                                "code": "401"
+                            },
+                            {
+                                "description": "Forbidden",
+                                "code": "403"
+                            },
+                            {
+                                "description": "Not Found",
+                                "code": "404"
+                            }
+                        ],
+                        "name": "GET"
+                    },
+                    {
+                        "description": "put",
+                        "parameters": {
+                            "path": [
+                                {
+                                    "name": "serialNumber",
+                                    "in": "path",
+                                    "description": "serialNumber",
+                                    "required": true,
+                                    "type": "string"
+                                }
+                            ],
+                            "body": [
+                                {
+                                    "in": "body",
+                                    "name": "rm",
+                                    "description": "rm",
+                                    "required": true,
+                                    "schema": {
+                                        "$ref": "#/definitions/ResourceModule"
+                                    }
+                                }
+                            ]
+                        },
+                        "responses": [
+                            {
+                                "description": "OK",
+                                "schema": {
+                                    "$ref": "#/definitions/ResponseEntity"
+                                },
+                                "code": "200"
+                            },
+                            {
+                                "description": "Created",
+                                "code": "201"
+                            },
+                            {
+                                "description": "Unauthorized",
+                                "code": "401"
+                            },
+                            {
+                                "description": "Forbidden",
+                                "code": "403"
+                            },
+                            {
+                                "description": "Not Found",
+                                "code": "404"
+                            }
+                        ],
+                        "name": "PUT"
+                    }
+                ],
+                "name": "/api/resource_modules/{serialNumber}"
+            }
+        ]
+    },
+    {
+        "name": "Deployments",
+        "description": "A collection of all service deployments.",
+        "basePath": "/api/deployments",
+        "resource": {
+            "type": "object",
+            "properties": [
+                {
+                    "type": "string",
+                    "name": "command_id"
+                },
+                {
+                    "type": "string",
+                    "name": "completed"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Component"
+                    },
+                    "name": "components"
+                },
+                {
+                    "$ref": "#/definitions/DefinitionIdentifier",
+                    "name": "definition"
+                },
+                {
+                    "type": "string",
+                    "name": "id"
+                },
+                {
+                    "type": "string",
+                    "name": "initiated"
+                },
+                {
+                    "type": "string",
+                    "name": "message"
+                },
+                {
+                    "type": "string",
+                    "name": "org_id"
+                },
+                {
+                    "type": "string",
+                    "name": "resource_pool_id"
+                },
+                {
+                    "type": "string",
+                    "enum": [
+                        "QUEUED",
+                        "PREPARING",
+                        "DEPLOYING",
+                        "DEPLOYED",
+                        "BRING_UP",
+                        "UP",
+                        "BRING_DOWN",
+                        "DOWN",
+                        "DESTROYING",
+                        "DESTROYED",
+                        "CANCELED",
+                        "FAILED",
+                        "DELETING",
+                        "DELETED"
+                    ],
+                    "name": "status"
+                }
+            ],
+            "name": "Deployment"
+        },
+        "paths": [
+            {
+                "methods": [
+                    {
+                        "description": "get",
+                        "parameters": {},
+                        "responses": [
+                            {
+                                "description": "OK",
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Deployment"
+                                    }
+                                },
+                                "code": "200"
+                            },
+                            {
+                                "description": "Unauthorized",
+                                "code": "401"
+                            },
+                            {
+                                "description": "Forbidden",
+                                "code": "403"
+                            },
+                            {
+                                "description": "Not Found",
+                                "code": "404"
+                            }
+                        ],
+                        "name": "GET"
+                    }
+                ],
+                "name": "/api/deployments"
+            },
+            {
+                "methods": [
+                    {
+                        "description": "get",
+                        "parameters": {
+                            "path": [
+                                {
+                                    "name": "id",
+                                    "in": "path",
+                                    "description": "id",
+                                    "required": true,
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "responses": [
+                            {
+                                "description": "OK",
+                                "schema": {
+                                    "$ref": "#/definitions/Deployment"
+                                },
+                                "code": "200"
+                            },
+                            {
+                                "description": "Unauthorized",
+                                "code": "401"
+                            },
+                            {
+                                "description": "Forbidden",
+                                "code": "403"
+                            },
+                            {
+                                "description": "Not Found",
+                                "code": "404"
+                            }
+                        ],
+                        "name": "GET"
+                    }
+                ],
+                "name": "/api/deployments/{id}"
+            }
+        ]
+    },
+    {
+        "name": "Instances",
+        "description": "A collection of all instances",
+        "basePath": "/api/instances",
+        "resource": {
+            "type": "object",
+            "properties": [
+                {
+                    "type": "string",
+                    "description": "The recognized target Instance status.",
+                    "enum": [
+                        "UNDEPLOYED",
+                        "CHECK_DEPLOY_REQUIRED",
+                        "DEPLOYING",
+                        "UNDEPLOYING",
+                        "DEPLOYED_FS",
+                        "DEPLOYED",
+                        "UP",
+                        "DOWN",
+                        "BOOTING",
+                        "GOING_DOWN",
+                        "ORPHANED"
+                    ],
+                    "name": "admin_status",
+                    "required": false
+                },
+                {
+                    "type": "string",
+                    "description": "The base image used for this Instance.",
+                    "name": "base_image",
+                    "required": false
+                },
+                {
+                    "type": "string",
+                    "description": "The locally-unique identifier for the initiating component deployment.",
+                    "name": "component_deployment_id",
+                    "required": true
+                },
+                {
+                    "type": "boolean",
+                    "name": "deleted",
+                    "required": false
+                },
+                {
+                    "type": "string",
+                    "description": "The globally-unique identifier for the initiating deployment.",
+                    "name": "deployment_id",
+                    "required": true
+                },
+                {
+                    "type": "string",
+                    "description": "The hostname of this Instance.",
+                    "name": "hostname",
+                    "required": false
+                },
+                {
+                    "type": "string",
+                    "description": "The ID of the Instance.",
+                    "name": "id",
+                    "required": false
+                },
+                {
+                    "type": "array",
+                    "description": "The IPv4 address assigned to this Instance.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "name": "ipv4_addrs",
+                    "required": true
+                },
+                {
+                    "type": "array",
+                    "description": "The IPv6 address assigned to this Instance.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "name": "ipv6_addrs",
+                    "required": true
+                },
+                {
+                    "type": "string",
+                    "description": "The current recognize Instance status.",
+                    "enum": [
+                        "UNDEPLOYED",
+                        "CHECK_DEPLOY_REQUIRED",
+                        "DEPLOYING",
+                        "UNDEPLOYING",
+                        "DEPLOYED_FS",
+                        "DEPLOYED",
+                        "UP",
+                        "DOWN",
+                        "BOOTING",
+                        "GOING_DOWN",
+                        "ORPHANED"
+                    ],
+                    "name": "oper_status",
+                    "required": false
+                },
+                {
+                    "type": "string",
+                    "description": "The globally-unique identifier for the owning organization.",
+                    "name": "org_id",
+                    "required": true
+                },
+                {
+                    "type": "string",
+                    "description": "The primary MAC address of this Instance.",
+                    "name": "primary_mac_address",
+                    "required": false
+                },
+                {
+                    "type": "string",
+                    "description": "The serial number of the Resource Module hosting this Instance.",
+                    "name": "rm_serial_number",
+                    "required": false
+                },
+                {
+                    "type": "string",
+                    "description": "The storage pool of this Instance.",
+                    "name": "storage_pool",
+                    "required": true
+                }
+            ],
+            "name": "Instance"
+        },
+        "paths": [
+            {
+                "methods": [
+                    {
+                        "description": "get",
+                        "parameters": {},
+                        "responses": [
+                            {
+                                "description": "OK",
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Instance"
+                                    }
+                                },
+                                "code": "200"
+                            },
+                            {
+                                "description": "Unauthorized",
+                                "code": "401"
+                            },
+                            {
+                                "description": "Forbidden",
+                                "code": "403"
+                            },
+                            {
+                                "description": "Not Found",
+                                "code": "404"
+                            }
+                        ],
+                        "name": "GET"
+                    }
+                ],
+                "name": "/api/instances"
+            },
+            {
+                "methods": [
+                    {
+                        "description": "get",
+                        "parameters": {
+                            "path": [
+                                {
+                                    "name": "id",
+                                    "in": "path",
+                                    "description": "id",
+                                    "required": true,
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "responses": [
+                            {
+                                "description": "OK",
+                                "schema": {
+                                    "$ref": "#/definitions/Instance"
+                                },
+                                "code": "200"
+                            },
+                            {
+                                "description": "Unauthorized",
+                                "code": "401"
+                            },
+                            {
+                                "description": "Forbidden",
+                                "code": "403"
+                            },
+                            {
+                                "description": "Not Found",
+                                "code": "404"
+                            }
+                        ],
+                        "name": "GET"
+                    }
+                ],
+                "name": "/api/instances/{id}"
+            }
+        ]
+    },
+    {
+        "name": "Resource Pools",
+        "description": "A collection of all resource pools.",
+        "basePath": "/api/resource_pools",
+        "resource": {
+            "type": "object",
+            "properties": [
+                {
+                    "type": "string",
+                    "name": "created",
+                    "required": false
+                },
+                {
+                    "type": "boolean",
+                    "example": false,
+                    "description": "A boolean value indicating whether this Resource Pool is the default for the account.",
+                    "name": "default",
+                    "required": false
+                },
+                {
+                    "type": "string",
+                    "description": "The description of the Resource Pool.",
+                    "name": "description",
+                    "required": false
+                },
+                {
+                    "type": "string",
+                    "description": "The globally unique identifier for the Resource Pool.",
+                    "name": "id",
+                    "required": false
+                },
+                {
+                    "type": "string",
+                    "description": "The account-local, friendly name of the Resource Pool.",
+                    "name": "name",
+                    "required": true
+                }
+            ],
+            "name": "Resource Pool"
+        },
+        "paths": [
+            {
+                "methods": [
+                    {
+                        "description": "get",
+                        "parameters": {
+                            "query": [
+                                {
+                                    "name": "names",
+                                    "in": "query",
+                                    "description": "names",
+                                    "required": false,
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    },
+                                    "collectionFormat": "multi"
+                                }
+                            ]
+                        },
+                        "responses": [
+                            {
+                                "description": "OK",
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/ResourcePool"
+                                    }
+                                },
+                                "code": "200"
+                            },
+                            {
+                                "description": "Unauthorized",
+                                "code": "401"
+                            },
+                            {
+                                "description": "Forbidden",
+                                "code": "403"
+                            },
+                            {
+                                "description": "Not Found",
+                                "code": "404"
+                            }
+                        ],
+                        "name": "GET"
+                    },
+                    {
+                        "description": "post",
+                        "parameters": {
+                            "body": [
+                                {
+                                    "in": "body",
+                                    "name": "resourcePool",
+                                    "description": "resourcePool",
+                                    "required": true,
+                                    "schema": {
+                                        "$ref": "#/definitions/ResourcePool"
+                                    }
+                                }
+                            ]
+                        },
+                        "responses": [
+                            {
+                                "description": "OK",
+                                "schema": {
+                                    "$ref": "#/definitions/ResourcePool"
+                                },
+                                "code": "200"
+                            },
+                            {
+                                "description": "Created",
+                                "code": "201"
+                            },
+                            {
+                                "description": "Unauthorized",
+                                "code": "401"
+                            },
+                            {
+                                "description": "Forbidden",
+                                "code": "403"
+                            },
+                            {
+                                "description": "Not Found",
+                                "code": "404"
+                            }
+                        ],
+                        "name": "POST"
+                    }
+                ],
+                "name": "/api/resource_pools"
+            },
+            {
+                "methods": [
+                    {
+                        "description": "getById",
+                        "parameters": {
+                            "path": [
+                                {
+                                    "name": "id",
+                                    "in": "path",
+                                    "description": "id",
+                                    "required": true,
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "responses": [
+                            {
+                                "description": "OK",
+                                "schema": {
+                                    "$ref": "#/definitions/ResourcePool"
+                                },
+                                "code": "200"
+                            },
+                            {
+                                "description": "Unauthorized",
+                                "code": "401"
+                            },
+                            {
+                                "description": "Forbidden",
+                                "code": "403"
+                            },
+                            {
+                                "description": "Not Found",
+                                "code": "404"
+                            }
+                        ],
+                        "name": "GET"
+                    },
+                    {
+                        "description": "delete",
+                        "parameters": {
+                            "path": [
+                                {
+                                    "name": "id",
+                                    "in": "path",
+                                    "description": "id",
+                                    "required": true,
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "responses": [
+                            {
+                                "description": "OK",
+                                "code": "200"
+                            },
+                            {
+                                "description": "No Content",
+                                "code": "204"
+                            },
+                            {
+                                "description": "Unauthorized",
+                                "code": "401"
+                            },
+                            {
+                                "description": "Forbidden",
+                                "code": "403"
+                            }
+                        ],
+                        "name": "DELETE"
+                    }
+                ],
+                "name": "/api/resource_pools/{id}"
+            }
+        ]
+    }
+]
